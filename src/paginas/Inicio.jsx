@@ -1,22 +1,52 @@
-import React from 'react';
-import { Box, Typography, Button, Container } from '@mui/material';
+import React from 'react'
+import HeroSection from '../components/HeroSection'
+import { Box, Container, Typography, Grid, Paper } from '@mui/material'
 
 const Inicio = () => {
   return (
-    <Box sx={{ py: 8, backgroundColor: '#f5f5f5' }}>
-      <Container maxWidth="md" sx={{ textAlign: 'center' }}>
-        <Typography variant="h3" gutterBottom>
-          Bienvenido a Quion Bolivia
+    <Box>
+      <HeroSection />
+
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Typography variant="h4" component="h2" gutterBottom align="center" sx={{ mb: 6 }}>
+          Beneficios de la quinua
         </Typography>
-        <Typography variant="h6" color="textSecondary" paragraph>
-          Exportamos quinua boliviana de alta calidad al mundo entero. Sabor, salud y origen.
-        </Typography>
-        <Button variant="contained" color="primary" size="large">
-          Ver Productos
-        </Button>
+
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={4}>
+            <Paper elevation={3} sx={{ p: 4, height: '100%' }}>
+              <Typography variant="h5" component="h3" gutterBottom>
+                Alto valor nutricional
+              </Typography>
+              <Typography>
+                La quinua es rica en proteínas, fibra y minerales esenciales como hierro, magnesio y zinc.
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Paper elevation={3} sx={{ p: 4, height: '100%' }}>
+              <Typography variant="h5" component="h3" gutterBottom>
+                Libre de gluten
+              </Typography>
+              <Typography>
+                Ideal para personas con celiaquía o sensibilidad al gluten, siendo una alternativa saludable.
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Paper elevation={3} sx={{ p: 4, height: '100%' }}>
+              <Typography variant="h5" component="h3" gutterBottom>
+                Cultivo sostenible
+              </Typography>
+              <Typography>
+                Nuestra quinua se cultiva respetando el medio ambiente y las tradiciones ancestrales.
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
       </Container>
     </Box>
-  );
-};
+  )
+}
 
-export default Inicio;
+export default Inicio
