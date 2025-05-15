@@ -1,5 +1,5 @@
 import React from 'react'
-import HeroSection from '../components/HeroSection'
+import HeroSection from '../componentes/HeroSection'
 import { Box, Container, Typography, Grid, Paper } from '@mui/material'
 
 const Inicio = () => {

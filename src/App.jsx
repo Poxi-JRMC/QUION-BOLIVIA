@@ -1,10 +1,10 @@
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Inicio from './pages/Inicio'
-import Nosotros from './pages/Nosotros'
-import Productos from './pages/Productos'
-import Contacto from './pages/Contacto'
+import Navbar from './componentes/Navbar'
+import Inicio from './paginas/Inicio'
+import Nosotros from './paginas/Nosotros'
+import Productos from './paginas/Productos'
+import Contacto from './paginas/Contacto'
 import './App.css'
 
 const theme = createTheme({
