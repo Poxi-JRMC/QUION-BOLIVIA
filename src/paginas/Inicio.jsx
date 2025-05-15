@@ -45,18 +45,18 @@ const Inicio = () => {
           >
             <Typography
               variant="h4"
-    component="h2"
-    gutterBottom
-    align="center"
-    sx={{
-      mb: 6,
-      fontWeight: '700',
-      fontFamily: "'Playfair Display', serif",
-      color: '#fff',
-      textShadow: '0 3px 6px rgba(0,0,0,0.6)',
+              component="h2"
+              gutterBottom
+              align="center"
+              sx={{
+              mb: 6,
+             fontWeight: '700',
+             fontFamily: "'Playfair Display', serif",
+             color: '#fff',
+             textShadow: '0 3px 6px rgba(0,0,0,0.6)',
               }}
             >
-              Beneficios de la quinua
+              Beneficios de la Quinua
             </Typography>
           </motion.div>
 
