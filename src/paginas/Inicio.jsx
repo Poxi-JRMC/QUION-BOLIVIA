@@ -45,14 +45,15 @@ const Inicio = () => {
           >
             <Typography
               variant="h4"
-              component="h2"
-              gutterBottom
-              align="center"
-              sx={{
-                mb: 6,
-                fontWeight: 'bold',
-                textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',
-                color: '#fff',
+    component="h2"
+    gutterBottom
+    align="center"
+    sx={{
+      mb: 6,
+      fontWeight: '700',
+      fontFamily: "'Playfair Display', serif",
+      color: '#fff',
+      textShadow: '0 3px 6px rgba(0,0,0,0.6)',
               }}
             >
               Beneficios de la quinua
@@ -82,23 +83,26 @@ const Inicio = () => {
               ].map(({title, text}, index) => (
                 <Grid item xs={12} md={4} key={index}>
                   <motion.div variants={itemVariants}>
-                    <Paper elevation={6} sx={{
-                      p: 4,
-                      height: '100%',
-                      borderRadius: 3,
-                      backgroundColor: 'rgba(255, 255, 255, 0.85)',
-                      boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
-                      cursor: 'default',
-                      transition: 'transform 0.3s ease',
+                    <Paper elevation={6}
+                     sx={{p: 4,
+                     height: '100%',
+                     borderRadius: 3,
+                     backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                     color: 'white',
+                     backdropFilter: 'blur(8px)',
+                     border: '1px solid rgba(255, 255, 255, 0.2)',
+                     boxShadow: '0 10px 25px rgba(0,0,0,0.4)',
+                     cursor: 'default',
+                     transition: 'transform 0.3s ease',
                       '&:hover': {
-                        transform: 'translateY(-10px)',
-                        boxShadow: '0 15px 25px rgba(0,0,0,0.3)',
+                     transform: 'translateY(-10px)',
+                     boxShadow: '0 18px 30px rgba(0,0,0,0.6)',
                       }
                     }}>
                       <Typography variant="h5" component="h3" gutterBottom sx={{fontWeight: '600'}}>
                         {title}
                       </Typography>
-                      <Typography color="text.secondary">
+                      <Typography sx={{ color: '#fff' }}>
                         {text}
                       </Typography>
                     </Paper>
