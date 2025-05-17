@@ -98,9 +98,9 @@ const Navbar = () => {
                     backgroundColor: 'rgba(0, 0, 0, 0.7)',
                     color: 'white',
                     minWidth: 200,
-    boxShadow: '0px 8px 24px rgba(0,0,0,0.4)',
-    border: '1px solid rgba(255, 255, 255, 0.2)',
-    backdropFilter: 'blur(6px)',
+                    boxShadow: '0px 8px 24px rgba(0,0,0,0.4)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    backdropFilter: 'blur(6px)',
                     }}
                   >
                     <ClickAwayListener onClickAway={handleClose}>
