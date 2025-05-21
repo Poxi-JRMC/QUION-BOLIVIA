@@ -1,28 +1,56 @@
-.inicio-container {
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+/* Sección Hero de bienvenida */
+.hero-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
   position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  width: 100%;
-  color: rgb(255, 255, 255);
-  z-index: 0;
 }
 
 .video-fondo {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vw;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   z-index: -1;
-  filter: brightness(0.6); /* oscurece un poco para que el texto resalte */
 }
 
-.content-wrapper {
+.hero-content {
   position: relative;
-  z-index: 1;
-  padding-top: 80px; /* para dejar espacio al navbar si usas uno */
-  padding-bottom: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Sección de contenido */
+.contenido-section {
+  background: linear-gradient(to bottom, #1a1a1a, #333); /* Cambia aquí el fondo de la segunda sección */
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.separator {
+  height: 100vh; /* espacio del alto del video */
+}
+.exportSection {
+  position: relative;
+  background-color: #000000;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 30px 10px;
+  z-index: 0;
 }

@@ -8,7 +8,16 @@ const rutas = [
   { name: 'España', lat: 40.4168, lng: -3.7038, color: '#ff0000' },
   { name: 'México', lat: 19.4326, lng: -99.1332, color: '#00ff00' },
   { name: 'Colombia', lat: 4.711, lng: -74.0721, color: '#0000ff' },
-  { name: 'Perú', lat: -12.0464, lng: -77.0428, color: '#ffff00' }
+  { name: 'Perú', lat: -12.0464, lng: -77.0428, color: '#ffff00' },
+  { name: 'Estados Unidos', lat: 38.9072, lng: -77.0369, color: '#00ffff' },
+  { name: 'Alemania', lat: 52.52, lng: 13.405, color: '#ff00ff' },
+  { name: 'Japón', lat: 35.6895, lng: 139.6917, color: '#ffa500' },
+  { name: 'China', lat: 39.9042, lng: 116.4074, color: '#a52a2a' },
+  { name: 'Francia', lat: 48.8566, lng: 2.3522, color: '#008080' },
+  { name: 'Italia', lat: 41.9028, lng: 12.4964, color: '#800080' },
+  { name: 'Brasil', lat: -15.7939, lng: -47.8828, color: '#228B22' },
+  { name: 'Argentina', lat: -34.6037, lng: -58.3816, color: '#B22222' },
+  { name: 'Canadá', lat: 45.4215, lng: -75.6972, color: '#191970' }
 ]
 
 const BOLIVIA = { lat: -17.9833, lng: -67.15 }
@@ -32,7 +41,6 @@ function Ruta({ start, end, color, radius }) {
   const geometryRef = useRef()
   const materialRef = useRef()
 
-  // Shader Material personalizado
   const shaderMaterial = new THREE.ShaderMaterial({
     uniforms: {
       u_time: { value: 0 },
@@ -62,14 +70,12 @@ function Ruta({ start, end, color, radius }) {
 
   const lineGeometry = new THREE.BufferGeometry().setFromPoints(points)
 
-  // Atributo personalizado para animación
   const offsets = new Float32Array(points.length)
   for (let i = 0; i < points.length; i++) {
     offsets[i] = i / points.length
   }
   lineGeometry.setAttribute('a_offset', new THREE.BufferAttribute(offsets, 1))
 
-  // Animar tiempo
   useFrame((state) => {
     shaderMaterial.uniforms.u_time.value = state.clock.elapsedTime
   })
@@ -77,10 +83,14 @@ function Ruta({ start, end, color, radius }) {
   return <line geometry={lineGeometry} material={shaderMaterial} />
 }
 
-// Globo principal
 const Globo = ({ radius = 2 }) => {
-  const texture = useLoader(THREE.TextureLoader, '/earth_daymap.jpg')
-  const start = latLongToVector3(BOLIVIA.lat, BOLIVIA.lng, radius)
+  const texture = useLoader(THREE.TextureLoader, '/t2.jpg')
+
+  // Rotación aplicada al globo y a los puntos
+  const globeRotation = new THREE.Euler(Math.PI / -11, Math.PI / 9, 0)
+
+  // Punto inicial rotado
+  const start = latLongToVector3(BOLIVIA.lat, BOLIVIA.lng, radius).applyEuler(globeRotation)
 
   return (
     <>
@@ -88,7 +98,7 @@ const Globo = ({ radius = 2 }) => {
       <directionalLight position={[5, 5, 5]} intensity={1} />
       <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.4} />
 
-      {/* Estrellas */}
+      {/* Estrellas de fondo */}
       <points>
         <bufferGeometry>
           <bufferAttribute
@@ -103,15 +113,15 @@ const Globo = ({ radius = 2 }) => {
         <pointsMaterial color="white" size={0.1} />
       </points>
 
-      {/* Globo */}
-      <mesh>
+      {/* Globo con rotación */}
+      <mesh rotation={[Math.PI / -5, Math.PI / 10, 0.5]}>
         <sphereGeometry args={[radius, 64, 64]} />
         <meshStandardMaterial map={texture} />
       </mesh>
 
-      {/* Rutas animadas */}
+      {/* Rutas ajustadas con misma rotación */}
       {rutas.map((dest, index) => {
-        const end = latLongToVector3(dest.lat, dest.lng, radius)
+        const end = latLongToVector3(dest.lat, dest.lng, radius).applyEuler(globeRotation)
         return (
           <Ruta key={index} start={start} end={end} color={dest.color} radius={radius} />
         )
