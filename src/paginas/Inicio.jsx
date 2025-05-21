@@ -105,7 +105,7 @@ const Inicio = () => {
           </motion.div>
 
           {/* Sección de exportación */}
-          <Grid container spacing={6} alignItems="center" sx={{ mt: 10 }}>
+           <Grid container spacing={6} alignItems="center" sx={{ mt: 10 }}>
             <Grid item xs={12} md={6}>
               <Globo3D />
             </Grid>
@@ -143,10 +143,57 @@ const Inicio = () => {
               </motion.div>
             </Grid>
           </Grid>
+
+          {/* NUEVA SECCIÓN ADICIONAL */}
+          <Grid container spacing={6} alignItems="center" sx={{ mt: 10 }}>
+            <Grid item xs={12} md={6}>
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1 }}
+              >
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontWeight: 'bold',
+                    fontFamily: "'Playfair Display', serif",
+                    color: '#fff',
+                    mb: 2,
+                    textShadow: '0 2px 6px rgba(0,0,0,0.5)'
+                  }}
+                >
+                  Calidad que cruza fronteras
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: 'rgba(255,255,255,0.9)',
+                    fontFamily: "'Poppins', sans-serif",
+                    lineHeight: 1.8
+                  }}
+                >
+                  Desde el corazón de Sudamérica, llevamos al mundo un superalimento
+                  que nutre, respeta el medio ambiente y apoya a comunidades locales.
+                </Typography>
+              </motion.div>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              {/* Puedes volver a usar Globo3D o poner una imagen */}
+              <img
+                src="/export-map.png"
+                alt="Mapa de exportación"
+                style={{
+                  width: '100%',
+                  borderRadius: '16px',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.4)'
+                }}
+              />
+            </Grid>
+          </Grid>
         </Container>
       </Box>
     </Box>
   )
 }
-
 export default Inicio
