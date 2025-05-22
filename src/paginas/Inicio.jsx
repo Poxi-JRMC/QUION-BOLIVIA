@@ -1,28 +1,49 @@
-import React from 'react'
-import HeroSection from '../componentes/HeroSection'
-import { Box, Container, Typography, Grid, Paper } from '@mui/material'
-import { motion } from 'framer-motion'
-import './Inicio.css'
-import Globo3D from '../componentes/Globo3D'
+import React from 'react';
+import HeroSection from '../componentes/HeroSection';
+import { Box, Container, Typography, Grid, Paper } from '@mui/material';
+import { motion } from 'framer-motion';
+import './Inicio.css';
+import Globo3D from '../componentes/Globo3D';
+import { useTranslation } from 'react-i18next';
 
 const containerVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: {},
   visible: {
-    opacity: 1,
-    y: 0,
-    transition: { staggerChildren: 0.3, duration: 0.6, ease: 'easeOut' }
-  }
-}
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
 
 const itemVariants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
-}
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: 'easeOut' },
+  },
+};
 
 const Inicio = () => {
+  const { t } = useTranslation();
+
+  const beneficios = [
+    {
+      title: t('beneficios.alto_valor'),
+      text: t('beneficios.alto_valor_text'),
+    },
+    {
+      title: t('beneficios.libre_gluten'),
+      text: t('beneficios.libre_gluten_text'),
+    },
+    {
+      title: t('beneficios.sostenible'),
+      text: t('beneficios.sostenible_text'),
+    },
+  ];
+
   return (
     <Box className="inicio-container">
-      {/* Video de fondo */}
       <video autoPlay muted loop playsInline className="video-fondo">
         <source src="/quinua-bg.mp4" type="video/mp4" />
         Tu navegador no soporta el video.
@@ -34,42 +55,21 @@ const Inicio = () => {
         <Container maxWidth="lg" sx={{ py: 8 }}>
           <motion.div
             initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <Typography
-              variant="h4"
-              component="h2"
-              gutterBottom
-              align="center"
-              sx={{
-                mb: 6,
-                fontWeight: '700',
-                fontFamily: "'Playfair Display', serif",
-                color: '#fff',
-                textShadow: '0 3px 6px rgba(0,0,0,0.6)'
-              }}
-            >
-              Beneficios de la Quinua
-            </Typography>
+            
           </motion.div>
 
-          <motion.div variants={containerVariants} initial="hidden" animate="visible">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             <Grid container spacing={4}>
-              {[
-                {
-                  title: 'Alto valor nutricional',
-                  text: 'La quinua es rica en proteínas, fibra y minerales esenciales como hierro, magnesio y zinc.'
-                },
-                {
-                  title: 'Libre de gluten',
-                  text: 'Ideal para personas con celiaquía o sensibilidad al gluten, siendo una alternativa saludable.'
-                },
-                {
-                  title: 'Cultivo sostenible',
-                  text: 'Nuestra quinua se cultiva respetando el medio ambiente y las tradiciones ancestrales.'
-                }
-              ].map(({ title, text }, index) => (
+              {beneficios.map(({ title, text }, index) => (
                 <Grid item xs={12} md={4} key={index}>
                   <motion.div variants={itemVariants}>
                     <Paper
@@ -87,11 +87,16 @@ const Inicio = () => {
                         transition: 'transform 0.3s ease',
                         '&:hover': {
                           transform: 'translateY(-10px)',
-                          boxShadow: '0 18px 30px rgba(0,0,0,0.6)'
-                        }
+                          boxShadow: '0 18px 30px rgba(0,0,0,0.6)',
+                        },
                       }}
                     >
-                      <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: '600' }}>
+                      <Typography
+                        variant="h5"
+                        component="h3"
+                        gutterBottom
+                        sx={{ fontWeight: '600' }}
+                      >
                         {title}
                       </Typography>
                       <Typography sx={{ color: '#fff' }}>{text}</Typography>
@@ -103,18 +108,8 @@ const Inicio = () => {
           </motion.div>
         </Container>
 
-
-
-        {/* Sección de exportación */}
         <section className="exportSection">
           <Container>
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0 }}
-              variants={containerVariants}
-            />
-
             <Grid container spacing={6} alignItems="center" sx={{ mt: 10 }}>
               <Grid item xs={12} md={6}>
                 <Globo3D />
@@ -133,22 +128,20 @@ const Inicio = () => {
                       fontFamily: "'Playfair Display', serif",
                       color: '#fff',
                       mb: 2,
-                      textShadow: '0 2px 6px rgba(0,0,0,0.5)'
+                      textShadow: '0 2px 6px rgba(0,0,0,0.5)',
                     }}
                   >
-                    Exportamos la mejor quinua de Bolivia para el Mundo
+                    {t('exportacion.titulo1')}
                   </Typography>
                   <Typography
                     variant="body1"
                     sx={{
                       color: 'rgba(255,255,255,0.9)',
                       fontFamily: "'Poppins', sans-serif",
-                      lineHeight: 1.8
+                      lineHeight: 1.8,
                     }}
                   >
-                    Nuestra quinua, cultivada en los Andes bolivianos, llega a mercados
-                    internacionales con estándares de calidad global. Nos sentimos orgullosos
-                    de conectar nuestras raíces con el mundo.
+                    {t('exportacion.texto1')}
                   </Typography>
                 </motion.div>
               </Grid>
@@ -169,21 +162,20 @@ const Inicio = () => {
                       fontFamily: "'Playfair Display', serif",
                       color: '#fff',
                       mb: 2,
-                      textShadow: '0 2px 6px rgba(0,0,0,0.5)'
+                      textShadow: '0 2px 6px rgba(0,0,0,0.5)',
                     }}
                   >
-                    Calidad que cruza fronteras
+                    {t('exportacion.titulo2')}
                   </Typography>
                   <Typography
                     variant="body1"
                     sx={{
                       color: 'rgba(255,255,255,0.9)',
                       fontFamily: "'Poppins', sans-serif",
-                      lineHeight: 1.8
+                      lineHeight: 1.8,
                     }}
                   >
-                    Desde el corazón de Sudamérica, llevamos al mundo un superalimento
-                    que nutre, respeta el medio ambiente y apoya a comunidades locales.
+                    {t('exportacion.texto2')}
                   </Typography>
                 </motion.div>
               </Grid>
@@ -194,7 +186,7 @@ const Inicio = () => {
                   style={{
                     width: '100%',
                     borderRadius: '16px',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.4)'
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
                   }}
                 />
               </Grid>
@@ -203,7 +195,7 @@ const Inicio = () => {
         </section>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Inicio
+export default Inicio;

@@ -1,0 +1,30 @@
+{
+  "QUION-SRL": "QUION-SRL",
+  "descubre_mas": "Descubre más",
+  "Inicio": "Inicio",
+  "Productos": "Productos",
+  "Nosotros": "Nosotros",
+  "Certificaciones": "Certificaciones",
+  "Contactos": "Contactos",
+  "hero": {
+    "titulo": "QUION-SRL",
+    "subtitulo1": "La mejor Quinua de Bolivia",
+    "subtitulo2": "Para ti y para el Mundo",
+    "boton": "Conoce nuestros productos",
+    "titulo2": "Beneficios de la Quinua"
+  },
+  "beneficios": {
+    "alto_valor": "Alto valor nutricional",
+    "alto_valor_text": "La quinua es rica en proteínas, fibra y minerales esenciales como hierro, magnesio y zinc.",
+    "libre_gluten": "Libre de gluten",
+    "libre_gluten_text": "Ideal para personas con celiaquía o sensibilidad al gluten, siendo una alternativa saludable.",
+    "sostenible": "Cultivo sostenible",
+    "sostenible_text": "Nuestra quinua se cultiva respetando el medio ambiente y las tradiciones ancestrales."
+  },
+  "exportacion": {
+    "titulo1": "Exportamos la mejor quinua de Bolivia para el Mundo",
+    "texto1": "Nuestra quinua, cultivada en los Andes bolivianos, llega a mercados internacionales con estándares de calidad global. Nos sentimos orgullosos de conectar nuestras raíces con el mundo.",
+    "titulo2": "Calidad que cruza fronteras",
+    "texto2": "Desde el corazón de Sudamérica, llevamos al mundo un superalimento que nutre, respeta el medio ambiente y apoya a comunidades locales."
+  }
+}

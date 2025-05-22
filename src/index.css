@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
@@ -35,3 +36,4 @@ a {
 html {
   scroll-behavior: smooth;
 }
+/* index.css o archivo global */

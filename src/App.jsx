@@ -6,6 +6,7 @@ import Nosotros from './paginas/Nosotros'
 import Productos from './paginas/Productos'
 import Contacto from './paginas/Contacto'
 import './App.css'
+import './i18n';
 
 
 const theme = createTheme({
@@ -32,7 +33,7 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Inicio />} />
+          <Route path="/" element={<Inicio  />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/productos" element={<Productos />} />
           <Route path="/contacto" element={<Contacto />} />

@@ -1,12 +1,12 @@
-// src/componentes/HeroSection.jsx
-
 import React from 'react'
 import { Typography, Box, Button, useTheme } from '@mui/material'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'  // <-- Importa useTranslation
 
 const HeroSection = () => {
   const theme = useTheme()
+  const { t } = useTranslation()  // <-- Hook para traducción
 
   return (
     <Box
@@ -34,7 +34,7 @@ const HeroSection = () => {
             textShadow: '0 4px 10px rgba(0,0,0,0.6)',
           }}
         >
-          QUION-BO
+          {t('hero.titulo')}
         </Typography>
       </motion.div>
 
@@ -54,7 +54,7 @@ const HeroSection = () => {
             textShadow: '0 2px 6px rgba(0,0,0,0.4)',
           }}
         >
-          La mejor Quinua de Bolivia
+          {t('hero.subtitulo1')}
         </Typography>
         <Typography
           variant="subtitle1"
@@ -64,7 +64,7 @@ const HeroSection = () => {
             color: 'rgba(255,255,255,0.8)',
           }}
         >
-          Para ti y para el Mundo
+          {t('hero.subtitulo2')}
         </Typography>
       </motion.div>
 
@@ -98,8 +98,33 @@ const HeroSection = () => {
             },
           }}
         >
-          Conoce nuestros productos
+          {t('hero.boton')}
         </Button>
+      </motion.div>
+
+      {/* Nuevo texto animado debajo del botón */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1.2 }}
+      >
+        <Typography
+          sx={{
+            mt: 4, // margen superior para separar del botón
+            fontFamily: "'Playfair Display', serif",
+            fontWeight: 650,
+            fontSize: { xs: '2rem', md: '2rem' }, // tamaño adaptable móvil/escritorio
+            color: 'rgba(255,255,255,0.85)',
+            textShadow: '0 5px 10px rgba(0,0,0,0.5)',
+            maxWidth: 600,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            lineHeight: 1.5,
+          }}
+        >
+          {/* Aquí va el texto que quieres mostrar */}
+          {t('hero.titulo2')}
+        </Typography>
       </motion.div>
     </Box>
   )

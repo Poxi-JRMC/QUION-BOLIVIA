@@ -1,0 +1,30 @@
+{
+  "QUION-SRL": "QUION-SRL",
+  "descubre_mas": "Discover More",
+  "Inicio": "Home",
+  "Productos": "Products",
+  "Nosotros": "About Us",
+  "Certificaciones": "Certifications",
+  "Contactos": "Contact",
+  "hero": {
+    "titulo": "QUION-SRL",
+    "subtitulo1": "The best Quinoa from Bolivia",
+    "subtitulo2": "For you and for the World",
+    "boton": "Discover our products",
+    "titulo2": "Benefits of Quinoa"
+  },
+  "beneficios": {
+    "alto_valor": "High nutritional value",
+    "alto_valor_text": "Quinoa is rich in protein, fiber, and essential minerals like iron, magnesium, and zinc.",
+    "libre_gluten": "Gluten-free",
+    "libre_gluten_text": "Ideal for people with celiac disease or gluten sensitivity, offering a healthy alternative.",
+    "sostenible": "Sustainable farming",
+    "sostenible_text": "Our quinoa is grown respecting the environment and ancestral traditions."
+  },
+  "exportacion": {
+    "titulo1": "We export the best Bolivian quinoa to the world",
+    "texto1": "Our quinoa, grown in the Bolivian Andes, reaches international markets with global quality standards. We are proud to connect our roots with the world.",
+    "titulo2": "Quality that crosses borders",
+    "texto2": "From the heart of South America, we bring to the world a superfood that nourishes, respects the environment, and supports local communities."
+  }
+}
