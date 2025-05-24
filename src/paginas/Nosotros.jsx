@@ -1,18 +1,39 @@
 import React, { useState } from 'react'
-import { Box, Container, Typography, Avatar, Grid, Fade, Modal } from '@mui/material'
-import { styled } from '@mui/system'
+import { Box, Container, Typography, Grid, Fade, Modal } from '@mui/material'
+import { styled, keyframes } from '@mui/system'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import StarIcon from '@mui/icons-material/Star'
+import VerifiedIcon from '@mui/icons-material/Verified'
 
-// Styled contenedor principal con fondo blanco y padding
+// Fondo amarillo suave
 const StyledBox = styled(Box)({
-  backgroundColor: '#fff',
+  backgroundColor: '#f7dc6f',
   padding: '80px 0',
   fontFamily: "'Lera', serif",
 })
 
-// Componente para cada sección (Misión, Visión, Valores)
+// Animación personalizada para el título principal
+const slideDownFade = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
+
+const AnimatedTitle = styled(Typography)({
+  animation: `${slideDownFade} 1s ease-out forwards`,
+})
+
+// Elegimos un ícono diferente por cada sección
+const icons = [<CheckCircleIcon fontSize="large" />, <CheckCircleIcon fontSize="large" />, <CheckCircleIcon fontSize="large" />]
+
+// Componente para cada sección
 const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
   const [open, setOpen] = useState(false)
-
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
@@ -29,25 +50,28 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
         <Grid item xs={12} md={6}>
           <Fade in timeout={600} style={{ transitionDelay: `${delay}ms` }}>
             <Box>
-              <Avatar
+              <Box
                 sx={{
                   width: 100,
                   height: 100,
                   mb: 3,
-                  bgcolor: 'primary.main',
-                  fontSize: 36,
-                  fontWeight: 'bold',
-                  fontFamily: "'Lera', serif",
+                  bgcolor: '#e67e22 ',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%',
                   color: '#fff',
+                  fontSize: 36,
                   transition: 'transform 0.3s',
                   '&:hover': {
                     transform: 'scale(1.1)',
                   },
                 }}
-                aria-label={`Número de sección ${id}`}
+                aria-label={`Sección ${title}`}
               >
-                {id}
-              </Avatar>
+                {icons[id - 1]}
+              </Box>
+
               <Typography
                 variant="h4"
                 component="h3"
@@ -55,6 +79,7 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
               >
                 {title}
               </Typography>
+
               <Box>
                 {text.split('\n').map((line, idx) => (
                   <Typography
@@ -88,7 +113,7 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
                 borderRadius: 3,
                 objectFit: 'cover',
                 maxHeight: 320,
-                boxShadow: '0 8px 20px rgba(0,0,0,0.3)', // sombra mejorada
+                boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
                 cursor: 'pointer',
                 transition: 'transform 0.3s',
                 '&:hover': {
@@ -175,17 +200,16 @@ const Nosotros = () => {
   return (
     <StyledBox>
       <Container maxWidth="lg">
-        <Fade in timeout={1200}>
-          <Typography
-            variant="h3"
-            component="h1"
-            gutterBottom
-            align="center"
-            sx={{ mb: 8, fontWeight: 700, color: '#000' }}
-          >
-            Sobre QUION-BO
-          </Typography>
-        </Fade>
+        <AnimatedTitle
+          variant="h3"
+          component="h1"
+          gutterBottom
+          align="center"
+          sx={{ mb: 8, fontWeight: 700, color: '#000' }}
+>
+          Sobre QUION-BO
+        </AnimatedTitle>
+
 
         <Fade in timeout={1600} style={{ transitionDelay: '300ms' }}>
           <Typography

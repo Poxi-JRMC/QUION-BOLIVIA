@@ -12,40 +12,45 @@ import {
   IconButton,
   useMediaQuery,
   useTheme,
-  Divider
+  Divider,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { motion, AnimatePresence } from 'framer-motion';  // AnimatePresence para animar salida
+import { motion, AnimatePresence } from 'framer-motion';
 
-const products = [
+
+const certifications = [
   {
-    name: 'Quinua Blanca',
-    description: 'Cultivada en el altiplano boliviano, la quinua blanca es la más versátil con su sabor suave y textura ligera la convierten en la favorita para ensaladas, sopas y postres saludables. Rica en proteínas y naturalmente libre de gluten.',
-    image: '/quinua-blanca.jpg',
+    name: 'Certificación Orgánica',
+    description:
+      'Garantiza que la quinua ha sido cultivada sin pesticidas ni fertilizantes químicos, siguiendo los estándares internacionales de agricultura orgánica.',
+    image: '/cert-orgánica.jpg',
   },
   {
-    name: 'Quinua Roja',
-    description: 'Con un sabor más terroso y un grano firme, la quinua roja es ideal para platos calientes, guarniciones o bowls. Rica en antioxidantes y fibra, mantiene su forma después de cocerse, ideal para recetas gourmet.',
-    image: '/quinua-roja.jpg',
+    name: 'Certificación Fair Trade',
+    description:
+      'Esta certificación asegura que los productores reciben un comercio justo, con condiciones laborales dignas y respeto al medio ambiente.',
+    image: '/cert-fairtrade.jpg',
   },
   {
-    name: 'Quinua Negra',
-    description: 'De sabor más intenso y textura crujiente, la quinua negra destaca por su alto contenido de litio y propiedades antiinflamatorias. Ideal para mezclas energéticas, granolas y platos exóticos.',
-    image: '/quinua-negra.jpg',
+    name: 'Certificación SGS',
+    description:
+      'Certificación internacional que garantiza la calidad y seguridad alimentaria de nuestros productos, validada por laboratorios SGS.',
+    image: '/cert-sgs.jpg',
   },
   {
-    name: 'Quinua Mixta',
-    description: 'Una combinación nutritiva y colorida de quinua blanca, roja y negra. Perfecta para aportar textura, color y valor nutricional en una sola preparación. Ideal para ensaladas o como base de platos vegetarianos.',
-    image: '/quinua-mixta.jpg',
-  }
+    name: 'Certificación Andina',
+    description:
+      'Reconoce el origen geográfico de la quinua andina y su cumplimiento con las regulaciones de la región para productos agroalimentarios.',
+    image: '/cert-andina.jpg',
+  },
 ];
 
 const cardVariants = {
   hover: {
     scale: 1.05,
     boxShadow: '0px 10px 20px rgba(0,0,0,0.2)',
-    transition: { duration: 0.3, ease: 'easeInOut' }
-  }
+    transition: { duration: 0.3, ease: 'easeInOut' },
+  },
 };
 
 const modalVariants = {
@@ -54,18 +59,13 @@ const modalVariants = {
   exit: { opacity: 0, scale: 0.8, transition: { duration: 0.3, ease: 'easeIn' } },
 };
 
-const Productos = () => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+const Certificaciones = () => {
+  const [selectedCert, setSelectedCert] = useState(null);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleOpen = (product) => {
-    setSelectedProduct(product);
-  };
-
-  const handleClose = () => {
-    setSelectedProduct(null);
-  };
+  const handleOpen = (cert) => setSelectedCert(cert);
+  const handleClose = () => setSelectedCert(null);
 
   return (
     <motion.div
@@ -75,7 +75,6 @@ const Productos = () => {
     >
       <Box sx={{ py: 10, backgroundColor: '#f7dc6f' }}>
         <Container maxWidth="lg">
-
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -92,16 +91,16 @@ const Productos = () => {
                 textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
               }}
             >
-              Nuestros Productos
+              Nuestras Certificaciones
             </Typography>
           </motion.div>
 
           <Grid container spacing={4}>
-            {products.map((product, index) => (
+            {certifications.map((cert, index) => (
               <Grid item key={index} xs={12} sm={6} md={6}>
                 <motion.div whileHover="hover" variants={cardVariants}>
                   <Card
-                    onClick={() => handleOpen(product)}
+                    onClick={() => handleOpen(cert)}
                     sx={{
                       cursor: 'pointer',
                       textAlign: 'center',
@@ -119,8 +118,8 @@ const Productos = () => {
                     >
                       <CardMedia
                         component="img"
-                        image={product.image}
-                        alt={product.name}
+                        image={cert.image}
+                        alt={cert.name}
                         sx={{
                           height: 200,
                           objectFit: 'cover',
@@ -130,7 +129,7 @@ const Productos = () => {
                       />
                     </motion.div>
                     <Typography variant="h6" fontWeight="600" sx={{ color: '#17202a' }}>
-                      {product.name}
+                      {cert.name}
                     </Typography>
                   </Card>
                 </motion.div>
@@ -138,11 +137,10 @@ const Productos = () => {
             ))}
           </Grid>
 
-          {/* Modal con AnimatePresence */}
           <AnimatePresence>
-            {selectedProduct && (
+            {selectedCert && (
               <Dialog
-                open={Boolean(selectedProduct)}
+                open={Boolean(selectedCert)}
                 onClose={handleClose}
                 fullScreen={fullScreen}
                 maxWidth="sm"
@@ -158,7 +156,7 @@ const Productos = () => {
                     p: 3,
                     background: 'linear-gradient(145deg,rgb(194, 183, 25), #f0f0f0)',
                     boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-                  }
+                  },
                 }}
               >
                 <DialogTitle
@@ -168,10 +166,10 @@ const Productos = () => {
                     textAlign: 'center',
                     pb: 0,
                     color: '#17202a',
-                    textShadow: '1px 1px 3px rgba(0,0,0,0.2)'
+                    textShadow: '1px 1px 3px rgba(0,0,0,0.2)',
                   }}
                 >
-                  {selectedProduct.name}
+                  {selectedCert.name}
                   <IconButton
                     aria-label="close"
                     onClick={handleClose}
@@ -189,8 +187,8 @@ const Productos = () => {
 
                 <DialogContent sx={{ textAlign: 'center' }}>
                   <motion.img
-                    src={selectedProduct.image}
-                    alt={selectedProduct.name}
+                    src={selectedCert.image}
+                    alt={selectedCert.name}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4 }}
@@ -211,18 +209,17 @@ const Productos = () => {
                     transition={{ duration: 0.5, delay: 0.2 }}
                   >
                     <Typography variant="body1" fontSize="1.1rem" color="text.secondary">
-                      {selectedProduct.description}
+                      {selectedCert.description}
                     </Typography>
                   </motion.div>
                 </DialogContent>
               </Dialog>
             )}
           </AnimatePresence>
-
         </Container>
       </Box>
     </motion.div>
   );
 };
 
-export default Productos;
+export default Certificaciones;
