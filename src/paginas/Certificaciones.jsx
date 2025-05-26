@@ -23,25 +23,25 @@ const certifications = [
     name: 'Certificación Orgánica',
     description:
       'Garantiza que la quinua ha sido cultivada sin pesticidas ni fertilizantes químicos, siguiendo los estándares internacionales de agricultura orgánica.',
-    image: '/cert-orgánica.jpg',
+    image: '/1senasag.jpg',
   },
   {
     name: 'Certificación Fair Trade',
     description:
       'Esta certificación asegura que los productores reciben un comercio justo, con condiciones laborales dignas y respeto al medio ambiente.',
-    image: '/cert-fairtrade.jpg',
+    image: '/2iso.jpg',
   },
   {
     name: 'Certificación SGS',
     description:
       'Certificación internacional que garantiza la calidad y seguridad alimentaria de nuestros productos, validada por laboratorios SGS.',
-    image: '/cert-sgs.jpg',
+    image: '/3.jpg',
   },
   {
     name: 'Certificación Andina',
     description:
       'Reconoce el origen geográfico de la quinua andina y su cumplimiento con las regulaciones de la región para productos agroalimentarios.',
-    image: '/cert-andina.jpg',
+    image: '/4.jpg',
   },
 ];
 

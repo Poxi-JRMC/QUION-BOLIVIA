@@ -200,7 +200,7 @@ const Navbar = () => {
                             <MenuItem component={Link} to="/nosotros" onClick={handleCloseMenu}>
                               {t('Nosotros')}
                             </MenuItem>
-                            <MenuItem component={Link} to="/reconocimientos" onClick={handleCloseMenu}>
+                            <MenuItem component={Link} to="/certificaciones" onClick={handleCloseMenu}>
                               {t('Certificaciones')}
                             </MenuItem>
                             <MenuItem component={Link} to="/contacto" onClick={handleCloseMenu}>
