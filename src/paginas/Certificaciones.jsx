@@ -17,31 +17,24 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import { motion, AnimatePresence } from 'framer-motion';
 
-
 const certifications = [
   {
-    name: 'Certificación Orgánica',
+    name: 'Certificación Senasag',
     description:
-      'Garantiza que la quinua ha sido cultivada sin pesticidas ni fertilizantes químicos, siguiendo los estándares internacionales de agricultura orgánica.',
+      'Otorgada por el Servicio Nacional de Sanidad Agropecuaria e Inocuidad Alimentaria, esta certificación garantiza que la quinua cumple con las normativas sanitarias y fitosanitarias nacionales, asegurando su inocuidad y calidad para el consumo.',
     image: '/1senasag.jpg',
   },
   {
-    name: 'Certificación Fair Trade',
+    name: 'Certificación ISO 22000',
     description:
-      'Esta certificación asegura que los productores reciben un comercio justo, con condiciones laborales dignas y respeto al medio ambiente.',
+      'Sistema de gestión de la inocuidad alimentaria reconocido internacionalmente que garantiza la trazabilidad, control de riesgos y cumplimiento de estándares higiénico-sanitarios en toda la cadena de producción de la quinua.',
     image: '/2iso.jpg',
   },
   {
-    name: 'Certificación SGS',
+    name: 'Certificación Fitosanitaria',
     description:
-      'Certificación internacional que garantiza la calidad y seguridad alimentaria de nuestros productos, validada por laboratorios SGS.',
+      'Incluye avales como SGS y Andina, que validan la calidad, origen geográfico y cumplimiento de estándares internacionales, garantizando que la quinua esté libre de plagas y enfermedades, apta para exportación.',
     image: '/3.jpg',
-  },
-  {
-    name: 'Certificación Andina',
-    description:
-      'Reconoce el origen geográfico de la quinua andina y su cumplimiento con las regulaciones de la región para productos agroalimentarios.',
-    image: '/4.jpg',
   },
 ];
 
@@ -74,69 +67,105 @@ const Certificaciones = () => {
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       <Box sx={{ py: 10, backgroundColor: '#f7dc6f' }}>
-        <Container maxWidth="lg">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
+        <Container maxWidth="md">
+          <Typography
+            variant="h3"
+            align="center"
+            gutterBottom
+            fontWeight="bold"
+            sx={{
+              mb: 6,
+              color: '#17202a',
+              textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+            }}
           >
-            <Typography
-              variant="h3"
-              align="center"
-              gutterBottom
-              fontWeight="bold"
-              sx={{
-                mb: 6,
-                color: '#17202a',
-                textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-              }}
-            >
-              Nuestras Certificaciones
-            </Typography>
-          </motion.div>
+            Nuestras Certificaciones
+          </Typography>
 
-          <Grid container spacing={4}>
-            {certifications.map((cert, index) => (
-              <Grid item key={index} xs={12} sm={6} md={6}>
-                <motion.div whileHover="hover" variants={cardVariants}>
-                  <Card
-                    onClick={() => handleOpen(cert)}
-                    sx={{
-                      cursor: 'pointer',
-                      textAlign: 'center',
-                      p: 2,
-                      backgroundColor: index % 2 === 0 ? '#fff' : '#f0f0f0',
-                      borderRadius: 4,
-                      boxShadow: 3,
-                      transition: 'all 0.3s ease',
-                    }}
-                  >
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: index * 0.2 }}
-                    >
-                      <CardMedia
-                        component="img"
-                        image={cert.image}
-                        alt={cert.name}
-                        sx={{
-                          height: 200,
-                          objectFit: 'cover',
-                          borderRadius: 2,
-                          mb: 2,
-                        }}
-                      />
-                    </motion.div>
-                    <Typography variant="h6" fontWeight="600" sx={{ color: '#17202a' }}>
-                      {cert.name}
-                    </Typography>
-                  </Card>
-                </motion.div>
-              </Grid>
-            ))}
+          <Grid container spacing={4} justifyContent="center">
+            {/* Fila superior */}
+            <Grid item xs={12} sm={6} md={5}>
+              <motion.div whileHover="hover" variants={cardVariants}>
+                <Card
+                  onClick={() => handleOpen(certifications[0])}
+                  sx={{
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    p: 2,
+                    backgroundColor: '#fff',
+                    borderRadius: 6,
+                    boxShadow: 15,
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    image={certifications[0].image}
+                    alt={certifications[0].name}
+                    sx={{ height: 200, objectFit: 'cover', borderRadius: 2, mb: 2 }}
+                  />
+                  <Typography variant="h6" fontWeight="600" sx={{ color: '#17202a' }}>
+                    {certifications[0].name}
+                  </Typography>
+                </Card>
+              </motion.div>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={5}>
+              <motion.div whileHover="hover" variants={cardVariants}>
+                <Card
+                  onClick={() => handleOpen(certifications[1])}
+                  sx={{
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    p: 2,
+                    backgroundColor: '#f0f0f0',
+                    borderRadius: 6,
+                    boxShadow: 15,
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    image={certifications[1].image}
+                    alt={certifications[1].name}
+                    sx={{ height: 200, objectFit: 'cover', borderRadius: 2, mb: 2 }}
+                  />
+                  <Typography variant="h6" fontWeight="600" sx={{ color: '#17202a' }}>
+                    {certifications[1].name}
+                  </Typography>
+                </Card>
+              </motion.div>
+            </Grid>
+
+            {/* Tarjeta inferior al centro */}
+            <Grid item xs={12} sm={8} md={6}>
+              <motion.div whileHover="hover" variants={cardVariants}>
+                <Card
+                  onClick={() => handleOpen(certifications[2])}
+                  sx={{
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    p: 2,
+                    backgroundColor: '#fff',
+                    borderRadius: 6,
+                    boxShadow: 15,
+                    mt: { xs: 3, md: 3 },
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    image={certifications[2].image}
+                    alt={certifications[2].name}
+                    sx={{ height: 200, objectFit: 'cover', borderRadius: 2, mb: 2 }}
+                  />
+                  <Typography variant="h6" fontWeight="600" sx={{ color: '#17202a' }}>
+                    {certifications[2].name}
+                  </Typography>
+                </Card>
+              </motion.div>
+            </Grid>
           </Grid>
 
+          {/* Modal */}
           <AnimatePresence>
             {selectedCert && (
               <Dialog
@@ -177,7 +206,7 @@ const Certificaciones = () => {
                       position: 'absolute',
                       right: 12,
                       top: 12,
-                      color: (theme) => theme.palette.grey[600],
+                      color: theme.palette.grey[600],
                       '&:hover': { color: '#b7950b' },
                     }}
                   >
