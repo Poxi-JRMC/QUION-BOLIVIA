@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+  <!-- Texto QUION-BO -->
+  <text x="10" y="50" font-family="Arial" font-size="40" font-weight="bold" fill="#2e7d32">QUION-BO</text>
+  <!-- Ícono de grano de quinua (simple) -->
+  <path d="M160 40 Q170 20 180 40 Q170 60 160 40 Z" fill="#8bc34a" />
+</svg>
