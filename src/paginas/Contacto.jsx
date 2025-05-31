@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Button, Grid, Paper, List, ListItem, Link } from '@mui/material';
+import { Box, Container, Typography, Button, Grid, Paper, List, ListItem } from '@mui/material';
 import { motion } from 'framer-motion';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -11,27 +11,21 @@ const Contacto = () => {
   const infoWhatsAppNumber = '+59171542030';
   const comprarWhatsAppNumber = '+59171542546';
 
-  // Función definitiva para todos los dispositivos
+  // Función para abrir WhatsApp
   const openWhatsApp = (phone, message) => {
     const cleanNumber = phone.replace(/[^\d+]/g, '');
     const encodedMessage = encodeURIComponent(message);
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     if (isMobile) {
-      // Para Android
       window.location.href = `intent://send?phone=${cleanNumber}&text=${encodedMessage}#Intent;scheme=whatsapp;package=com.whatsapp;action=android.intent.action.SEND;end`;
-      
-      // Para iOS (fallback)
       setTimeout(() => {
         window.location.href = `whatsapp://send?phone=${cleanNumber}&text=${encodedMessage}`;
       }, 300);
-      
-      // Si todo falla, abre la versión web
       setTimeout(() => {
         window.open(`https://api.whatsapp.com/send?phone=${cleanNumber}&text=${encodedMessage}`, '_blank');
       }, 600);
     } else {
-      // Para desktop
       window.open(`https://web.whatsapp.com/send?phone=${cleanNumber}&text=${encodedMessage}`, '_blank');
     }
   };
@@ -46,7 +40,6 @@ const Contacto = () => {
 
 *Mi consulta específica:*
 [Por favor describa su necesidad aquí]`;
-    
     openWhatsApp(infoWhatsAppNumber, message);
   };
 
@@ -61,7 +54,6 @@ const Contacto = () => {
 - Dirección de envío: 
 
 Por favor confírmenme disponibilidad y costo total.`;
-    
     openWhatsApp(comprarWhatsAppNumber, message);
   };
 
@@ -73,12 +65,9 @@ Por favor confírmenme disponibilidad y costo total.`;
         position: 'relative',
         pt: { xs: '100px', md: '130px' },
         pb: { xs: '60px', md: '80px' },
-        // Fondo de imagen fijo
-        backgroundImage: 'url(/contacto.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-        // Overlay oscuro
+        // Fondo con imagen y color de respaldo
+        background: '#f5f5f5 url(/contacto.jpg) center/cover fixed',
+        // Estilos alternativos si la imagen no carga
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -86,7 +75,7 @@ Por favor confírmenme disponibilidad y costo total.`;
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          backgroundColor: 'rgba(255, 255, 255, 0.15)',
           zIndex: 0
         }
       }}
@@ -120,13 +109,13 @@ Por favor confírmenme disponibilidad y costo total.`;
                   justifyContent: 'space-between',
                   borderRadius: 3,
                   minHeight: '380px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.25)',
                   backdropFilter: 'blur(8px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  border: '1px solid rgba(255, 255, 255, 0.3)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-5px)',
-                    boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
+                    backgroundColor: 'rgba(255, 255, 255, 0.35)'
                   }
                 }}
               >
@@ -137,7 +126,8 @@ Por favor confírmenme disponibilidad y costo total.`;
                     sx={{
                       fontWeight: 700,
                       fontFamily: "'Playfair Display', serif",
-                      color: '#fff',
+                      color: 'rgba(0, 0, 0, 0.8)',
+                      textShadow: '0 1px 2px rgba(255,255,255,0.5)',
                       fontSize: { xs: '1.6rem', md: '2rem' },
                       mb: 3
                     }}
@@ -148,7 +138,8 @@ Por favor confírmenme disponibilidad y costo total.`;
                     variant="body1"
                     paragraph
                     sx={{
-                      color: 'rgba(255,255,255,0.85)',
+                      color: 'rgba(0, 0, 0, 0.7)',
+                      textShadow: '0 1px 1px rgba(255,255,255,0.3)',
                       mb: 3,
                       fontSize: { xs: '0.95rem', md: '1.05rem' },
                       lineHeight: 1.6
@@ -161,7 +152,8 @@ Por favor confírmenme disponibilidad y costo total.`;
                   <Typography
                     variant="h6"
                     sx={{
-                      color: '#fff',
+                      color: 'rgba(0, 0, 0, 0.9)',
+                      textShadow: '0 1px 1px rgba(255,255,255,0.3)',
                       mb: 3,
                       fontSize: { xs: '1.1rem', md: '1.3rem' },
                       fontWeight: '600',
@@ -170,7 +162,7 @@ Por favor confírmenme disponibilidad y costo total.`;
                     {infoWhatsAppNumber}
                   </Typography>
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     startIcon={<WhatsAppIcon />}
                     onClick={handleInfoClick}
                     fullWidth
@@ -181,13 +173,13 @@ Por favor confírmenme disponibilidad y costo total.`;
                       fontWeight: 600,
                       textTransform: 'none',
                       fontSize: '1.05rem',
+                      backgroundColor: 'rgba(37, 211, 102, 0.9)',
                       color: '#fff',
-                      borderColor: '#fff',
                       '&:hover': {
-                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                        borderColor: '#fff'
+                        backgroundColor: 'rgba(37, 211, 102, 1)',
                       },
-                      transition: 'all 0.3s ease'
+                      transition: 'all 0.3s ease',
+                      boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
                     }}
                   >
                     Solicitar Información
@@ -209,13 +201,13 @@ Por favor confírmenme disponibilidad y costo total.`;
                   justifyContent: 'space-between',
                   borderRadius: 3,
                   minHeight: '380px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.25)',
                   backdropFilter: 'blur(8px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  border: '1px solid rgba(255, 255, 255, 0.3)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-5px)',
-                    boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
+                    backgroundColor: 'rgba(255, 255, 255, 0.35)'
                   }
                 }}
               >
@@ -226,7 +218,8 @@ Por favor confírmenme disponibilidad y costo total.`;
                     sx={{
                       fontWeight: 700,
                       fontFamily: "'Playfair Display', serif",
-                      color: '#fff',
+                      color: 'rgba(0, 0, 0, 0.8)',
+                      textShadow: '0 1px 2px rgba(255,255,255,0.5)',
                       fontSize: { xs: '1.6rem', md: '2rem' },
                       mb: 3
                     }}
@@ -237,7 +230,8 @@ Por favor confírmenme disponibilidad y costo total.`;
                     variant="body1"
                     paragraph
                     sx={{
-                      color: 'rgba(255,255,255,0.85)',
+                      color: 'rgba(0, 0, 0, 0.7)',
+                      textShadow: '0 1px 1px rgba(255,255,255,0.3)',
                       mb: 3,
                       fontSize: { xs: '0.95rem', md: '1.05rem' },
                       lineHeight: 1.6
@@ -250,7 +244,8 @@ Por favor confírmenme disponibilidad y costo total.`;
                   <Typography
                     variant="h6"
                     sx={{
-                      color: '#fff',
+                      color: 'rgba(0, 0, 0, 0.9)',
+                      textShadow: '0 1px 1px rgba(255,255,255,0.3)',
                       mb: 3,
                       fontSize: { xs: '1.1rem', md: '1.3rem' },
                       fontWeight: '600',
@@ -259,7 +254,7 @@ Por favor confírmenme disponibilidad y costo total.`;
                     {comprarWhatsAppNumber}
                   </Typography>
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     startIcon={<WhatsAppIcon />}
                     onClick={handleComprarClick}
                     fullWidth
@@ -270,13 +265,13 @@ Por favor confírmenme disponibilidad y costo total.`;
                       fontWeight: 600,
                       textTransform: 'none',
                       fontSize: '1.05rem',
+                      backgroundColor: 'rgba(37, 211, 102, 0.9)',
                       color: '#fff',
-                      borderColor: '#fff',
                       '&:hover': {
-                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                        borderColor: '#fff'
+                        backgroundColor: 'rgba(37, 211, 102, 1)',
                       },
-                      transition: 'all 0.3s ease'
+                      transition: 'all 0.3s ease',
+                      boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
                     }}
                   >
                     Realizar Pedido
@@ -292,13 +287,13 @@ Por favor confírmenme disponibilidad y costo total.`;
                 sx={{
                   p: { xs: 3, md: 4 },
                   borderRadius: 3,
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.25)',
                   backdropFilter: 'blur(8px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  border: '1px solid rgba(255, 255, 255, 0.3)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-5px)',
-                    boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
+                    backgroundColor: 'rgba(255, 255, 255, 0.35)'
                   }
                 }}
               >
@@ -309,7 +304,8 @@ Por favor confírmenme disponibilidad y costo total.`;
                     sx={{
                       fontWeight: 700,
                       fontFamily: "'Playfair Display', serif",
-                      color: '#fff',
+                      color: 'rgba(0, 0, 0, 0.8)',
+                      textShadow: '0 1px 2px rgba(255,255,255,0.5)',
                       fontSize: { xs: '1.6rem', md: '2rem' },
                       mb: 3
                     }}
@@ -324,7 +320,8 @@ Por favor confírmenme disponibilidad y costo total.`;
                       <Typography
                         variant="h6"
                         sx={{
-                          color: '#fff',
+                          color: 'rgba(0, 0, 0, 0.8)',
+                          textShadow: '0 1px 1px rgba(255,255,255,0.3)',
                           mb: 2,
                           fontWeight: 600,
                           fontSize: '1.2rem',
@@ -333,24 +330,18 @@ Por favor confírmenme disponibilidad y costo total.`;
                           gap: 1
                         }}
                       >
-                        <EmailIcon sx={{ fontSize: '1.4rem', color: 'rgba(255,255,255,0.85)' }} />
+                        <EmailIcon sx={{ fontSize: '1.4rem', color: 'rgba(0, 0, 0, 0.7)' }} />
                         Correos electrónicos
                       </Typography>
                       <List sx={{ pl: 0 }}>
-                        <ListItem sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '1rem', px: 0 }}>
-                          <Link href="mailto:grovervillca@quionbolivia.com" color="inherit" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)' }}>
-                            grovervillca@quionbolivia.com
-                          </Link>
+                        <ListItem sx={{ color: 'rgba(0, 0, 0, 0.7)', fontSize: '1rem', px: 0 }}>
+                          grovervillca@quionbolivia.com
                         </ListItem>
-                        <ListItem sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '1rem', px: 0 }}>
-                          <Link href="mailto:info@quionbolivia.com" color="inherit" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)' }}>
-                            info@quionbolivia.com
-                          </Link>
+                        <ListItem sx={{ color: 'rgba(0, 0, 0, 0.7)', fontSize: '1rem', px: 0 }}>
+                          info@quionbolivia.com
                         </ListItem>
-                        <ListItem sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '1rem', px: 0 }}>
-                          <Link href="mailto:ventas@quionbolivia.com" color="inherit" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)' }}>
-                            ventas@quionbolivia.com
-                          </Link>
+                        <ListItem sx={{ color: 'rgba(0, 0, 0, 0.7)', fontSize: '1rem', px: 0 }}>
+                          ventas@quionbolivia.com
                         </ListItem>
                       </List>
                     </Box>
@@ -361,7 +352,8 @@ Por favor confírmenme disponibilidad y costo total.`;
                       <Typography
                         variant="h6"
                         sx={{
-                          color: '#fff',
+                          color: 'rgba(0, 0, 0, 0.8)',
+                          textShadow: '0 1px 1px rgba(255,255,255,0.3)',
                           mb: 2,
                           fontWeight: 600,
                           fontSize: '1.2rem'
@@ -372,7 +364,8 @@ Por favor confírmenme disponibilidad y costo total.`;
                       <Typography
                         variant="body1"
                         sx={{
-                          color: 'rgba(255,255,255,0.85)',
+                          color: 'rgba(0, 0, 0, 0.7)',
+                          textShadow: '0 1px 1px rgba(255,255,255,0.3)',
                           fontSize: '1rem',
                           lineHeight: 1.6
                         }}
@@ -391,7 +384,8 @@ Por favor confírmenme disponibilidad y costo total.`;
                     sx={{
                       fontWeight: 600,
                       fontFamily: "'Playfair Display', serif",
-                      color: '#fff',
+                      color: 'rgba(0, 0, 0, 0.8)',
+                      textShadow: '0 1px 1px rgba(255,255,255,0.3)',
                       mb: 3,
                       fontSize: '1.3rem'
                     }}
@@ -400,7 +394,7 @@ Por favor confírmenme disponibilidad y costo total.`;
                   </Typography>
                   <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
                     <Button
-                      variant="outlined"
+                      variant="contained"
                       startIcon={<FacebookIcon />}
                       sx={{
                         px: 3,
@@ -409,18 +403,17 @@ Por favor confírmenme disponibilidad y costo total.`;
                         textTransform: 'none',
                         fontWeight: 500,
                         minWidth: '140px',
+                        backgroundColor: 'rgba(24, 119, 242, 0.9)',
                         color: '#fff',
-                        borderColor: 'rgba(255,255,255,0.3)',
                         '&:hover': {
-                          borderColor: '#fff',
-                          backgroundColor: 'rgba(255,255,255,0.1)'
+                          backgroundColor: 'rgba(24, 119, 242, 1)'
                         }
                       }}
                     >
                       Facebook
                     </Button>
                     <Button
-                      variant="outlined"
+                      variant="contained"
                       startIcon={<InstagramIcon />}
                       sx={{
                         px: 3,
@@ -429,11 +422,10 @@ Por favor confírmenme disponibilidad y costo total.`;
                         textTransform: 'none',
                         fontWeight: 500,
                         minWidth: '140px',
+                        backgroundColor: 'rgba(228, 64, 95, 0.9)',
                         color: '#fff',
-                        borderColor: 'rgba(255,255,255,0.3)',
                         '&:hover': {
-                          borderColor: '#fff',
-                          backgroundColor: 'rgba(255,255,255,0.1)'
+                          backgroundColor: 'rgba(228, 64, 95, 1)'
                         }
                       }}
                     >
