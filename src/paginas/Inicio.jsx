@@ -5,6 +5,9 @@ import { motion } from 'framer-motion';
 import './Inicio.css';
 import Globo3D from '../componentes/Globo3D';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from "react";
+
+
 
 const containerVariants = {
   hidden: {},
@@ -26,6 +29,12 @@ const itemVariants = {
 
 const Inicio = () => {
   const { t } = useTranslation();
+  useEffect(() => {
+    document.body.className = "inicio"; // fondo negro solo para Inicio
+    return () => {
+      document.body.className = "";
+    };
+  }, []);
 
   const beneficios = [
     {

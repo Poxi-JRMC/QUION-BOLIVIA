@@ -1,6 +1,6 @@
 {
   "QUION-SRL": "QUION-SRL",
-  "descubre_mas": "Discover More",
+  "descubre_mas": "Discover more",
   "Inicio": "Home",
   "Productos": "Products",
   "Nosotros": "About Us",
@@ -8,23 +8,83 @@
   "Contactos": "Contact",
   "hero": {
     "titulo": "QUION-SRL",
-    "subtitulo1": "The best Quinoa from Bolivia",
-    "subtitulo2": "For you and for the World",
-    "boton": "Discover our products",
+    "subtitulo1": "The Best Quinoa from Bolivia",
+    "subtitulo2": "For You and the World",
+    "boton": "Explore our products",
     "titulo2": "Benefits of Quinoa"
   },
   "beneficios": {
-    "alto_valor": "High nutritional value",
+    "alto_valor": "High Nutritional Value",
     "alto_valor_text": "Quinoa is rich in protein, fiber, and essential minerals like iron, magnesium, and zinc.",
-    "libre_gluten": "Gluten-free",
-    "libre_gluten_text": "Ideal for people with celiac disease or gluten sensitivity, offering a healthy alternative.",
-    "sostenible": "Sustainable farming",
-    "sostenible_text": "Our quinoa is grown respecting the environment and ancestral traditions."
+    "libre_gluten": "Gluten-Free",
+    "libre_gluten_text": "Perfect for people with celiac disease or gluten sensitivity, offering a healthy alternative.",
+    "sostenible": "Sustainable Farming",
+    "sostenible_text": "Our quinoa is grown with respect for the environment and ancestral traditions."
   },
   "exportacion": {
-    "titulo1": "We export the best Bolivian quinoa to the world",
-    "texto1": "Our quinoa, grown in the Bolivian Andes, reaches international markets with global quality standards. We are proud to connect our roots with the world.",
-    "titulo2": "Quality that crosses borders",
-    "texto2": "From the heart of South America, we bring to the world a superfood that nourishes, respects the environment, and supports local communities."
+    "titulo1": "We Export the Best Bolivian Quinoa to the World",
+    "texto1": "Our quinoa, grown in the Bolivian Andes, reaches international markets with global quality standards. We take pride in connecting our roots with the world.",
+    "titulo2": "Quality Across Borders",
+    "texto2": "From the heart of South America, we deliver a superfood that nourishes, respects the environment, and supports local communities."
+  },
+  "products": {
+    "title": "Our Products",
+    "whiteQuinoa": {
+  "name": "White Quinoa",
+  "description": "White quinoa is known for its mild flavor and light texture, making it ideal for a wide range of dishes such as fresh salads, nutritious soups, and healthy main courses. It is an excellent source of complete proteins and slow-digesting carbohydrates, helping to maintain sustained energy throughout the day. Additionally, it is easy to digest and pairs well with multiple ingredients, making it a versatile and nutritious choice in the kitchen."
+},
+"redQuinoa": {
+  "name": "Red Quinoa",
+  "description": "Red quinoa stands out for its firm texture and characteristic earthy flavor, making it perfect for gourmet recipes and preparations that require a sturdier consistency. Besides being rich in fiber, it contains natural antioxidants that contribute to cardiovascular health and help combat oxidative stress. Its vibrant color adds a visually appealing touch to dishes, alongside its nutritional benefits."
+},
+"blackQuinoa": {
+  "name": "Black Quinoa",
+  "description": "Black quinoa is especially valued for its high antioxidant content and its more intense, slightly sweet flavor. It is an excellent source of essential amino acids, fiber, and minerals such as iron and magnesium, which help strengthen the immune system and improve bone health. Its crunchy texture and pronounced taste make it ideal for salads, side dishes, and meals that require a special touch."
+},
+"mixedQuinoa": {
+  "name": "Mixed Quinoa",
+  "description": "Mixed quinoa combines the best of white, red, and black quinoa, offering a complete and balanced nutritional profile. This nutritious and colorful blend provides a variety of flavors and textures, enriching any dish with essential proteins, fiber, vitamins, and minerals. It is perfect for those seeking a versatile and visually attractive food that enhances the nutritional quality of their meals."
+    }
+  },
+ 
+  "footer": "The best quinoa company QUION-SRL",
+  "about": {
+    "title": "About Us",
+    "description": "We are a company dedicated to offering high-quality products that honor our traditions and the environment. Our mission, vision, and values guide every action to deliver the best to our customers.",
+    "mission": {
+      "title": "Mission",
+      "text": "QUION-SRL provides safe organic and natural products to improve the health and well-being of our Bolivian family, always delivering the best service.",
+      "imgAlt": "Representative image of QUION-SRL's mission"
+    },
+    "vision": {
+      "title": "Vision",
+      "text": "To be a proactive company, offering products in the short term under strict quality management standards, through continuous training of our workers, to serve Bolivia and neighboring countries.",
+      "imgAlt": "Image representing QUION-SRL's vision"
+    },
+    "values": {
+      "title": "Values",
+      "text": "Quality, sustainability, social responsibility, and respect for ancestral farming traditions.\n\nCommitment:\nWe consider commitment a key part of our vision. It means fully applying our abilities to successfully accomplish entrusted tasks.\n\nResponsibility and Discipline:\nWe are organized and persistent in our daily activities, aiming to optimize resources and improve our operational standards.\n\nIntegrity:\nWe act with honesty and transparency in all our actions, building trust with clients and collaborators.",
+      "imgAlt": "Image representing the values of QUION-SRL"
+    },
+    "footer": "The best quinoa company QUION-SRL"
+  },
+  "certifications": {
+  "title": "Certifications",
+  "0": {
+    "name": "Senasag Certification",
+    "description": "Granted by the National Service of Agricultural Health and Food Safety, this certification ensures that quinoa complies with national sanitary and phytosanitary regulations, guaranteeing its safety and quality for consumption.",
+    "image": "/1senasag.jpg"
+  },
+  "1": {
+    "name": "ISO 22000 Certification",
+    "description": "An internationally recognized food safety management system that guarantees traceability, risk control, and compliance with hygienic and sanitary standards throughout the quinoa production chain.",
+    "image": "/2iso.jpg"
+  },
+  "2": {
+    "name": "Phytosanitary Certification",
+    "description": "Includes endorsements such as SGS and Andina, which validate quality, geographic origin, and compliance with international standards, ensuring that quinoa is free from pests and diseases, suitable for export.",
+    "image": "/3.jpg"
+      }
+    
   }
 }

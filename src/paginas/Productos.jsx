@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   Box,
   Container,
@@ -15,27 +15,25 @@ import {
   Divider
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { motion, AnimatePresence } from 'framer-motion';  // AnimatePresence para animar salida
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const products = [
+  
   {
-    name: 'Quinua Blanca',
-    description: 'Cultivada en el altiplano boliviano, la quinua blanca es la más versátil con su sabor suave y textura ligera la convierten en la favorita para ensaladas, sopas y postres saludables. Rica en proteínas y naturalmente libre de gluten.',
+    key: 'whiteQuinoa',
     image: '/quinua-blanca.jpg',
   },
   {
-    name: 'Quinua Roja',
-    description: 'Con un sabor más terroso y un grano firme, la quinua roja es ideal para platos calientes, guarniciones o bowls. Rica en antioxidantes y fibra, mantiene su forma después de cocerse, ideal para recetas gourmet.',
+    key: 'redQuinoa',
     image: '/quinua-roja.jpg',
   },
   {
-    name: 'Quinua Negra',
-    description: 'De sabor más intenso y textura crujiente, la quinua negra destaca por su alto contenido de litio y propiedades antiinflamatorias. Ideal para mezclas energéticas, granolas y platos exóticos.',
+    key: 'blackQuinoa',
     image: '/quinua-negra.jpg',
   },
   {
-    name: 'Quinua Mixta',
-    description: 'Una combinación nutritiva y colorida de quinua blanca, roja y negra. Perfecta para aportar textura, color y valor nutricional en una sola preparación. Ideal para ensaladas o como base de platos vegetarianos.',
+    key: 'mixedQuinoa',
     image: '/quinua-mixta.jpg',
   }
 ];
@@ -58,6 +56,7 @@ const Productos = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const { t } = useTranslation();
 
   const handleOpen = (product) => {
     setSelectedProduct(product);
@@ -66,7 +65,13 @@ const Productos = () => {
   const handleClose = () => {
     setSelectedProduct(null);
   };
-
+  
+  useEffect(() => {
+    document.body.classList.add('productos');
+    return () => {
+      document.body.classList.remove('productos');
+    };
+  }, []);
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -92,13 +97,13 @@ const Productos = () => {
                 textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
               }}
             >
-              Nuestros Productos
+              {t('products.title')}
             </Typography>
           </motion.div>
 
           <Grid container spacing={4}>
             {products.map((product, index) => (
-              <Grid item key={index} xs={12} sm={6} md={6}>
+              <Grid item key={product.key} xs={12} sm={6} md={6}>
                 <motion.div whileHover="hover" variants={cardVariants}>
                   <Card
                     onClick={() => handleOpen(product)}
@@ -120,7 +125,7 @@ const Productos = () => {
                       <CardMedia
                         component="img"
                         image={product.image}
-                        alt={product.name}
+                        alt={t(`products.${product.key}.name`)}
                         sx={{
                           height: 200,
                           objectFit: 'cover',
@@ -130,7 +135,7 @@ const Productos = () => {
                       />
                     </motion.div>
                     <Typography variant="h6" fontWeight="600" sx={{ color: '#17202a' }}>
-                      {product.name}
+                      {t(`products.${product.key}.name`)}
                     </Typography>
                   </Card>
                 </motion.div>
@@ -138,7 +143,6 @@ const Productos = () => {
             ))}
           </Grid>
 
-          {/* Modal con AnimatePresence */}
           <AnimatePresence>
             {selectedProduct && (
               <Dialog
@@ -171,7 +175,7 @@ const Productos = () => {
                     textShadow: '1px 1px 3px rgba(0,0,0,0.2)'
                   }}
                 >
-                  {selectedProduct.name}
+                  {t(`products.${selectedProduct.key}.name`)}
                   <IconButton
                     aria-label="close"
                     onClick={handleClose}
@@ -190,7 +194,7 @@ const Productos = () => {
                 <DialogContent sx={{ textAlign: 'center' }}>
                   <motion.img
                     src={selectedProduct.image}
-                    alt={selectedProduct.name}
+                    alt={t(`products.${selectedProduct.key}.name`)}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4 }}
@@ -211,7 +215,7 @@ const Productos = () => {
                     transition={{ duration: 0.5, delay: 0.2 }}
                   >
                     <Typography variant="body1" fontSize="1.1rem" color="text.secondary">
-                      {selectedProduct.description}
+                      {t(`products.${selectedProduct.key}.description`)}
                     </Typography>
                   </motion.div>
                 </DialogContent>

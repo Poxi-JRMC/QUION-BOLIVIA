@@ -1,16 +1,22 @@
-import React, { useState } from 'react'
-import { Box, Container, Typography, Grid, Fade, Modal } from '@mui/material'
-import { styled, keyframes } from '@mui/system'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import StarIcon from '@mui/icons-material/Star'
-import VerifiedIcon from '@mui/icons-material/Verified'
+import React, { useState,useEffect} from 'react';
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  Fade,
+  Modal
+} from '@mui/material';
+import { styled, keyframes } from '@mui/system';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useTranslation } from 'react-i18next';
 
 // Fondo amarillo suave
 const StyledBox = styled(Box)({
   backgroundColor: '#f7dc6f',
   padding: '80px 0',
   fontFamily: "'Lera', serif",
-})
+});
 
 // Animación personalizada para el título principal
 const slideDownFade = keyframes`
@@ -22,20 +28,24 @@ const slideDownFade = keyframes`
     opacity: 1;
     transform: translateY(0);
   }
-`
+`;
 
 const AnimatedTitle = styled(Typography)({
   animation: `${slideDownFade} 1s ease-out forwards`,
-})
+});
 
-// Elegimos un ícono diferente por cada sección
-const icons = [<CheckCircleIcon fontSize="large" />, <CheckCircleIcon fontSize="large" />, <CheckCircleIcon fontSize="large" />]
+// Íconos para cada sección
+const icons = [
+  <CheckCircleIcon fontSize="large" />,
+  <CheckCircleIcon fontSize="large" />,
+  <CheckCircleIcon fontSize="large" />
+];
 
 // Componente para cada sección
 const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -55,7 +65,7 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
                   width: 100,
                   height: 100,
                   mb: 3,
-                  bgcolor: '#e67e22 ',
+                  bgcolor: '#e67e22',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -160,43 +170,45 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
         </Box>
       </Modal>
     </>
-  )
-}
-
-const contentData = [
-  {
-    id: 1,
-    title: 'Misión',
-    text: 'QUION-SRL ofrece productos orgánicos y naturales inocuos para mejorar la salud y el bienestar de nuestra familia boliviana, dando siempre el mejor servicio.',
-    imgSrc: '/src/assets/mision.jpeg',
-    imgAlt: 'Foto representativa de la misión de QUION-SRL',
-    reverse: false,
-  },
-  {
-    id: 2,
-    title: 'Visión',
-    text: 'Ser una empresa proactiva, ofrecer a un corto plazo productos de acuerdo a estrictas normas de gestión de calidad, mediante capacitación continua de nuestros trabajadores, para brindarles a nuestra Bolivia y países hermanos.',
-    imgSrc: '/src/assets/vision.jpeg',
-    imgAlt: 'Imagen que representa la visión de QUION-SRL',
-    reverse: true,
-  },
-  {
-    id: 3,
-    title: 'Valores',
-    text: `Calidad, sostenibilidad, responsabilidad social y respeto por las tradiciones ancestrales de cultivo.\n
-Compromiso:\n
-Pensamos en el compromiso como parte fundamental de nuestra visión. Implica ejecutar al máximo nuestras capacidades para sacar adelante lo que se nos ha confiado.\n
-Responsabilidad y disciplina:\n
-Somos ordenados y perseverantes en nuestras actividades diarias, buscando aprovechar nuestros recursos y exigiéndonos mejorar nuestros parámetros de operación.\n
-Integridad:\n
-Actuamos con honestidad y transparencia en todas nuestras acciones, generando confianza en nuestros clientes y colaboradores.`,
-    imgSrc: '/src/assets/valores.jpg',
-    imgAlt: 'Imagen que representa los valores de QUION-SRL',
-    reverse: false,
-  },
-]
+  );
+};
 
 const Nosotros = () => {
+useEffect(() => {
+    document.body.classList.add('nosotros');
+    return () => {
+      document.body.classList.remove('nosotros');
+    };
+  }, []);
+  const { t } = useTranslation();
+
+  const contentData = [
+    {
+      id: 1,
+      title: t('about.mission.title'),
+      text: t('about.mission.text'),
+      imgSrc: '/src/assets/mision.jpeg',
+      imgAlt: t('about.mission.imgAlt'),
+      reverse: false,
+    },
+    {
+      id: 2,
+      title: t('about.vision.title'),
+      text: t('about.vision.text'),
+      imgSrc: '/src/assets/vision.jpeg',
+      imgAlt: t('about.vision.imgAlt'),
+      reverse: true,
+    },
+    {
+      id: 3,
+      title: t('about.values.title'),
+      text: t('about.values.text'),
+      imgSrc: '/src/assets/valores.jpg',
+      imgAlt: t('about.values.imgAlt'),
+      reverse: false,
+    },
+  ];
+
   return (
     <StyledBox>
       <Container maxWidth="lg">
@@ -206,10 +218,9 @@ const Nosotros = () => {
           gutterBottom
           align="center"
           sx={{ mb: 8, fontWeight: 700, color: '#000' }}
->
-          Sobre QUION-BO
+        >
+          {t('about.title')}
         </AnimatedTitle>
-
 
         <Fade in timeout={1600} style={{ transitionDelay: '300ms' }}>
           <Typography
@@ -224,7 +235,7 @@ const Nosotros = () => {
               color: '#000',
             }}
           >
-            Somos una empresa dedicada a la producción y comercialización de quinua orgánica de la más alta calidad, cultivada en las tierras altas de los Andes peruanos con técnicas ancestrales y sostenibles.
+            {t('about.description')}
           </Typography>
         </Fade>
 
@@ -253,12 +264,12 @@ const Nosotros = () => {
               letterSpacing: 2,
             }}
           >
-            La mejor empresa de quinua QUION-SRL
+            {t('about.footer')}
           </Typography>
         </Box>
       </Container>
     </StyledBox>
-  )
-}
+  );
+};
 
-export default Nosotros
+export default Nosotros;

@@ -1,12 +1,19 @@
-import React from 'react';
 import { Box, Container, Typography, Button, Grid, Paper, List, ListItem } from '@mui/material';
 import { motion } from 'framer-motion';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
+import React, { useEffect } from 'react';
 
 const Contacto = () => {
+  
+  useEffect(() => {
+    document.body.classList.add('contacto');
+    return () => {
+      document.body.classList.remove('contacto');
+    };
+  }, []);
   // Números en formato internacional CON el signo +
   const infoWhatsAppNumber = '+59171542030';
   const comprarWhatsAppNumber = '+59171542546';
@@ -66,7 +73,7 @@ Por favor confírmenme disponibilidad y costo total.`;
         pt: { xs: '100px', md: '130px' },
         pb: { xs: '60px', md: '80px' },
         // Fondo con imagen y color de respaldo
-        background: '#f5f5f5 url(/contacto.jpg) center/cover fixed',
+        
         // Estilos alternativos si la imagen no carga
         '&::before': {
           content: '""',

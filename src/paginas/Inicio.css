@@ -2,9 +2,35 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #000; /* Fondo negro en toda la página */
 }
-
+body.inicio {
+  background-color: black;
+}
+body.contacto {
+  margin: 0;
+  height: 100vh;
+  background: url('/contacto.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: black; 
+}
+body.productos {
+  background-color: #3fc22e; 
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+body.nosotros {
+   background-color: #a8d5a2; 
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+body.certificaciones {
+   background-color: #a8d5a2; 
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
 
 
 /* Sección Hero de bienvenida */

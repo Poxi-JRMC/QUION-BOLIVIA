@@ -8,23 +8,84 @@
   "Contactos": "Contactos",
   "hero": {
     "titulo": "QUION-SRL",
-    "subtitulo1": "La mejor Quinua de Bolivia",
-    "subtitulo2": "Para ti y para el Mundo",
-    "boton": "Conoce nuestros productos",
+    "subtitulo1": "La Mejor Quinua de Bolivia",
+    "subtitulo2": "Para Ti y el Mundo",
+    "boton": "Explora nuestros productos",
     "titulo2": "Beneficios de la Quinua"
   },
   "beneficios": {
-    "alto_valor": "Alto valor nutricional",
+    "alto_valor": "Alto Valor Nutricional",
     "alto_valor_text": "La quinua es rica en proteínas, fibra y minerales esenciales como hierro, magnesio y zinc.",
-    "libre_gluten": "Libre de gluten",
+    "libre_gluten": "Libre de Gluten",
     "libre_gluten_text": "Ideal para personas con celiaquía o sensibilidad al gluten, siendo una alternativa saludable.",
-    "sostenible": "Cultivo sostenible",
+    "sostenible": "Agricultura Sostenible",
     "sostenible_text": "Nuestra quinua se cultiva respetando el medio ambiente y las tradiciones ancestrales."
   },
   "exportacion": {
-    "titulo1": "Exportamos la mejor quinua de Bolivia para el Mundo",
-    "texto1": "Nuestra quinua, cultivada en los Andes bolivianos, llega a mercados internacionales con estándares de calidad global. Nos sentimos orgullosos de conectar nuestras raíces con el mundo.",
-    "titulo2": "Calidad que cruza fronteras",
-    "texto2": "Desde el corazón de Sudamérica, llevamos al mundo un superalimento que nutre, respeta el medio ambiente y apoya a comunidades locales."
+    "titulo1": "Exportamos la Mejor Quinua de Bolivia al Mundo",
+    "texto1": "Nuestra quinua, cultivada en los Andes bolivianos, llega a mercados internacionales con estándares de calidad globales. Nos enorgullece conectar nuestras raíces con el mundo.",
+    "titulo2": "Calidad que Cruza Fronteras",
+    "texto2": "Desde el corazón de Sudamérica, llevamos al mundo un superalimento que nutre, respeta el medio ambiente y apoya a las comunidades locales."
+  },
+  "products": {
+    "title": "Nuestros Productos",
+    "whiteQuinoa": {
+      "name": "Quinua Blanca",
+  "description": "La quinua blanca es conocida por su sabor suave y textura ligera, lo que la hace ideal para una amplia variedad de platos como ensaladas frescas, sopas nutritivas y platos principales saludables. Es una excelente fuente de proteínas completas y carbohidratos de absorción lenta, lo que ayuda a mantener energía sostenida durante el día. Además, es fácil de digerir y combina bien con múltiples ingredientes, convirtiéndola en una opción versátil y nutritiva en la cocina."
+},
+"redQuinoa": {
+  "name": "Quinua Roja",
+  "description": "La quinua roja destaca por su textura firme y su sabor terroso característico, lo que la hace perfecta para recetas gourmet y preparaciones que requieren una consistencia más robusta. Además de ser rica en fibra, contiene antioxidantes naturales que contribuyen a la salud cardiovascular y ayudan a combatir el estrés oxidativo. Su color vibrante aporta un toque visual atractivo en los platillos, además de sus beneficios nutricionales."
+},
+"blackQuinoa": {
+  "name": "Quinua Negra",
+  "description": "La quinua negra es especialmente valorada por su alto contenido en antioxidantes y su sabor más intenso y ligeramente dulce. Es una excelente fuente de aminoácidos esenciales, fibra y minerales como el hierro y magnesio, que ayudan a fortalecer el sistema inmunológico y mejorar la salud ósea. Su textura crujiente y sabor pronunciado la hacen ideal para ensaladas, acompañamientos y platos que requieren un toque especial."
+},
+"mixedQuinoa": {
+  "name": "Quinua Mixta",
+  "description": "La quinua mixta combina lo mejor de la quinua blanca, roja y negra, ofreciendo un perfil nutricional completo y equilibrado. Esta mezcla nutritiva y colorida aporta una variedad de sabores y texturas, enriqueciendo cualquier plato con proteínas, fibra, vitaminas y minerales esenciales. Es perfecta para quienes buscan un alimento versátil y visualmente atractivo que potencie la calidad nutricional de sus comidas."
+}
+  },
+  
+  
+  "footer": "La mejor empresa de quinua QUION-SRL",
+  "about": {
+    "title": "Nosotros",
+    "description": "Somos una empresa dedicada a ofrecer productos de alta calidad que respetan nuestras tradiciones y el medio ambiente. Nuestra misión, visión y valores guían cada acción para brindar lo mejor a nuestros clientes.",
+    "mission": {
+      "title": "Misión",
+      "text": "QUION-SRL ofrece productos orgánicos y naturales seguros para mejorar la salud y bienestar de nuestra familia boliviana, brindando siempre el mejor servicio.",
+      "imgAlt": "Foto representativa de la misión de QUION-SRL"
+    },
+    "vision": {
+      "title": "Visión",
+      "text": "Ser una empresa proactiva, ofreciendo productos a corto plazo bajo estrictos estándares de gestión de calidad, mediante la capacitación continua de nuestros trabajadores, para servir a Bolivia y países hermanos.",
+      "imgAlt": "Imagen que representa la visión de QUION-SRL"
+    },
+    "values": {
+      "title": "Valores",
+      "text": "Calidad, sostenibilidad, responsabilidad social y respeto por las tradiciones ancestrales de cultivo.\n\nCompromiso:\nConsideramos el compromiso como parte fundamental de nuestra visión. Significa ejecutar plenamente nuestras capacidades para cumplir exitosamente lo que se nos confía.\n\nResponsabilidad y Disciplina:\nSomos organizados y perseverantes en nuestras actividades diarias, buscando optimizar recursos y exigir mejoras en nuestros estándares operativos.\n\nIntegridad:\nActuamos con honestidad y transparencia en todas nuestras acciones, generando confianza con clientes y colaboradores.",
+      "imgAlt": "Imagen que representa los valores de QUION-SRL"
+    },
+    "footer": "La mejor empresa de quinua QUION-SRL"
+  },
+  "certifications": {
+  "title": "Certificaciones",
+  "0": {
+    "name": "Certificación Senasag",
+    "description": "Otorgada por el Servicio Nacional de Sanidad Agropecuaria e Inocuidad Alimentaria, esta certificación garantiza que la quinua cumple con las normativas sanitarias y fitosanitarias nacionales, asegurando su inocuidad y calidad para el consumo.",
+    "image": "/1senasag.jpg"
+  },
+  "1": {
+    "name": "Certificación ISO 22000",
+    "description": "Sistema de gestión de la inocuidad alimentaria reconocido internacionalmente que garantiza la trazabilidad, control de riesgos y cumplimiento de estándares higiénico-sanitarios en toda la cadena de producción de la quinua.",
+    "image": "/2iso.jpg"
+  },
+  "2": {
+    "name": "Certificación Fitosanitaria",
+    "description": "Incluye avales como SGS y Andina, que validan la calidad, origen geográfico y cumplimiento de estándares internacionales, garantizando que la quinua esté libre de plagas y enfermedades, apta para exportación.",
+    "image": "/3.jpg"
+      }
+    
   }
 }
