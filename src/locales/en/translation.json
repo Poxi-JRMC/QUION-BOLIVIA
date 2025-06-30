@@ -85,6 +85,28 @@
     "description": "Includes endorsements such as SGS and Andina, which validate quality, geographic origin, and compliance with international standards, ensuring that quinoa is free from pests and diseases, suitable for export.",
     "image": "/3.jpg"
       }
-    
+  },
+  "contact": {
+  "title": "Contact Us",
+  "ceo_title": "CEO OF QUION-SRL GROVER VILLCA",
+  "info_section": {
+    "title": "Do you need information?",
+    "description": "Contact us directly via WhatsApp for detailed information.",
+    "area": "INFORMATION AREA (NAME)",
+    "button": "Request Information"
+  },
+  "buy_section": {
+    "title": "Do you want to buy?",
+    "description": "Place your orders directly via WhatsApp.",
+    "area": "SALES MANAGER (NAME)",
+    "button": "Place Order"
+  },
+  "contact_section": {
+    "title": "CONTACT US",
+    "emails": "EMAILS",
+    "address": "ADDRESS",
+    "location": "Challapata Tomás Frías Street,<br />Oruro, Bolivia",
+    "social": "Follow us on social media"
   }
+}
 }

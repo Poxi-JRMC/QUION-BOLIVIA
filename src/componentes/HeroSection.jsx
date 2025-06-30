@@ -19,11 +19,17 @@ const HeroSection = () => {
       }}
     >
       {/* Título principal */}
-      <motion.div
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5}}
-      >
+       <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      repeatType: "mirror",
+                      repeatDelay: 2,
+                      ease: "easeInOut"
+                    }}
+                  >
         <Typography
           variant="h2"
           sx={{
@@ -39,11 +45,17 @@ const HeroSection = () => {
       </motion.div>
 
       {/* Subtítulos */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.4 }}
-      >
+       <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      repeatType: "mirror",
+                      repeatDelay: 2,
+                      ease: "easeInOut"
+                    }}
+                  >
         <Typography
           variant="h5"
           sx={{

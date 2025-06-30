@@ -5,8 +5,10 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Contacto = () => {
+  const { t } = useTranslation();
   
   useEffect(() => {
     document.body.classList.add('contacto');
@@ -14,11 +16,12 @@ const Contacto = () => {
       document.body.classList.remove('contacto');
     };
   }, []);
-  // Números en formato internacional CON el signo +
+  
+  // Números WhatsApp (no cambian con la traducción)
   const infoWhatsAppNumber = '+59171542030';
-  const comprarWhatsAppNumber = '+59171542546';
+  const comprarWhatsAppNumber = '+59173564453';
 
-  // Función para abrir WhatsApp
+  // Función para abrir WhatsApp (se mantiene igual)
   const openWhatsApp = (phone, message) => {
     const cleanNumber = phone.replace(/[^\d+]/g, '');
     const encodedMessage = encodeURIComponent(message);
@@ -37,7 +40,7 @@ const Contacto = () => {
     }
   };
 
-  // Handler para información
+  // Handlers para WhatsApp (se mantienen igual)
   const handleInfoClick = () => {
     const message = `¡Hola! Vi su página web *QUION BOLIVIA* y necesito información sobre:
 
@@ -50,7 +53,6 @@ const Contacto = () => {
     openWhatsApp(infoWhatsAppNumber, message);
   };
 
-  // Handler para compras
   const handleComprarClick = () => {
     const message = `¡Hola! Quiero realizar un pedido en *QUION BOLIVIA*:
 
@@ -64,33 +66,22 @@ Por favor confírmenme disponibilidad y costo total.`;
     openWhatsApp(comprarWhatsAppNumber, message);
   };
 
+  // Redes sociales (URLs no cambian)
+  const facebookUrl = 'https://www.facebook.com/share/1HMF4x3Gaf/?mibextid=wwXIfr';
+  const instagramUrl = 'https://www.instagram.com/quions.r.l?igsh=YzN6eXpnZHVhNGht&utm_source=qr';
+
   return (
     <Box 
+      component="section"
       sx={{
         width: '100%',
-        minHeight: '100vh',
+        py: { xs: 4, md: 6 },
         position: 'relative',
-        pt: { xs: '100px', md: '130px' },
-        pb: { xs: '60px', md: '80px' },
-        // Fondo con imagen y color de respaldo
-        
-        // Estilos alternativos si la imagen no carga
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(255, 255, 255, 0.15)',
-          zIndex: 0
-        }
       }}
     >
       <Container 
         maxWidth="lg" 
         sx={{ 
-          py: 6,
           position: 'relative',
           zIndex: 1,
           px: { xs: 2, md: 0 }
@@ -101,9 +92,37 @@ Por favor confírmenme disponibilidad y costo total.`;
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
+          {/* Sección del CEO */}
+          <Box sx={{ textAlign: 'center', mb: 4 }}>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                repeatType: "mirror",
+                repeatDelay: 2,
+                ease: "easeInOut"
+              }}
+            >
+              <Typography 
+                variant="h5" 
+                sx={{ 
+                  fontWeight: 700, 
+                  color: 'rgba(0, 0, 0, 0.9)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  fontSize: { xs: '1.3rem', md: '1.5rem' },
+                }}
+              >
+                {t("contact.ceo_title")}
+              </Typography>
+            </motion.div>
+          </Box>
+
           <Grid container spacing={4} justifyContent="center">
             
-            {/* Sección de Información */}
+            {/* Sección de Información WhatsApp */}
             <Grid item xs={12} md={5}>
               <Paper
                 elevation={0}
@@ -116,13 +135,13 @@ Por favor confírmenme disponibilidad y costo total.`;
                   justifyContent: 'space-between',
                   borderRadius: 3,
                   minHeight: '380px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.25)',
-                  backdropFilter: 'blur(8px)',
-                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                  backdropFilter: 'blur(4px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-5px)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.35)'
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)'
                   }
                 }}
               >
@@ -139,7 +158,7 @@ Por favor confírmenme disponibilidad y costo total.`;
                       mb: 3
                     }}
                   >
-                    ¿Quieres información?
+                    {t("contact.info_section.title")}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -152,7 +171,20 @@ Por favor confírmenme disponibilidad y costo total.`;
                       lineHeight: 1.6
                     }}
                   >
-                    Contáctanos directamente por WhatsApp para recibir información detallada.
+                    {t("contact.info_section.description")}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    paragraph
+                    sx={{
+                      color: 'rgba(0, 0, 0, 0.7)',
+                      textShadow: '0 1px 1px rgba(255,255,255,0.3)',
+                      mb: 3,
+                      fontSize: { xs: '0.95rem', md: '1.05rem' },
+                      lineHeight: 1.6
+                    }}
+                  >
+                    {t("contact.info_section.area")}
                   </Typography>
                 </Box>
                 <Box>
@@ -189,13 +221,13 @@ Por favor confírmenme disponibilidad y costo total.`;
                       boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
                     }}
                   >
-                    Solicitar Información
+                    {t("contact.info_section.button")}
                   </Button>
                 </Box>
               </Paper>
             </Grid>
 
-            {/* Sección de Compras */}
+            {/* Sección de Compras WhatsApp */}
             <Grid item xs={12} md={5}>
               <Paper
                 elevation={0}
@@ -208,13 +240,13 @@ Por favor confírmenme disponibilidad y costo total.`;
                   justifyContent: 'space-between',
                   borderRadius: 3,
                   minHeight: '380px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.25)',
-                  backdropFilter: 'blur(8px)',
-                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                  backdropFilter: 'blur(4px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-5px)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.35)'
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)'
                   }
                 }}
               >
@@ -231,7 +263,7 @@ Por favor confírmenme disponibilidad y costo total.`;
                       mb: 3
                     }}
                   >
-                    ¿Quieres comprar?
+                    {t("contact.buy_section.title")}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -244,7 +276,20 @@ Por favor confírmenme disponibilidad y costo total.`;
                       lineHeight: 1.6
                     }}
                   >
-                    Realiza tus pedidos directamente por WhatsApp.
+                    {t("contact.buy_section.description")}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    paragraph
+                    sx={{
+                      color: 'rgba(0, 0, 0, 0.7)',
+                      textShadow: '0 1px 1px rgba(255,255,255,0.3)',
+                      mb: 3,
+                      fontSize: { xs: '0.95rem', md: '1.05rem' },
+                      lineHeight: 1.6
+                    }}
+                  >
+                    {t("contact.buy_section.area")}
                   </Typography>
                 </Box>
                 <Box>
@@ -281,7 +326,7 @@ Por favor confírmenme disponibilidad y costo total.`;
                       boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
                     }}
                   >
-                    Realizar Pedido
+                    {t("contact.buy_section.button")}
                   </Button>
                 </Box>
               </Paper>
@@ -294,60 +339,90 @@ Por favor confírmenme disponibilidad y costo total.`;
                 sx={{
                   p: { xs: 3, md: 4 },
                   borderRadius: 3,
-                  backgroundColor: 'rgba(255, 255, 255, 0.25)',
-                  backdropFilter: 'blur(8px)',
-                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.18)',
+                  backdropFilter: 'blur(5px)',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-5px)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.35)'
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)'
                   }
                 }}
               >
                 <Box sx={{ textAlign: 'center', mb: 4 }}>
-                  <Typography
-                    variant="h4"
-                    gutterBottom
-                    sx={{
-                      fontWeight: 700,
-                      fontFamily: "'Playfair Display', serif",
-                      color: 'rgba(0, 0, 0, 0.8)',
-                      textShadow: '0 1px 2px rgba(255,255,255,0.5)',
-                      fontSize: { xs: '1.6rem', md: '2rem' },
-                      mb: 3
-                    }}
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300 }}
                   >
-                    Contáctanos
-                  </Typography>
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        fontWeight: 700,
+                        fontFamily: "'Playfair Display', serif",
+                        color: 'rgba(0, 0, 0, 0.85)',
+                        fontSize: { xs: '2rem', md: '2.5rem' },
+                        mb: 3,
+                        textShadow: '0 2px 4px rgba(255,255,255,0.3)',
+                        display: 'inline-block',
+                        borderBottom: '3px solid rgba(0,0,0,0.1)',
+                        pb: 1
+                      }}
+                    >
+                      {t("contact.contact_section.title")}
+                    </Typography>
+                  </motion.div>
                 </Box>
 
                 <Grid container spacing={4}>
                   <Grid item xs={12} md={6}>
                     <Box>
                       <Typography
-                        variant="h6"
+                        variant="h5"
                         sx={{
-                          color: 'rgba(0, 0, 0, 0.8)',
-                          textShadow: '0 1px 1px rgba(255,255,255,0.3)',
-                          mb: 2,
+                          color: 'rgba(0, 0, 0, 0.85)',
+                          mb: 3,
                           fontWeight: 600,
-                          fontSize: '1.2rem',
+                          fontSize: '1.4rem',
                           display: 'flex',
                           alignItems: 'center',
-                          gap: 1
+                          gap: 1.5
                         }}
                       >
-                        <EmailIcon sx={{ fontSize: '1.4rem', color: 'rgba(0, 0, 0, 0.7)' }} />
-                        Correos electrónicos
+                        <EmailIcon sx={{ fontSize: '1.8rem', color: 'rgba(0, 0, 0, 0.75)' }} />
+                        {t("contact.contact_section.emails")}
                       </Typography>
                       <List sx={{ pl: 0 }}>
-                        <ListItem sx={{ color: 'rgba(0, 0, 0, 0.7)', fontSize: '1rem', px: 0 }}>
+                        <ListItem 
+                          sx={{ 
+                            color: 'rgba(0, 0, 0, 0.75)',
+                            fontSize: '1.1rem',
+                            px: 0,
+                            py: 1,
+                            fontWeight: 500
+                          }}
+                        >
                           grovervillca@quionbolivia.com
                         </ListItem>
-                        <ListItem sx={{ color: 'rgba(0, 0, 0, 0.7)', fontSize: '1rem', px: 0 }}>
+                        <ListItem 
+                          sx={{ 
+                            color: 'rgba(0, 0, 0, 0.75)',
+                            fontSize: '1.1rem',
+                            px: 0,
+                            py: 1,
+                            fontWeight: 500
+                          }}
+                        >
                           info@quionbolivia.com
                         </ListItem>
-                        <ListItem sx={{ color: 'rgba(0, 0, 0, 0.7)', fontSize: '1rem', px: 0 }}>
+                        <ListItem 
+                          sx={{ 
+                            color: 'rgba(0, 0, 0, 0.75)',
+                            fontSize: '1.1rem',
+                            px: 0,
+                            py: 1,
+                            fontWeight: 500
+                          }}
+                        >
                           ventas@quionbolivia.com
                         </ListItem>
                       </List>
@@ -357,29 +432,38 @@ Por favor confírmenme disponibilidad y costo total.`;
                   <Grid item xs={12} md={6}>
                     <Box>
                       <Typography
-                        variant="h6"
+                        variant="h5"
                         sx={{
-                          color: 'rgba(0, 0, 0, 0.8)',
-                          textShadow: '0 1px 1px rgba(255,255,255,0.3)',
-                          mb: 2,
+                          color: 'rgba(0, 0, 0, 0.85)',
+                          mb: 3,
                           fontWeight: 600,
-                          fontSize: '1.2rem'
+                          fontSize: '1.4rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 1.5
                         }}
                       >
-                        Dirección
+                        <Box component="span" sx={{ 
+                          width: '28px',
+                          height: '28px',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }}>
+                          📍
+                        </Box>
+                        {t("contact.contact_section.address")}
                       </Typography>
                       <Typography
                         variant="body1"
                         sx={{
-                          color: 'rgba(0, 0, 0, 0.7)',
-                          textShadow: '0 1px 1px rgba(255,255,255,0.3)',
-                          fontSize: '1rem',
-                          lineHeight: 1.6
+                          color: 'rgba(0, 0, 0, 0.75)',
+                          fontSize: '1.1rem',
+                          lineHeight: 1.7,
+                          fontWeight: 500
                         }}
-                      >
-                        Challapata Calle Tomás Frías,<br />
-                        Oruro, Bolivia
-                      </Typography>
+                        dangerouslySetInnerHTML={{ __html: t("contact.contact_section.location") }}
+                      />
                     </Box>
                   </Grid>
                 </Grid>
@@ -397,12 +481,13 @@ Por favor confírmenme disponibilidad y costo total.`;
                       fontSize: '1.3rem'
                     }}
                   >
-                    Síguenos en redes sociales
+                    {t("contact.contact_section.social")}
                   </Typography>
                   <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
                     <Button
                       variant="contained"
                       startIcon={<FacebookIcon />}
+                      onClick={() => window.open(facebookUrl, '_blank')}
                       sx={{
                         px: 3,
                         py: 1.2,
@@ -422,6 +507,7 @@ Por favor confírmenme disponibilidad y costo total.`;
                     <Button
                       variant="contained"
                       startIcon={<InstagramIcon />}
+                      onClick={() => window.open(instagramUrl, '_blank')}
                       sx={{
                         px: 3,
                         py: 1.2,

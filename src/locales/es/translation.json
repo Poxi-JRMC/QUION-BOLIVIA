@@ -87,5 +87,30 @@
     "image": "/3.jpg"
       }
     
+  },
+
+  "contact": {
+  "title": "Contáctanos",
+  "ceo_title": "CEO DE QUION-SRL GROVER VILLCA",
+  "info_section": {
+    "title": "¿Quieres información?",
+    "description": "Contáctanos directamente por WhatsApp para recibir información detallada.",
+    "area": "AREA DE INFORMACION (NOMBRE)",
+    "button": "Solicitar Información"
+  },
+  "buy_section": {
+    "title": "¿Quieres comprar?",
+    "description": "Realiza tus pedidos directamente por WhatsApp.",
+    "area": "GERENTE DE COMERCIALIZACION (NOMBRE)",
+    "button": "Realizar Pedido"
+  },
+  "contact_section": {
+    "title": "CONTÁCTANOS",
+    "emails": "CORREOS ELECTRÓNICOS",
+    "address": "DIRECCIÓN",
+    "location": "Challapata Calle Tomás Frías,<br />Oruro, Bolivia",
+    "social": "Síguenos en redes sociales"
+    }
+  
   }
 }
