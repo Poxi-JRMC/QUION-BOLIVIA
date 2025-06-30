@@ -44,7 +44,15 @@
 "mixedQuinoa": {
   "name": "Mixed Quinoa",
   "description": "Mixed quinoa combines the best of white, red, and black quinoa, offering a complete and balanced nutritional profile. This nutritious and colorful blend provides a variety of flavors and textures, enriching any dish with essential proteins, fiber, vitamins, and minerals. It is perfect for those seeking a versatile and visually attractive food that enhances the nutritional quality of their meals."
-    }
+},
+"upcomingTitle": "Upcoming Products",
+"futureQuinoa1": {
+  "name": "Quinoa Flakes"
+},
+"futureQuinoa2": {
+  "name": "Quinoa Flour"
+}
+
   },
  
   "footer": "The best quinoa company QUION-SRL",

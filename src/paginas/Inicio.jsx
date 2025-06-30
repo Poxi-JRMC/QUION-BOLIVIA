@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HeroSection from '../componentes/HeroSection';
 import { Box, Container, Typography, Grid, Paper } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import './Inicio.css';
 import Globo3D from '../componentes/Globo3D';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from "react";
-
-
 
 const containerVariants = {
   hidden: {},
@@ -25,6 +23,18 @@ const itemVariants = {
     y: 0,
     transition: { duration: 0.6, ease: 'easeOut' },
   },
+};
+
+const overlayVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+const imageVariants = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: { scale: 1, opacity: 1 },
+  exit: { scale: 0.8, opacity: 0 },
 };
 
 const Inicio = () => {
@@ -50,6 +60,9 @@ const Inicio = () => {
       text: t('beneficios.sostenible_text'),
     },
   ];
+
+  // Estado para controlar modal lightbox
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <Box className="inicio-container">
@@ -189,6 +202,7 @@ const Inicio = () => {
                 </motion.div>
               </Grid>
               <Grid item xs={12} md={6}>
+                {/* Imagen clickeable para abrir lightbox */}
                 <img
                   src="/export.jpg"
                   alt="Mapa de exportación"
@@ -196,12 +210,61 @@ const Inicio = () => {
                     width: '100%',
                     borderRadius: '16px',
                     boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
+                    cursor: 'pointer',
                   }}
+                  onClick={() => setModalOpen(true)}
                 />
               </Grid>
             </Grid>
           </Container>
         </section>
+
+        {/* Modal Lightbox solo imagen centrada */}
+        <AnimatePresence>
+          {modalOpen && (
+            <motion.div
+              key="overlay"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={overlayVariants}
+              onClick={() => setModalOpen(false)}
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                zIndex: 1300,
+                cursor: 'pointer',
+              }}
+            >
+              <motion.img
+                key="image"
+                src="/export.jpg"
+                alt="Mapa de exportación ampliado"
+                variants={imageVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                onClick={(e) => e.stopPropagation()} // Evitar cerrar al hacer click en la imagen
+                whileHover={{ scale: 1.05, boxShadow: '0 15px 40px rgba(0,0,0,0.9)' }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                style={{
+                  maxWidth: '95vw',
+                  maxHeight: '95vh',
+                  borderRadius: 12,
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.8)',
+                  cursor: 'default',
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Box>
     </Box>
   );

@@ -142,7 +142,7 @@ const Certificaciones = () => {
                   sx: {
                     borderRadius: 4,
                     p: 3,
-                    background: 'linear-gradient(145deg,rgb(194, 183, 25), #f0f0f0)',
+                    background: 'linear-gradient(145deg, #b9cc61, #f0f0f0)',
                     boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                   },
                 }}
