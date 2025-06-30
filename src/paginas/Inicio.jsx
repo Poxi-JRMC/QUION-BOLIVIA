@@ -138,11 +138,16 @@ const Inicio = () => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1 }}
-                >
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{
+                                duration: 1,
+                                repeat: Infinity,
+                                repeatType: "mirror",
+                                repeatDelay: 2,
+                                ease: "easeInOut"
+                              }}
+                            >
                   <Typography
                     variant="h4"
                     sx={{
@@ -172,11 +177,16 @@ const Inicio = () => {
             <Grid container spacing={6} alignItems="center" sx={{ mt: 10 }}>
               <Grid item xs={12} md={6}>
                 <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1 }}
-                >
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{
+                                duration: 1,
+                                repeat: Infinity,
+                                repeatType: "mirror",
+                                repeatDelay: 2,
+                                ease: "easeInOut"
+                              }}
+                            >
                   <Typography
                     variant="h4"
                     sx={{
