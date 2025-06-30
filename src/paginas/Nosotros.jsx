@@ -1,15 +1,21 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Container,
   Typography,
   Grid,
   Fade,
-  Modal
+  Modal,
+  IconButton,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
-import { styled, keyframes } from '@mui/system';
+import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { styled, keyframes } from '@mui/system';
 import { useTranslation } from 'react-i18next';
+import Slide from '@mui/material/Slide';
+
 
 // Fondo amarillo suave
 const StyledBox = styled(Box)({
@@ -34,16 +40,44 @@ const AnimatedTitle = styled(Typography)({
   animation: `${slideDownFade} 1s ease-out forwards`,
 });
 
-// Íconos para cada sección
+// Animación para caja del título (con pulso suave)
+const pulse = keyframes`
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+`;
+
+// Caja animada para el título (reemplaza donde estaba el texto)
+const TitleBox = styled(Box)(({ theme }) => ({
+  cursor: 'pointer',
+  backgroundColor: '#b9cc61',
+  borderRadius: 8,
+  padding: '40px 20px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: '#fff',
+  fontWeight: 'bold',
+  fontSize: '1.5rem',
+  gap: '12px',
+  userSelect: 'none',
+  animation: `${pulse} 2s infinite ease-in-out`,
+  transition: 'background-color 0.3s',
+  '&:hover': {
+    backgroundColor: '#cf6f0a',
+  },
+}));
+
 const icons = [
   <CheckCircleIcon fontSize="large" />,
   <CheckCircleIcon fontSize="large" />,
-  <CheckCircleIcon fontSize="large" />
+  <CheckCircleIcon fontSize="large" />,
 ];
 
-// Componente para cada sección
 const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
   const [open, setOpen] = useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -56,61 +90,17 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
         alignItems="center"
         sx={{ mb: 12 }}
       >
-        {/* Texto */}
+        {/* Caja título con animación e ícono, clic para abrir modal */}
         <Grid item xs={12} md={6}>
           <Fade in timeout={600} style={{ transitionDelay: `${delay}ms` }}>
-            <Box>
-              <Box
-                sx={{
-                  width: 100,
-                  height: 100,
-                  mb: 3,
-                  bgcolor: '#e67e22',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '50%',
-                  color: '#fff',
-                  fontSize: 36,
-                  transition: 'transform 0.3s',
-                  '&:hover': {
-                    transform: 'scale(1.1)',
-                  },
-                }}
-                aria-label={`Sección ${title}`}
-              >
-                {icons[id - 1]}
-              </Box>
-
-              <Typography
-                variant="h4"
-                component="h3"
-                sx={{ mb: 2, fontWeight: 700, color: '#000' }}
-              >
-                {title}
-              </Typography>
-
-              <Box>
-                {text.split('\n').map((line, idx) => (
-                  <Typography
-                    key={idx}
-                    sx={{
-                      fontSize: 18,
-                      lineHeight: 1.8,
-                      color: '#000',
-                      mb: 2,
-                      whiteSpace: 'pre-line',
-                    }}
-                  >
-                    {line.trim()}
-                  </Typography>
-                ))}
-              </Box>
-            </Box>
+            <TitleBox onClick={handleOpen} aria-label={`Abrir detalles de ${title}`}>
+              {icons[id - 1]}
+              {title}
+            </TitleBox>
           </Fade>
         </Grid>
 
-        {/* Imagen */}
+        {/* Imagen con animación y hover */}
         <Grid item xs={12} md={6}>
           <Fade in timeout={800} style={{ transitionDelay: `${delay + 400}ms` }}>
             <Box
@@ -137,49 +127,89 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
         </Grid>
       </Grid>
 
-      {/* Modal para imagen grande */}
-      <Modal open={open} onClose={handleClose} closeAfterTransition>
-        <Box
-          onClick={handleClose}
-          sx={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            bgcolor: 'rgba(0,0,0,0.85)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            p: 2,
-            cursor: 'zoom-out',
-            zIndex: 1300,
-          }}
-        >
-          <Box
-            component="img"
-            src={imgSrc}
-            alt={imgAlt}
-            sx={{
-              maxWidth: '90%',
-              maxHeight: '90%',
-              borderRadius: 3,
-              boxShadow: '0 8px 30px rgba(0,0,0,0.7)',
-            }}
-          />
-        </Box>
+      {/* Modal que despliega texto completo con imagen */}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        aria-labelledby={`${title}-modal-title`}
+        aria-describedby={`${title}-modal-description`}
+        sx={{
+       display: 'flex',
+       alignItems: 'center',
+       justifyContent: 'center',
+       zIndex: 1300,
+      }}
+>
+     <Slide direction="up" in={open} mountOnEnter unmountOnExit>
+      <Box
+      sx={{
+        background: 'linear-gradient(145deg, #b9cc61, #f0f0f0)',
+        bgcolor: '#fff',
+        borderRadius: 3,
+        boxShadow: 24,
+        p: 4,
+        maxWidth: fullScreen ? '90vw' : 600,
+        width: '90%',
+        maxHeight: '80vh',
+        overflowY: 'auto',
+        outline: 'none',
+      }}
+          >
+            <Box
+              sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}
+            >
+              <Typography
+                id={`${title}-modal-title`}
+                variant="h5"
+                fontWeight="bold"
+              >
+                {title}
+              </Typography>
+              <IconButton
+                onClick={handleClose}
+                aria-label="Cerrar"
+                size="large"
+              >
+                <CloseIcon />
+              </IconButton>
+            </Box>
+
+            <Box
+              component="img"
+              src={imgSrc}
+              alt={imgAlt}
+              sx={{
+                width: '100%',
+                height: 'auto',
+                borderRadius: 2,
+                mb: 3,
+                objectFit: 'cover',
+              }}
+            />
+
+            <Typography
+              id={`${title}-modal-description`}
+              variant="body1"
+              sx={{ whiteSpace: 'pre-line', lineHeight: 1.6 }}
+            >
+              {text}
+            </Typography>
+          </Box>
+        </Slide>
       </Modal>
     </>
   );
 };
 
 const Nosotros = () => {
-useEffect(() => {
+  useEffect(() => {
     document.body.classList.add('nosotros');
     return () => {
       document.body.classList.remove('nosotros');
     };
   }, []);
+
   const { t } = useTranslation();
 
   const contentData = [

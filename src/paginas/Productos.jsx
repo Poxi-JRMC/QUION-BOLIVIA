@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Box,
   Container,
@@ -15,27 +15,19 @@ import {
   Divider
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 const products = [
-  
-  {
-    key: 'whiteQuinoa',
-    image: '/quinua-blanca.jpg',
-  },
-  {
-    key: 'redQuinoa',
-    image: '/quinua-roja.jpg',
-  },
-  {
-    key: 'blackQuinoa',
-    image: '/quinua-negra.jpg',
-  },
-  {
-    key: 'mixedQuinoa',
-    image: '/quinua-mixta.jpg',
-  }
+  { key: 'whiteQuinoa', image: '/quinua-blanca.jpg' },
+  { key: 'redQuinoa', image: '/quinua-roja.jpg' },
+  { key: 'blackQuinoa', image: '/quinua-negra.jpg' },
+  { key: 'mixedQuinoa', image: '/quinua-mixta.jpg' }
+];
+
+const upcomingProducts = [
+  { key: 'futureQuinoa1', image: '/proximo1.jpg' },
+  { key: 'futureQuinoa2', image: '/proximo2.jpg' }
 ];
 
 const cardVariants = {
@@ -58,6 +50,9 @@ const Productos = () => {
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const { t } = useTranslation();
 
+  const upcomingRef = useRef(null);
+  const isInView = useInView(upcomingRef, { once: true, margin: '-100px' });
+
   const handleOpen = (product) => {
     setSelectedProduct(product);
   };
@@ -65,13 +60,14 @@ const Productos = () => {
   const handleClose = () => {
     setSelectedProduct(null);
   };
-  
+
   useEffect(() => {
     document.body.classList.add('productos');
     return () => {
       document.body.classList.remove('productos');
     };
   }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -80,7 +76,7 @@ const Productos = () => {
     >
       <Box sx={{ py: 10, backgroundColor: '#f7dc6f' }}>
         <Container maxWidth="lg">
-
+          {/* Título principal */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -101,6 +97,7 @@ const Productos = () => {
             </Typography>
           </motion.div>
 
+          {/* Productos actuales */}
           <Grid container spacing={4}>
             {products.map((product, index) => (
               <Grid item key={product.key} xs={12} sm={6} md={6}>
@@ -143,6 +140,7 @@ const Productos = () => {
             ))}
           </Grid>
 
+          {/* Modal de descripción */}
           <AnimatePresence>
             {selectedProduct && (
               <Dialog
@@ -160,7 +158,8 @@ const Productos = () => {
                   sx: {
                     borderRadius: 4,
                     p: 3,
-                    background: 'linear-gradient(145deg,rgb(194, 183, 25), #f0f0f0)',
+                    background: 'linear-gradient(145deg, #b9cc61, #f0f0f0)',
+
                     boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                   }
                 }}
@@ -223,6 +222,69 @@ const Productos = () => {
             )}
           </AnimatePresence>
 
+          {/* Sección Próximos productos */}
+          <Box ref={upcomingRef} sx={{ mt: 10 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1, delay: 0.2 }}
+            >
+              <Typography
+                variant="h4"
+                align="center"
+                gutterBottom
+                fontWeight="bold"
+                sx={{
+                  mb: 4,
+                  color: '#17202a',
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+                }}
+              >
+                {t('products.upcomingTitle')}
+              </Typography>
+
+              <Grid container spacing={4}>
+                {upcomingProducts.map((product, index) => (
+                  <Grid item key={product.key} xs={12} sm={6} md={6}>
+                    <motion.div whileHover="hover" variants={cardVariants}>
+                      <Card
+                        sx={{
+                          cursor: 'default',
+                          textAlign: 'center',
+                          p: 2,
+                          backgroundColor: index % 2 === 0 ? '#fff' : '#f0f0f0',
+                          borderRadius: 4,
+                          boxShadow: 3,
+                          transition: 'all 0.3s ease',
+                        }}
+                      >
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.5, delay: index * 0.2 }}
+                        >
+                          <CardMedia
+                            component="img"
+                            image={product.image}
+                            alt={t(`products.${product.key}.name`)}
+                            sx={{
+                              height: 200,
+                              objectFit: 'cover',
+                              borderRadius: 2,
+                              mb: 2,
+                            }}
+                          />
+                        </motion.div>
+                        <Typography variant="h6" fontWeight="600" sx={{ color: '#17202a' }}>
+                          {t(`products.${product.key}.name`)}
+                        </Typography>
+                      </Card>
+                    </motion.div>
+                  </Grid>
+                ))}
+              </Grid>
+            </motion.div>
+          </Box>
         </Container>
       </Box>
     </motion.div>
