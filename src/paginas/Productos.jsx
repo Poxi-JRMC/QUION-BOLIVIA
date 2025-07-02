@@ -76,7 +76,6 @@ const Productos = () => {
     >
       <Box sx={{ py: 10, backgroundColor: '#f7dc6f' }}>
         <Container maxWidth="lg">
-          {/* Título principal */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -97,7 +96,6 @@ const Productos = () => {
             </Typography>
           </motion.div>
 
-          {/* Productos actuales */}
           <Grid container spacing={4}>
             {products.map((product, index) => (
               <Grid item key={product.key} xs={12} sm={6} md={6}>
@@ -140,14 +138,14 @@ const Productos = () => {
             ))}
           </Grid>
 
-          {/* Modal de descripción */}
+          
           <AnimatePresence>
             {selectedProduct && (
               <Dialog
                 open={Boolean(selectedProduct)}
                 onClose={handleClose}
                 fullScreen={fullScreen}
-                maxWidth="sm"
+                maxWidth={false}
                 fullWidth
                 PaperComponent={motion.div}
                 PaperProps={{
@@ -157,9 +155,11 @@ const Productos = () => {
                   exit: 'exit',
                   sx: {
                     borderRadius: 4,
-                    p: 3,
+                    p: fullScreen ? 2 : 4,
                     background: 'linear-gradient(145deg, #b9cc61, #f0f0f0)',
-
+                    width: fullScreen ? '88vw' : '600px',
+                    maxHeight: fullScreen ? '70vh':'80vh',
+                    overflowY: 'auto',
                     boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                   }
                 }}
@@ -199,7 +199,7 @@ const Productos = () => {
                     transition={{ duration: 0.4 }}
                     style={{
                       width: '100%',
-                      maxHeight: 300,
+                      maxHeight: fullScreen ? '40vh' : 300,
                       objectFit: 'cover',
                       borderRadius: 16,
                       marginBottom: 24,
@@ -222,7 +222,7 @@ const Productos = () => {
             )}
           </AnimatePresence>
 
-          {/* Sección Próximos productos */}
+          
           <Box ref={upcomingRef} sx={{ mt: 10 }}>
             <motion.div
               initial={{ opacity: 0, y: 50 }}

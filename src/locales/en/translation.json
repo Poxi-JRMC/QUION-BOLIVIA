@@ -13,6 +13,17 @@
     "boton": "Explore our products",
     "titulo2": "Benefits of Quinoa"
   },
+  "extraBloques": {
+  "titulo1": "The Finest Natural Quinoa",
+  "texto1": "We use the finest natural quinoa from Bolivia, cultivated with respect for the land and ancestral traditions.",
+  "titulo2": "Advanced Technology",
+  "texto2": "We have the best machines to process quinoa, ensuring quality and purity in every grain.",
+  "titulo3": "Careful Cultivation",
+  "texto3": "We carefully manage every stage of quinoa cultivation to guarantee the best products, from seed to harvest.",
+  "titulo4": "Superior Quality",
+  "texto4": "Thanks to the combination of the finest natural quinoa, advanced technology, and careful cultivation, we deliver a final product of the highest quality to our customers."
+},
+
   "beneficios": {
     "alto_valor": "High Nutritional Value",
     "alto_valor_text": "Quinoa is rich in protein, fiber, and essential minerals like iron, magnesium, and zinc.",

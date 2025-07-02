@@ -131,7 +131,7 @@ const Certificaciones = () => {
                 open={selectedIndex !== null}
                 onClose={handleClose}
                 fullScreen={fullScreen}
-                maxWidth="sm"
+                maxWidth={false}
                 fullWidth
                 PaperComponent={motion.div}
                 PaperProps={{
@@ -141,8 +141,11 @@ const Certificaciones = () => {
                   exit: 'exit',
                   sx: {
                     borderRadius: 4,
-                    p: 3,
+                    p: fullScreen ? 1.5 : 4,
                     background: 'linear-gradient(145deg, #b9cc61, #f0f0f0)',
+                    width: fullScreen ? '88vw' : '600px',
+                    maxHeight: fullScreen ?'70vh': '600vh',
+                    overflowY: 'auto',
                     boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                   },
                 }}
@@ -182,7 +185,7 @@ const Certificaciones = () => {
                     transition={{ duration: 0.4 }}
                     style={{
                       width: '100%',
-                      maxHeight: 300,
+                      maxHeight: fullScreen ? '40vh' : 300,
                       objectFit: 'cover',
                       borderRadius: 16,
                       marginBottom: 24,

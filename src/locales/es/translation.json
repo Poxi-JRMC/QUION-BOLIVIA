@@ -21,12 +21,23 @@
     "sostenible": "Agricultura Sostenible",
     "sostenible_text": "Nuestra quinua se cultiva respetando el medio ambiente y las tradiciones ancestrales."
   },
+"extraBloques": {
+    "titulo1": "La Mejor Quinua Natural",
+    "texto1": "Usamos la mejor quinua natural de Bolivia, cultivada con respeto a la tierra y las tradiciones ancestrales.",
+    "titulo2": "Tecnología Avanzada",
+    "texto2": "Contamos con las mejores máquinas para procesar la quinua, garantizando calidad y pureza en cada grano.",
+    "titulo3": "Cuidado en el Cultivo",
+    "texto3": "Cuidamos cada etapa del cultivo de quinua para asegurar los mejores productos, desde la semilla hasta la cosecha.",
+    "titulo4": "Calidad Superior",
+    "texto4": "Gracias a la combinación de la mejor quinua natural, tecnología avanzada y cuidado en el cultivo, ofrecemos un producto final de la más alta calidad para nuestros clientes."
+  },
   "exportacion": {
     "titulo1": "Exportamos la Mejor Quinua de Bolivia al Mundo",
     "texto1": "Nuestra quinua, cultivada en los Andes bolivianos, llega a mercados internacionales con estándares de calidad globales. Nos enorgullece conectar nuestras raíces con el mundo.",
     "titulo2": "Calidad que Cruza Fronteras",
     "texto2": "Desde el corazón de Sudamérica, llevamos al mundo un superalimento que nutre, respeta el medio ambiente y apoya a las comunidades locales."
   },
+  
   "products": {
     "title": "Nuestros Productos",
     "whiteQuinoa": {

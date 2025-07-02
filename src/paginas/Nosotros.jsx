@@ -17,14 +17,14 @@ import { useTranslation } from 'react-i18next';
 import Slide from '@mui/material/Slide';
 
 
-// Fondo amarillo suave
+
 const StyledBox = styled(Box)({
   backgroundColor: '#f7dc6f',
   padding: '80px 0',
   fontFamily: "'Lera', serif",
 });
 
-// Animación personalizada para el título principal
+
 const slideDownFade = keyframes`
   0% {
     opacity: 0;
@@ -40,13 +40,13 @@ const AnimatedTitle = styled(Typography)({
   animation: `${slideDownFade} 1s ease-out forwards`,
 });
 
-// Animación para caja del título (con pulso suave)
+
 const pulse = keyframes`
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 `;
 
-// Caja animada para el título (reemplaza donde estaba el texto)
+
 const TitleBox = styled(Box)(({ theme }) => ({
   cursor: 'pointer',
   backgroundColor: '#b9cc61',
@@ -90,7 +90,7 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
         alignItems="center"
         sx={{ mb: 12 }}
       >
-        {/* Caja título con animación e ícono, clic para abrir modal */}
+       
         <Grid item xs={12} md={6}>
           <Fade in timeout={600} style={{ transitionDelay: `${delay}ms` }}>
             <TitleBox onClick={handleOpen} aria-label={`Abrir detalles de ${title}`}>
@@ -100,7 +100,7 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
           </Fade>
         </Grid>
 
-        {/* Imagen con animación y hover */}
+       
         <Grid item xs={12} md={6}>
           <Fade in timeout={800} style={{ transitionDelay: `${delay + 400}ms` }}>
             <Box
@@ -127,7 +127,7 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
         </Grid>
       </Grid>
 
-      {/* Modal que despliega texto completo con imagen */}
+      
       <Modal
         open={open}
         onClose={handleClose}
@@ -282,7 +282,7 @@ const Nosotros = () => {
           />
         ))}
 
-        {/* Texto final centrado */}
+        
         <Box sx={{ textAlign: 'center', mt: 12, mb: 6 }}>
           <Typography
             variant="h5"

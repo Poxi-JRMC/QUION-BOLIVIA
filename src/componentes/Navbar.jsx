@@ -17,19 +17,24 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
 import LanguageIcon from '@mui/icons-material/Language';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
-
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true); // visible por defecto
   const [mounted, setMounted] = useState(false);
   const [language, setLanguage] = useState(i18n.language || 'es');
+  const theme = useTheme();
+  const isMobile = window.innerWidth <= 768;
+
+
 
   const menuAnchorRef = useRef(null);
   const langAnchorRef = useRef(null);
@@ -206,6 +211,19 @@ const Navbar = () => {
                             <MenuItem component={Link} to="/contacto" onClick={handleCloseMenu}>
                               {t('Contactos')}
                             </MenuItem>
+                            {isMobile && (
+                            <>
+                             <MenuItem disabled divider>
+                            🌐 {t('Seleccionar idioma')}
+                            </MenuItem>
+                            <MenuItem onClick={() => handleChangeLanguage('es')} selected={language === 'es'}>
+                             BO Español
+                            </MenuItem>
+                             <MenuItem onClick={() => handleChangeLanguage('en')} selected={language === 'en'}>
+                             US English
+                            </MenuItem>
+                            </>
+                             )}
                           </MenuList>
                         </ClickAwayListener>
                       </Paper>
