@@ -21,54 +21,80 @@ const Contacto = () => {
   const infoWhatsAppNumber = '+59171542030';
   const comprarWhatsAppNumber = '+59173564453';
 
-  // Función para abrir WhatsApp (se mantiene igual)
+  // Función mejorada para abrir WhatsApp según plataforma
   const openWhatsApp = (phone, message) => {
     const cleanNumber = phone.replace(/[^\d+]/g, '');
     const encodedMessage = encodeURIComponent(message);
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
+
     if (isMobile) {
-      window.location.href = `intent://send?phone=${cleanNumber}&text=${encodedMessage}#Intent;scheme=whatsapp;package=com.whatsapp;action=android.intent.action.SEND;end`;
-      setTimeout(() => {
-        window.location.href = `whatsapp://send?phone=${cleanNumber}&text=${encodedMessage}`;
-      }, 300);
+      // En móvil: primero intenta la app, luego la web
+      window.location.href = `whatsapp://send?phone=${cleanNumber}&text=${encodedMessage}`;
       setTimeout(() => {
         window.open(`https://api.whatsapp.com/send?phone=${cleanNumber}&text=${encodedMessage}`, '_blank');
-      }, 600);
+      }, 800);
     } else {
+      // En PC: usar directamente web.whatsapp.com para asegurar que el mensaje se pase correctamente
       window.open(`https://web.whatsapp.com/send?phone=${cleanNumber}&text=${encodedMessage}`, '_blank');
     }
   };
 
   // Handlers para WhatsApp (se mantienen igual)
   const handleInfoClick = () => {
-    const message = `¡Hola! Vi su página web *QUION BOLIVIA* y necesito información sobre:
+  openWhatsApp(infoWhatsAppNumber, t("whatsapp_messages.info_message"));
+};
 
-🔹 Productos disponibles
-🔹 Precios actualizados
-🔹 Tiempos de entrega
-
-*Mi consulta específica:*
-[Por favor describa su necesidad aquí]`;
-    openWhatsApp(infoWhatsAppNumber, message);
-  };
-
-  const handleComprarClick = () => {
-    const message = `¡Hola! Quiero realizar un pedido en *QUION BOLIVIA*:
-
-📋 *Detalles del pedido:*
-- Producto: 
-- Cantidad: 
-- Forma de pago: (Efectivo/Transferencia/Tarjeta)
-- Dirección de envío: 
-
-Por favor confírmenme disponibilidad y costo total.`;
-    openWhatsApp(comprarWhatsAppNumber, message);
-  };
+const handleComprarClick = () => {
+  openWhatsApp(comprarWhatsAppNumber, t("whatsapp_messages.buy_message"));
+};
 
   // Redes sociales (URLs no cambian)
   const facebookUrl = 'https://www.facebook.com/share/1HMF4x3Gaf/?mibextid=wwXIfr';
   const instagramUrl = 'https://www.instagram.com/quions.r.l?igsh=YzN6eXpnZHVhNGht&utm_source=qr';
+
+  // Función para abrir Facebook según plataforma
+  const openFacebook = () => {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // En móvil: intenta abrir la app de Facebook con el ID correcto
+      const appUrl = 'fb://page/61573488490491';
+      const webUrl = 'https://www.facebook.com/profile.php?id=61573488490491';
+      
+      // Intenta abrir la app
+      window.location.href = appUrl;
+      
+      // Si después de 1 segundo no se abrió la app, abre la web
+      setTimeout(() => {
+        window.open(webUrl, '_blank');
+      }, 1000);
+    } else {
+      // En PC: usa la web directamente con el ID correcto
+      window.open('https://www.facebook.com/profile.php?id=61573488490491', '_blank');
+    }
+  };
+
+  // Función para abrir Instagram según plataforma
+  const openInstagram = () => {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // En móvil: intenta abrir la app de Instagram
+      const appUrl = 'instagram://user?username=quions.r.l';
+      const webUrl = 'https://www.instagram.com/quions.r.l';
+      
+      // Intenta abrir la app
+      window.location.href = appUrl;
+      
+      // Si después de 1 segundo no se abrió la app, abre la web
+      setTimeout(() => {
+        window.open(webUrl, '_blank');
+      }, 1000);
+    } else {
+      // En PC: usa la web directamente
+      window.open('https://www.instagram.com/quions.r.l', '_blank');
+    }
+  };
 
   return (
     <Box 
@@ -487,7 +513,7 @@ Por favor confírmenme disponibilidad y costo total.`;
                     <Button
                       variant="contained"
                       startIcon={<FacebookIcon />}
-                      onClick={() => window.open(facebookUrl, '_blank')}
+                      onClick={openFacebook}
                       sx={{
                         px: 3,
                         py: 1.2,
@@ -507,7 +533,7 @@ Por favor confírmenme disponibilidad y costo total.`;
                     <Button
                       variant="contained"
                       startIcon={<InstagramIcon />}
-                      onClick={() => window.open(instagramUrl, '_blank')}
+                      onClick={openInstagram}
                       sx={{
                         px: 3,
                         py: 1.2,

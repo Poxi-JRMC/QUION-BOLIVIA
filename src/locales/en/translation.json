@@ -127,5 +127,9 @@
     "location": "Challapata Tomás Frías Street,<br />Oruro, Bolivia",
     "social": "Follow us on social media"
   }
+},
+"whatsapp_messages": {
+  "info_message": "Hello! I saw your *QUION BOLIVIA* website and I need information about:\n\n🔹 Available products\n🔹 Updated prices\n🔹 Delivery times\n\n*My specific query:*\n[Please describe your need here]",
+  "buy_message": "Hello! I want to place an order with *QUION BOLIVIA*:\n\n📋 *Order details:*\n- Product: \n- Quantity: \n- Payment method: (Cash/Transfer/Card)\n- Shipping address: \n\nPlease confirm availability and total cost."
 }
 }

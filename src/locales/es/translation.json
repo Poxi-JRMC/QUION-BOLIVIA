@@ -131,5 +131,9 @@
     "social": "Síguenos en redes sociales"
     }
   
-  }
+  },
+  "whatsapp_messages": {
+  "info_message": "¡Hola! Vi su página web *QUION BOLIVIA* y necesito información sobre:\n\n🔹 Productos disponibles\n🔹 Precios actualizados\n🔹 Tiempos de entrega\n\n*Mi consulta específica:*\n[Por favor describa su necesidad aquí]",
+  "buy_message": "¡Hola! Quiero realizar un pedido en *QUION BOLIVIA*:\n\n📋 *Detalles del pedido:*\n- Producto: \n- Cantidad: \n- Forma de pago: (Efectivo/Transferencia/Tarjeta)\n- Dirección de envío: \n\nPor favor confírmenme disponibilidad y costo total."
+}
 }
