@@ -41,12 +41,12 @@ const Contacto = () => {
 
   // Handlers para WhatsApp (se mantienen igual)
   const handleInfoClick = () => {
-  openWhatsApp(infoWhatsAppNumber, t("whatsapp_messages.info_message"));
-};
+    openWhatsApp(infoWhatsAppNumber, t("whatsapp_messages.info_message"));
+  };
 
-const handleComprarClick = () => {
-  openWhatsApp(comprarWhatsAppNumber, t("whatsapp_messages.buy_message"));
-};
+  const handleComprarClick = () => {
+    openWhatsApp(comprarWhatsAppNumber, t("whatsapp_messages.buy_message"));
+  };
 
   // Redes sociales (URLs no cambian)
   const facebookUrl = 'https://www.facebook.com/share/1HMF4x3Gaf/?mibextid=wwXIfr';
@@ -96,6 +96,27 @@ const handleComprarClick = () => {
     }
   };
 
+  // Configuración común para animaciones spring
+  const springAnimation = {
+  initial: { opacity: 0, y: 20 },
+  animate: {
+    opacity: [0, 1, 0],
+    y: [20, 0, 20],
+    transition: {
+      repeat: Infinity,
+      repeatType: "reverse",
+      duration: 3,
+      ease: "easeInOut",
+      times: [0, 0.5, 1] // Puntos clave de la animación
+    }
+  },
+  whileHover: {
+    scale: 1.03,
+    textShadow: '0 2px 8px rgba(255,255,255,0.5)',
+    transition: { type: "spring", stiffness: 300 }
+  }
+};
+
   return (
     <Box 
       component="section"
@@ -134,11 +155,12 @@ const handleComprarClick = () => {
               <Typography 
                 variant="h5" 
                 sx={{ 
-                  fontWeight: 700, 
+                  fontWeight: 900, 
                   color: 'rgba(0, 0, 0, 0.9)',
                   textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                  fontSize: { xs: '1.3rem', md: '1.5rem' },
+                  letterSpacing: '2px',
+                  fontSize: { xs: '1.8rem', md: '2.2rem' },
+                  fontFamily: '"Montserrat", sans-serif',
                 }}
               >
                 {t("contact.ceo_title")}
@@ -184,7 +206,12 @@ const handleComprarClick = () => {
                       mb: 3
                     }}
                   >
-                    {t("contact.info_section.title")}
+                    <motion.span
+                      {...springAnimation}
+                      transition={{ ...springAnimation.transition, delay: 0.1 }}
+                    >
+                      {t("contact.info_section.title")}
+                    </motion.span>
                   </Typography>
                   <Typography
                     variant="body1"
@@ -289,7 +316,12 @@ const handleComprarClick = () => {
                       mb: 3
                     }}
                   >
-                    {t("contact.buy_section.title")}
+                    <motion.span
+                      {...springAnimation}
+                      transition={{ ...springAnimation.transition, delay: 0.2 }}
+                    >
+                      {t("contact.buy_section.title")}
+                    </motion.span>
                   </Typography>
                   <Typography
                     variant="body1"
@@ -376,27 +408,27 @@ const handleComprarClick = () => {
                 }}
               >
                 <Box sx={{ textAlign: 'center', mb: 4 }}>
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                  <Typography
+                    variant="h3"
+                    sx={{
+                      fontWeight: 700,
+                      fontFamily: "'Playfair Display', serif",
+                      color: 'rgba(0, 0, 0, 0.85)',
+                      fontSize: { xs: '2rem', md: '2.5rem' },
+                      mb: 3,
+                      textShadow: '0 2px 4px rgba(255,255,255,0.3)',
+                      display: 'inline-block',
+                      borderBottom: '3px solid rgba(0,0,0,0.1)',
+                      pb: 1
+                    }}
                   >
-                    <Typography
-                      variant="h3"
-                      sx={{
-                        fontWeight: 700,
-                        fontFamily: "'Playfair Display', serif",
-                        color: 'rgba(0, 0, 0, 0.85)',
-                        fontSize: { xs: '2rem', md: '2.5rem' },
-                        mb: 3,
-                        textShadow: '0 2px 4px rgba(255,255,255,0.3)',
-                        display: 'inline-block',
-                        borderBottom: '3px solid rgba(0,0,0,0.1)',
-                        pb: 1
-                      }}
+                    <motion.span
+                      {...springAnimation}
+                      transition={{ ...springAnimation.transition, delay: 0.3 }}
                     >
                       {t("contact.contact_section.title")}
-                    </Typography>
-                  </motion.div>
+                    </motion.span>
+                  </Typography>
                 </Box>
 
                 <Grid container spacing={4}>

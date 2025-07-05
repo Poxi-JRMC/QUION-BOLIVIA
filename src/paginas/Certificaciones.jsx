@@ -74,7 +74,18 @@ const Certificaciones = () => {
     >
       <Box sx={{ py: 10, backgroundColor: '#f7dc6f' }}>
         <Container maxWidth="md">
-          <Typography
+          <motion.div
+  initial={{ opacity: 0, y: -10 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    duration: 1,
+    repeat: Infinity,
+    repeatType: "mirror",
+    repeatDelay: 1,
+    ease: "easeInOut"
+  }}
+>
+  <Typography
             variant="h3"
             align="center"
             gutterBottom
@@ -87,6 +98,7 @@ const Certificaciones = () => {
           >
             {t('certifications.title')}
           </Typography>
+</motion.div>
 
           <Grid container spacing={4} justifyContent="center">
             {certifications.map((cert, index) => (

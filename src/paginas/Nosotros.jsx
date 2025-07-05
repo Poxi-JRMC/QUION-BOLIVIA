@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from "framer-motion";
 import {
   Box,
   Container,
@@ -16,14 +17,11 @@ import { styled, keyframes } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 import Slide from '@mui/material/Slide';
 
-
-
 const StyledBox = styled(Box)({
   backgroundColor: '#f7dc6f',
   padding: '80px 0',
   fontFamily: "'Lera', serif",
 });
-
 
 const slideDownFade = keyframes`
   0% {
@@ -36,16 +34,10 @@ const slideDownFade = keyframes`
   }
 `;
 
-const AnimatedTitle = styled(Typography)({
-  animation: `${slideDownFade} 1s ease-out forwards`,
-});
-
-
 const pulse = keyframes`
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 `;
-
 
 const TitleBox = styled(Box)(({ theme }) => ({
   cursor: 'pointer',
@@ -90,7 +82,6 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
         alignItems="center"
         sx={{ mb: 12 }}
       >
-       
         <Grid item xs={12} md={6}>
           <Fade in timeout={600} style={{ transitionDelay: `${delay}ms` }}>
             <TitleBox onClick={handleOpen} aria-label={`Abrir detalles de ${title}`}>
@@ -100,7 +91,6 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
           </Fade>
         </Grid>
 
-       
         <Grid item xs={12} md={6}>
           <Fade in timeout={800} style={{ transitionDelay: `${delay + 400}ms` }}>
             <Box
@@ -127,7 +117,6 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
         </Grid>
       </Grid>
 
-      
       <Modal
         open={open}
         onClose={handleClose}
@@ -135,42 +124,32 @@ const Section = ({ id, title, text, imgSrc, imgAlt, reverse, delay }) => {
         aria-labelledby={`${title}-modal-title`}
         aria-describedby={`${title}-modal-description`}
         sx={{
-       display: 'flex',
-       alignItems: 'center',
-       justifyContent: 'center',
-       zIndex: 1300,
-      }}
->
-     <Slide direction="up" in={open} mountOnEnter unmountOnExit>
-      <Box
-      sx={{
-        background: 'linear-gradient(145deg, #b9cc61, #f0f0f0)',
-        bgcolor: '#fff',
-        borderRadius: 3,
-        boxShadow: 24,
-        p: 4,
-        maxWidth: fullScreen ? '90vw' : 600,
-        width: '90%',
-        maxHeight: '80vh',
-        overflowY: 'auto',
-        outline: 'none',
-      }}
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1300,
+        }}
+      >
+        <Slide direction="up" in={open} mountOnEnter unmountOnExit>
+          <Box
+            sx={{
+              background: 'linear-gradient(145deg, #b9cc61, #f0f0f0)',
+              bgcolor: '#fff',
+              borderRadius: 3,
+              boxShadow: 24,
+              p: 4,
+              maxWidth: fullScreen ? '90vw' : 600,
+              width: '90%',
+              maxHeight: '80vh',
+              overflowY: 'auto',
+              outline: 'none',
+            }}
           >
-            <Box
-              sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}
-            >
-              <Typography
-                id={`${title}-modal-title`}
-                variant="h5"
-                fontWeight="bold"
-              >
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+              <Typography id={`${title}-modal-title`} variant="h5" fontWeight="bold">
                 {title}
               </Typography>
-              <IconButton
-                onClick={handleClose}
-                aria-label="Cerrar"
-                size="large"
-              >
+              <IconButton onClick={handleClose} aria-label="Cerrar" size="large">
                 <CloseIcon />
               </IconButton>
             </Box>
@@ -242,15 +221,27 @@ const Nosotros = () => {
   return (
     <StyledBox>
       <Container maxWidth="lg">
-        <AnimatedTitle
-          variant="h3"
-          component="h1"
-          gutterBottom
-          align="center"
-          sx={{ mb: 8, fontWeight: 700, color: '#000' }}
-        >
-          {t('about.title')}
-        </AnimatedTitle>
+        <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+            duration: 1,
+            repeat: Infinity,
+            repeatType: "mirror",
+            repeatDelay: 1,
+            ease: "easeInOut"
+        }}
+      >
+          <Typography
+            variant="h3"
+            component="h1"
+            gutterBottom
+            align="center"
+            sx={{ mb: 8, fontWeight: 700, color: '#000' }}
+          >
+            {t('about.title')}
+          </Typography>
+        </motion.div>
 
         <Fade in timeout={1600} style={{ transitionDelay: '300ms' }}>
           <Typography
@@ -282,7 +273,6 @@ const Nosotros = () => {
           />
         ))}
 
-        
         <Box sx={{ textAlign: 'center', mt: 12, mb: 6 }}>
           <Typography
             variant="h5"
