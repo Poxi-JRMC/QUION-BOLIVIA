@@ -6,6 +6,9 @@ import './Inicio.css';
 import Globo3D from '../componentes/Globo3D';
 import { useTranslation } from 'react-i18next';
 import ScrollDownIndicator from '../componentes/ScrollDownIndicator';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 const containerVariants = {
   hidden: {},
@@ -95,6 +98,21 @@ const Inicio = () => {
     },
   ];
 
+  // Configuración del slider para el carrusel (segundo bloque)
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 2000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: false,
+  };
+
+  // Las imágenes del carrusel para el bloque 2
+  const extra2Images = ['/extra2.jpg', '/extra2b.jpg', '/extra2c.jpg'];
+
   return (
     <Box className="inicio-container">
       <video autoPlay muted loop playsInline className="video-fondo">
@@ -172,16 +190,10 @@ const Inicio = () => {
               </Grid>
             </Grid>
 
-            <Grid container spacing={6} 
-              alignItems="center" 
-              sx={{ mt: 10 }}>
+            <Grid container spacing={6} alignItems="center" sx={{ mt: 10 }}>
               <Grid item xs={12} md={6}>
                 <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror", repeatDelay: 2, ease: "easeInOut" }}>
-                  <Typography variant="h4" 
-                   sx={{ fontWeight: 'bold', 
-                   fontFamily: "'Playfair Display', serif", 
-                   color: '#fff', mb: 2, 
-                   textShadow: '0 2px 6px rgba(0,0,0,0.5)' }}>
+                  <Typography variant="h4" sx={{ fontWeight: 'bold', fontFamily: "'Playfair Display', serif", color: '#fff', mb: 2, textShadow: '0 2px 6px rgba(0,0,0,0.5)' }}>
                     {t('exportacion.titulo2')}
                   </Typography>
                   <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.9)', fontFamily: "'Poppins', sans-serif", lineHeight: 1.8 }}>
@@ -190,20 +202,21 @@ const Inicio = () => {
                 </motion.div>
               </Grid>
               <Grid item xs={12} md={6}>
-                <motion.img 
-                 src="/export.jpg" 
-                 alt="Mapa de exportación" 
-                 initial={{ scale: 0.8, opacity: 0 }}
-                 whileInView={{ scale: 1, opacity: 1 }}
-                 viewport={{ once: true }}
-                 transition={{ duration: 0.8, ease: 'easeOut' }}
-                 style={{
-                 width: '100%',
-                 borderRadius: '16px',
-                 boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
-                 cursor: 'pointer',
-                 }}
-                 onClick={() => setModalImg('/export.jpg')}/>
+                <motion.img
+                  src="/export.jpg"
+                  alt="Mapa de exportación"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
+                  style={{
+                    width: '100%',
+                    borderRadius: '16px',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => setModalImg('/export.jpg')}
+                />
               </Grid>
             </Grid>
           </Container>
@@ -212,81 +225,109 @@ const Inicio = () => {
         <AnimatePresence>
           {modalImg && (
             <motion.div key="overlay" initial="hidden" animate="visible" exit="exit" variants={overlayVariants} onClick={() => setModalImg(null)} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.8)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1300, cursor: 'pointer' }}>
-              <motion.img key="image" src={modalImg} alt="Imagen ampliada" variants={imageVariants} initial="hidden" animate="visible" exit="exit" onClick={(e) => e.stopPropagation()} whileHover={{ scale: 1.05, boxShadow: '0 15px 40px rgba(0,0,0,0.9)' }} transition={{ type: 'spring', stiffness: 300, damping: 20 }} style={{ maxWidth: '95vw', maxHeight: '95vh', borderRadius: 12, boxShadow: '0 10px 30px rgba(0,0,0,0.8)', cursor: 'default' }} />
+              <motion.img
+                key="image"
+                src={modalImg}
+                alt="Imagen ampliada"
+                variants={imageVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                onClick={(e) => e.stopPropagation()}
+                whileHover={{ scale: 1.05, boxShadow: '0 15px 40px rgba(0,0,0,0.9)' }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                style={{ maxWidth: '95vw', maxHeight: '95vh', borderRadius: 12, boxShadow: '0 10px 30px rgba(0,0,0,0.8)', cursor: 'default' }}
+              />
             </motion.div>
           )}
         </AnimatePresence>
 
         <Container maxWidth="lg" sx={{ py: 8 }}>
-          {bloques.map(({ title, text, imgSrc, imgAlt, reverse }, index) => (
-  <Grid
-    container
-    spacing={4}
-    alignItems="center"
-    direction={reverse ? 'row-reverse' : 'row'}
-    sx={{ mb: 10 }}
-    key={index}
-  >
-    {/* texto */}
-    <Grid item xs={12} md={6}>
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 1,
-          repeat: Infinity,
-          repeatType: "mirror",
-          repeatDelay: 2,
-          ease: "easeInOut"
-        }}
-      >
-        <Typography
-          variant="h4"
-          sx={{
-            fontWeight: 'bold',
-            fontFamily: "'Playfair Display', serif",
-            color: '#fff',
-            mb: 2,
-            textShadow: '0 2px 6px rgba(0,0,0,0.5)',
-          }}
-        >
-          {title}
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{
-            color: 'rgba(255,255,255,0.9)',
-            fontFamily: "'Poppins', sans-serif",
-            lineHeight: 1.8,
-          }}
-        >
-          {text}
-        </Typography>
-      </motion.div>
-    </Grid>
+          {bloques.map(({ title, text, imgSrc, imgAlt, reverse }, index) => {
+            const isExtra2 = index === 1; // Detectamos el segundo bloque para el carrusel
+            return (
+              <Grid container spacing={4} alignItems="center" direction={reverse ? 'row-reverse' : 'row'} sx={{ mb: 10 }} key={index}>
+                {/* texto */}
+                <Grid item xs={12} md={6}>
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      repeatType: "mirror",
+                      repeatDelay: 2,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontWeight: 'bold',
+                        fontFamily: "'Playfair Display', serif",
+                        color: '#fff',
+                        mb: 2,
+                        textShadow: '0 2px 6px rgba(0,0,0,0.5)',
+                      }}
+                    >
+                      {title}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: 'rgba(255,255,255,0.9)',
+                        fontFamily: "'Poppins', sans-serif",
+                        lineHeight: 1.8,
+                      }}
+                    >
+                      {text}
+                    </Typography>
+                  </motion.div>
+                </Grid>
 
-    {/* imagen */}
-    <Grid item xs={12} md={6}>
-      <motion.img
-        src={imgSrc}
-        alt={imgAlt}
-        initial={{ scale: 0.8, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        style={{
-          width: '100%',
-          borderRadius: '16px',
-          boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
-          cursor: 'pointer',
-        }}
-        onClick={() => setModalImg(imgSrc)}
-      />
-    </Grid>
-  </Grid>
-))}
-
+                {/* imagen o carrusel */}
+                <Grid item xs={12} md={6}>
+                  {isExtra2 ? (
+                    <Slider {...sliderSettings}>
+                      {extra2Images.map((img, i) => (
+                        <Box key={i} sx={{ px: 1 }}>
+                          <img
+                            src={img}
+                            alt={`Extra 2 - ${i}`}
+                            style={{
+                              width: '100%',
+                              borderRadius: '16px',
+                              boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
+                              cursor: 'pointer'
+                            }}
+                            onClick={() => setModalImg(img)}
+                          />
+                        </Box>
+                      ))}
+                    </Slider>
+                  ) : (
+                    <motion.img
+                      src={imgSrc}
+                      alt={imgAlt}
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, ease: 'easeOut' }}
+                      style={{
+                        width: '100%',
+                        borderRadius: '16px',
+                        boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => setModalImg(imgSrc)}
+                    />
+                  )}
+                </Grid>
+              </Grid>
+            )
+          })}
         </Container>
+
       </Box>
     </Box>
   );
