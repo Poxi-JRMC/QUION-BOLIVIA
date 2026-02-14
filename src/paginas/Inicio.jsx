@@ -42,6 +42,8 @@ const imageVariants = {
 
 const Inicio = () => {
   const { t } = useTranslation();
+  const [videoReady, setVideoReady] = useState(false);
+
   useEffect(() => {
     document.title = t('pageTitles.inicio');
     document.body.className = "inicio";
@@ -131,7 +133,35 @@ const Inicio = () => {
     <Box className="inicio-container">
       {/* Sección 1: Video - primera vista, de extremo a extremo */}
       <Box className="hero-section-video">
-        <video autoPlay muted loop playsInline className="video-fondo">
+        {/* Poster: imagen de respaldo mientras carga el video */}
+        <Box
+          component="img"
+          src="/extra1.jpg"
+          alt=""
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 0,
+            opacity: videoReady ? 0 : 1,
+            transition: 'opacity 0.8s ease-out',
+            pointerEvents: 'none',
+          }}
+        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/extra1.jpg"
+          className="video-fondo"
+          onCanPlay={() => setVideoReady(true)}
+          style={{ opacity: videoReady ? 1 : 0, transition: 'opacity 0.8s ease-out' }}
+        >
           <source src="/quinua-bg1.mp4" type="video/mp4" />
           Tu navegador no soporta el video.
         </video>

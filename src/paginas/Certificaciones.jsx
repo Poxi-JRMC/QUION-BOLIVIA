@@ -174,7 +174,7 @@ const Certificaciones = () => {
                 fullScreen={fullScreen}
                 maxWidth={false}
                 fullWidth
-                TransitionProps={{ timeout: { enter: 200, exit: 150 } }}
+                TransitionProps={{ timeout: { enter: 300, exit: 200 } }}
                 PaperProps={{
                   sx: {
                     borderRadius: 4,
@@ -215,25 +215,43 @@ const Certificaciones = () => {
                 </DialogTitle>
 
                 <DialogContent sx={{ textAlign: 'center' }}>
-                  <Box
-                    component="img"
-                    src={certifications[selectedIndex].image}
-                    alt={certifications[selectedIndex].name}
-                    loading="eager"
-                    sx={{
-                      width: '100%',
-                      maxHeight: fullScreen ? '40vh' : 300,
-                      objectFit: 'cover',
-                      borderRadius: 16,
-                      mb: 3,
-                      mt: 1,
-                      boxShadow: '0 5px 20px rgba(0,0,0,0.1)',
-                    }}
-                  />
-                  <Divider sx={{ mb: 3 }} />
-                  <Typography variant="body1" fontSize="1.1rem" sx={{ color: '#4A5F4A', fontFamily: "'Poppins', sans-serif" }}>
-                    {certifications[selectedIndex].description}
-                  </Typography>
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: 0.05 }}
+                    >
+                      <Box
+                        component="img"
+                        src={certifications[selectedIndex].image}
+                        alt={certifications[selectedIndex].name}
+                        loading="eager"
+                        sx={{
+                          width: '100%',
+                          maxHeight: fullScreen ? '40vh' : 300,
+                          objectFit: 'cover',
+                          borderRadius: 16,
+                          mb: 3,
+                          mt: 1,
+                          boxShadow: '0 5px 20px rgba(0,0,0,0.1)',
+                        }}
+                      />
+                    </motion.div>
+                    <Divider sx={{ mb: 3 }} />
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.35, delay: 0.15 }}
+                    >
+                      <Typography variant="body1" fontSize="1.1rem" sx={{ color: '#4A5F4A', fontFamily: "'Poppins', sans-serif" }}>
+                        {certifications[selectedIndex].description}
+                      </Typography>
+                    </motion.div>
+                  </motion.div>
                 </DialogContent>
               </Dialog>
             )}

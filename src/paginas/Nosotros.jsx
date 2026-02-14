@@ -121,7 +121,7 @@ const SectionCard = ({ id, title, text, imgSrc, imgAlt, index }) => {
           zIndex: 1300,
         }}
       >
-        <Slide direction="up" in={open} mountOnEnter unmountOnExit timeout={{ enter: 250, exit: 200 }}>
+        <Slide direction="up" in={open} mountOnEnter unmountOnExit timeout={{ enter: 350, exit: 250 }}>
           <Box
             sx={{
               background: 'linear-gradient(145deg, #f8f9f5, #ffffff)',
@@ -145,26 +145,42 @@ const SectionCard = ({ id, title, text, imgSrc, imgAlt, index }) => {
               </IconButton>
             </Box>
 
-            <Box
-              component="img"
-              src={imgSrc}
-              alt={imgAlt}
-              sx={{
-                width: '100%',
-                height: 'auto',
-                borderRadius: 2,
-                mb: 3,
-                objectFit: 'cover',
-              }}
-            />
+            {open && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
+                  <Box
+                    component="img"
+                    src={imgSrc}
+                    alt={imgAlt}
+                    sx={{
+                      width: '100%',
+                      height: 'auto',
+                      borderRadius: 2,
+                      mb: 3,
+                      objectFit: 'cover',
+                    }}
+                  />
+                </motion.div>
 
-            <Typography
-              id={`${title}-modal-description`}
-              variant="body1"
-              sx={{ whiteSpace: 'pre-line', lineHeight: 1.6, color: '#4A5F4A', fontFamily: "'Poppins', sans-serif" }}
-            >
-              {text}
-            </Typography>
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
+                  <Typography
+                    id={`${title}-modal-description`}
+                    variant="body1"
+                    sx={{ whiteSpace: 'pre-line', lineHeight: 1.6, color: '#4A5F4A', fontFamily: "'Poppins', sans-serif" }}
+                  >
+                    {text}
+                  </Typography>
+                </motion.div>
+              </>
+            )}
           </Box>
         </Slide>
       </Modal>
