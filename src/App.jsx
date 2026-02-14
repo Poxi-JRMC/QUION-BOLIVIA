@@ -1,18 +1,19 @@
-import React from 'react';
-import { Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { lazy, Suspense, useEffect } from 'react';
+import { Box, CssBaseline, ThemeProvider, createTheme, CircularProgress } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 import Navbar from './componentes/Navbar';
 import Footer from './componentes/Footer';
 import ScrollToTop from './componentes/ScrollToTop';
-import Inicio from './paginas/Inicio';
-import Nosotros from './paginas/Nosotros';
-import Productos from './paginas/Productos';
-import Contacto from './paginas/Contacto';
-import Certificaciones from './paginas/Certificaciones';  // Verifica que esta ruta sea correcta
 
 import './App.css';
 import './i18n';
+
+const Inicio = lazy(() => import('./paginas/Inicio'));
+const Nosotros = lazy(() => import('./paginas/Nosotros'));
+const Productos = lazy(() => import('./paginas/Productos'));
+const Contacto = lazy(() => import('./paginas/Contacto'));
+const Certificaciones = lazy(() => import('./paginas/Certificaciones'));
 
 const theme = createTheme({
   palette: {
@@ -46,25 +47,43 @@ const theme = createTheme({
   },
 });
 
+function AppContent() {
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      const el = document.getElementById('mobile-loading');
+      if (el) el.remove();
+    }
+  }, [location.pathname]);
+
+  return (
+    <>
+      <ScrollToTop />
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Navbar />
+        <Box component="main" sx={{ flex: 1 }}>
+          <Suspense fallback={<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}><CircularProgress sx={{ color: '#1B5E20' }} /></Box>}>
+            <Routes>
+              <Route path="/" element={<Inicio />} />
+              <Route path="/nosotros" element={<Nosotros />} />
+              <Route path="/productos" element={<Productos />} />
+              <Route path="/certificaciones" element={<Certificaciones />} />
+              <Route path="/contacto" element={<Contacto />} />
+            </Routes>
+          </Suspense>
+        </Box>
+        <Footer />
+      </Box>
+    </>
+  );
+}
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <ScrollToTop />
-        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Navbar />
-        <Box component="main" sx={{ flex: 1 }}>
-        <Routes>
-          <Route path="/" element={<Inicio />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="/certificaciones" element={<Certificaciones />} />
-          <Route path="/contacto" element={<Contacto />} />
-        </Routes>
-        </Box>
-        <Footer />
-        </Box>
+        <AppContent />
       </Router>
     </ThemeProvider>
   );

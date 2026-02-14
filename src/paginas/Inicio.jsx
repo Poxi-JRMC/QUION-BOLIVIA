@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import HeroSection from '../componentes/HeroSection';
 import { Box, Container, Typography, Grid, Paper } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
-import './Inicio.css';
-import Globo3D from '../componentes/Globo3D';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import ScrollDownIndicator from '../componentes/ScrollDownIndicator';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import './Inicio.css';
+
+const Globo3D = lazy(() => import('../componentes/Globo3D'));
 
 const containerVariants = {
   hidden: {},
@@ -43,6 +44,17 @@ const imageVariants = {
 const Inicio = () => {
   const { t } = useTranslation();
   const [videoReady, setVideoReady] = useState(false);
+  const globoRef = React.useRef(null);
+  const posterRef = React.useRef(null);
+  const globoInView = useInView(globoRef, { once: true, margin: '100px' });
+
+  const hideMobileLoader = React.useCallback(() => {
+    const el = document.getElementById('mobile-loading');
+    if (el) {
+      el.style.opacity = '0';
+      setTimeout(() => el.remove(), 500);
+    }
+  }, []);
 
   useEffect(() => {
     document.title = t('pageTitles.inicio');
@@ -64,6 +76,25 @@ const Inicio = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    const el = document.getElementById('mobile-loading');
+    if (!el) return;
+    const img = posterRef.current;
+    const hide = () => {
+      hideMobileLoader();
+    };
+    if (img?.complete) {
+      hide();
+    } else {
+      img?.addEventListener('load', hide);
+      const fallback = setTimeout(hide, 3500);
+      return () => {
+        img?.removeEventListener('load', hide);
+        clearTimeout(fallback);
+      };
+    }
+  }, [hideMobileLoader]);
 
   const beneficios = [
     {
@@ -131,13 +162,15 @@ const Inicio = () => {
 
   return (
     <Box className="inicio-container">
-      {/* Sección 1: Video - primera vista, de extremo a extremo */}
+      {/* Sección 1: Video hero - poster mientras carga, luego video */}
       <Box className="hero-section-video">
-        {/* Poster: imagen de respaldo mientras carga el video */}
         <Box
+          ref={posterRef}
           component="img"
           src="/extra1.jpg"
           alt=""
+          loading="eager"
+          fetchPriority="high"
           sx={{
             position: 'absolute',
             top: 0,
@@ -152,19 +185,19 @@ const Inicio = () => {
           }}
         />
         <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster="/extra1.jpg"
-          className="video-fondo"
-          onCanPlay={() => setVideoReady(true)}
-          style={{ opacity: videoReady ? 1 : 0, transition: 'opacity 0.8s ease-out' }}
-        >
-          <source src="/quinua-bg1.mp4" type="video/mp4" />
-          Tu navegador no soporta el video.
-        </video>
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/extra1.jpg"
+            className="video-fondo"
+            onCanPlay={() => setVideoReady(true)}
+            style={{ opacity: videoReady ? 1 : 0, transition: 'opacity 0.8s ease-out' }}
+          >
+            <source src="/quinua-bg1.mp4" type="video/mp4" />
+            Tu navegador no soporta el video.
+          </video>
         <Box className="hero-content-overlay">
           <HeroSection />
           {/* Beneficios directamente debajo de "Beneficios de la Quinua" */}
@@ -218,14 +251,20 @@ const Inicio = () => {
           <Container>
             <Grid container spacing={6} alignItems="center" sx={{ mt: 10 }}>
               <Grid item xs={12} md={6}>
-                <motion.div
+                <Box ref={globoRef} sx={{ minHeight: 1 }}>
+                  <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, margin: '-80px' }}
                   transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
                 >
-                  <Globo3D />
-                </motion.div>
+                  {globoInView && (
+                    <Suspense fallback={<Box sx={{ minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>...</Box>}>
+                      <Globo3D />
+                    </Suspense>
+                  )}
+                  </motion.div>
+                </Box>
               </Grid>
               <Grid item xs={12} md={6}>
                 <motion.div
@@ -264,6 +303,7 @@ const Inicio = () => {
                 <motion.img
                   src="/export.jpg"
                   alt="Mapa de exportación"
+                  loading="lazy"
                   initial={{ scale: 0.8, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
@@ -371,6 +411,7 @@ const Inicio = () => {
                     <motion.img
                       src={imgSrc}
                       alt={imgAlt}
+                      loading="lazy"
                       initial={{ scale: 0.8, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
                       viewport={{ once: true }}
