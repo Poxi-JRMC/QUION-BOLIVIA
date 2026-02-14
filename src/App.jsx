@@ -1,8 +1,10 @@
 import React from 'react';
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './componentes/Navbar';
+import Footer from './componentes/Footer';
+import ScrollToTop from './componentes/ScrollToTop';
 import Inicio from './paginas/Inicio';
 import Nosotros from './paginas/Nosotros';
 import Productos from './paginas/Productos';
@@ -15,17 +17,32 @@ import './i18n';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#2e7d32', // Verde oscuro
+      main: '#1B5E20', // Verde oscuro - naturaleza, confianza
+      dark: '#0D3D10',
+      light: '#2E7D32',
     },
     secondary: {
-      main: '#8bc34a', // Verde claro
+      main: '#8BC34A', // Verde claro - frescura
+      dark: '#689F38',
+      light: '#9ACD32',
     },
     background: {
-      default: '#f5f5f5',
+      default: '#f8f9f5',
+      paper: '#ffffff',
+    },
+    text: {
+      primary: '#2C3E2E',
+      secondary: '#4A5F4A',
     },
   },
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Poppins", "Helvetica", "Arial", sans-serif',
+    h1: { fontFamily: '"Playfair Display", serif', fontWeight: 700 },
+    h2: { fontFamily: '"Playfair Display", serif', fontWeight: 700 },
+    h3: { fontFamily: '"Playfair Display", serif', fontWeight: 600 },
+    h4: { fontFamily: '"Playfair Display", serif', fontWeight: 600 },
+    h5: { fontFamily: '"Playfair Display", serif', fontWeight: 600 },
+    h6: { fontFamily: '"Playfair Display", serif', fontWeight: 600 },
   },
 });
 
@@ -34,16 +51,20 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <ScrollToTop />
+        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Navbar />
+        <Box component="main" sx={{ flex: 1 }}>
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/productos" element={<Productos />} />
           <Route path="/certificaciones" element={<Certificaciones />} />
           <Route path="/contacto" element={<Contacto />} />
-          {/* Puedes agregar un fallback para rutas no encontradas */}
-          {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
+        </Box>
+        <Footer />
+        </Box>
       </Router>
     </ThemeProvider>
   );

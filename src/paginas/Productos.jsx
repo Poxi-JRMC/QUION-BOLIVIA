@@ -15,7 +15,7 @@ import {
   Divider
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 const products = [
@@ -31,10 +31,12 @@ const upcomingProducts = [
 ];
 
 const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
   hover: {
-    scale: 1.05,
-    boxShadow: '0px 10px 20px rgba(0,0,0,0.2)',
-    transition: { duration: 0.3, ease: 'easeInOut' }
+    scale: 1.03,
+    boxShadow: '0px 12px 24px rgba(27, 94, 32, 0.15)',
+    transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }
   }
 };
 
@@ -62,40 +64,35 @@ const Productos = () => {
   };
 
   useEffect(() => {
+    document.title = t('pageTitles.productos');
     document.body.classList.add('productos');
     return () => {
       document.body.classList.remove('productos');
     };
-  }, []);
+  }, [t]);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
+      transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
-      <Box sx={{ py: 10, backgroundColor: '#f7dc6f' }}>
+      <Box sx={{ py: 10 }}>
         <Container maxWidth="lg">
           <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          duration: 1,
-                          repeat: Infinity,
-                          repeatType: "mirror",
-                          repeatDelay: 1,
-                          ease: "easeInOut"
-                        }}
-                      >
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
             <Typography
               variant="h3"
               align="center"
               gutterBottom
-              fontWeight="bold"
+              fontWeight={600}
               sx={{
                 mb: 6,
-                color: '#17202a',
-                textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+                color: '#1B5E20',
+                fontFamily: "'Playfair Display', serif",
               }}
             >
               {t('products.title')}
@@ -105,28 +102,32 @@ const Productos = () => {
           <Grid container spacing={4}>
             {products.map((product, index) => (
               <Grid item key={product.key} xs={12} sm={6} md={6}>
-                <motion.div whileHover="hover" variants={cardVariants}>
+                <motion.div
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  whileHover="hover"
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
                   <Card
                     onClick={() => handleOpen(product)}
                     sx={{
                       cursor: 'pointer',
                       textAlign: 'center',
                       p: 2,
-                      backgroundColor: index % 2 === 0 ? '#fff' : '#f0f0f0',
+                      backgroundColor: '#ffffff',
                       borderRadius: 4,
-                      boxShadow: 3,
+                      boxShadow: '0 4px 20px rgba(27, 94, 32, 0.08)',
+                      border: '1px solid rgba(27, 94, 32, 0.1)',
                       transition: 'all 0.3s ease',
                     }}
                   >
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: index * 0.2 }}
-                    >
-                      <CardMedia
+                    <CardMedia
                         component="img"
                         image={product.image}
                         alt={t(`products.${product.key}.name`)}
+                        loading="lazy"
                         sx={{
                           height: 200,
                           objectFit: 'cover',
@@ -134,8 +135,7 @@ const Productos = () => {
                           mb: 2,
                         }}
                       />
-                    </motion.div>
-                    <Typography variant="h6" fontWeight="600" sx={{ color: '#17202a' }}>
+                    <Typography variant="h6" fontWeight={600} sx={{ color: '#1B5E20', fontFamily: "'Playfair Display', serif" }}>
                       {t(`products.${product.key}.name`)}
                     </Typography>
                   </Card>
@@ -145,88 +145,78 @@ const Productos = () => {
           </Grid>
 
           
-          <AnimatePresence>
+          <Dialog
+            open={Boolean(selectedProduct)}
+            onClose={handleClose}
+            fullScreen={fullScreen}
+            maxWidth={false}
+            fullWidth
+            transitionDuration={{ enter: 200, exit: 150 }}
+            PaperProps={{
+              sx: {
+                borderRadius: 4,
+                p: fullScreen ? 2 : 4,
+                background: 'linear-gradient(145deg, #f8f9f5, #ffffff)',
+                width: fullScreen ? '88vw' : '600px',
+                maxHeight: fullScreen ? '70vh' : '80vh',
+                overflowY: 'auto',
+                boxShadow: '0 10px 30px rgba(27, 94, 32, 0.15)',
+                border: '1px solid rgba(27, 94, 32, 0.1)',
+              },
+            }}
+          >
             {selectedProduct && (
-              <Dialog
-                open={Boolean(selectedProduct)}
-                onClose={handleClose}
-                fullScreen={fullScreen}
-                maxWidth={false}
-                fullWidth
-                PaperComponent={motion.div}
-                PaperProps={{
-                  variants: modalVariants,
-                  initial: 'hidden',
-                  animate: 'visible',
-                  exit: 'exit',
-                  sx: {
-                    borderRadius: 4,
-                    p: fullScreen ? 2 : 4,
-                    background: 'linear-gradient(145deg, #b9cc61, #f0f0f0)',
-                    width: fullScreen ? '88vw' : '600px',
-                    maxHeight: fullScreen ? '70vh':'80vh',
-                    overflowY: 'auto',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-                  }
-                }}
-              >
+              <>
                 <DialogTitle
                   sx={{
-                    fontWeight: 'bold',
+                    fontWeight: 600,
                     fontSize: '1.7rem',
                     textAlign: 'center',
                     pb: 0,
-                    color: '#17202a',
-                    textShadow: '1px 1px 3px rgba(0,0,0,0.2)'
+                    color: '#1B5E20',
+                    fontFamily: "'Playfair Display', serif",
                   }}
                 >
                   {t(`products.${selectedProduct.key}.name`)}
-                  <IconButton
-                    aria-label="close"
-                    onClick={handleClose}
-                    sx={{
-                      position: 'absolute',
-                      right: 12,
-                      top: 12,
-                      color: (theme) => theme.palette.grey[600],
-                      '&:hover': { color: '#b7950b' },
-                    }}
-                  >
+                    <IconButton
+                      aria-label="close"
+                      onClick={handleClose}
+                      sx={{
+                        position: 'absolute',
+                        right: 12,
+                        top: 12,
+                        color: (theme) => theme.palette.grey[600],
+                        '&:hover': { color: '#1B5E20' },
+                      }}
+                    >
                     <CloseIcon />
                   </IconButton>
                 </DialogTitle>
 
                 <DialogContent sx={{ textAlign: 'center' }}>
-                  <motion.img
+                  <Box
+                    component="img"
                     src={selectedProduct.image}
                     alt={t(`products.${selectedProduct.key}.name`)}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4 }}
-                    style={{
+                    loading="eager"
+                    sx={{
                       width: '100%',
                       maxHeight: fullScreen ? '40vh' : 300,
                       objectFit: 'cover',
-                      borderRadius: 16,
-                      marginBottom: 24,
-                      marginTop: 8,
+                      borderRadius: 2,
+                      mb: 3,
+                      mt: 1,
                       boxShadow: '0 5px 20px rgba(0,0,0,0.1)',
                     }}
                   />
                   <Divider sx={{ mb: 3 }} />
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                  >
-                    <Typography variant="body1" fontSize="1.1rem" color="text.secondary">
-                      {t(`products.${selectedProduct.key}.description`)}
-                    </Typography>
-                  </motion.div>
+                  <Typography variant="body1" fontSize="1.1rem" sx={{ color: '#4A5F4A', fontFamily: "'Poppins', sans-serif" }}>
+                    {t(`products.${selectedProduct.key}.description`)}
+                  </Typography>
                 </DialogContent>
-              </Dialog>
+              </>
             )}
-          </AnimatePresence>
+          </Dialog>
 
           
           <Box ref={upcomingRef} sx={{ mt: 10 }}>
@@ -239,11 +229,11 @@ const Productos = () => {
                 variant="h4"
                 align="center"
                 gutterBottom
-                fontWeight="bold"
+                fontWeight={600}
                 sx={{
                   mb: 4,
-                  color: '#17202a',
-                  textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+                  color: '#1B5E20',
+                  fontFamily: "'Playfair Display', serif",
                 }}
               >
                 {t('products.upcomingTitle')}
@@ -252,36 +242,38 @@ const Productos = () => {
               <Grid container spacing={4}>
                 {upcomingProducts.map((product, index) => (
                   <Grid item key={product.key} xs={12} sm={6} md={6}>
-                    <motion.div whileHover="hover" variants={cardVariants}>
+                    <motion.div
+                      variants={cardVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    >
                       <Card
                         sx={{
                           cursor: 'default',
                           textAlign: 'center',
                           p: 2,
-                          backgroundColor: index % 2 === 0 ? '#fff' : '#f0f0f0',
+                          backgroundColor: '#ffffff',
                           borderRadius: 4,
-                          boxShadow: 3,
+                          boxShadow: '0 4px 20px rgba(27, 94, 32, 0.08)',
+                          border: '1px solid rgba(27, 94, 32, 0.1)',
                           transition: 'all 0.3s ease',
                         }}
                       >
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.95 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.5, delay: index * 0.2 }}
-                        >
-                          <CardMedia
-                            component="img"
-                            image={product.image}
-                            alt={t(`products.${product.key}.name`)}
-                            sx={{
+                        <CardMedia
+                          component="img"
+                          image={product.image}
+                          alt={t(`products.${product.key}.name`)}
+                          loading="lazy"
+                          sx={{
                               height: 200,
                               objectFit: 'cover',
                               borderRadius: 2,
                               mb: 2,
                             }}
                           />
-                        </motion.div>
-                        <Typography variant="h6" fontWeight="600" sx={{ color: '#17202a' }}>
+                        <Typography variant="h6" fontWeight={600} sx={{ color: '#1B5E20', fontFamily: "'Playfair Display', serif" }}>
                           {t(`products.${product.key}.name`)}
                         </Typography>
                       </Card>

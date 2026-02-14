@@ -19,17 +19,11 @@ const HeroSection = () => {
       }}
     >
       {/* Título principal */}
-       <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      repeatType: "mirror",
-                      repeatDelay: 2,
-                      ease: "easeInOut"
-                    }}
-                  >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
         <Typography
           variant="h2"
           sx={{
@@ -37,7 +31,7 @@ const HeroSection = () => {
             fontWeight: 700,
             fontSize: { xs: '2.5rem', md: '4rem' },
             letterSpacing: '0.1em',
-            textShadow: '0 4px 10px rgba(0,0,0,0.6)',
+            textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 4px 12px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.6)',
           }}
         >
           {t('hero.titulo')}
@@ -45,25 +39,19 @@ const HeroSection = () => {
       </motion.div>
 
       {/* Subtítulos */}
-       <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      repeatType: "mirror",
-                      repeatDelay: 2,
-                      ease: "easeInOut"
-                    }}
-                  >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
         <Typography
           variant="h5"
           sx={{
             mt: 2,
             fontFamily: "'Poppins', sans-serif",
             fontWeight: 400,
-            color: 'rgba(255,255,255,0.9)',
-            textShadow: '0 2px 6px rgba(0,0,0,0.4)',
+            color: 'rgba(255,255,255,0.95)',
+            textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 4px 12px rgba(0,0,0,0.7)',
           }}
         >
           {t('hero.subtitulo1')}
@@ -73,7 +61,8 @@ const HeroSection = () => {
           sx={{
             fontFamily: "'Poppins', sans-serif",
             mt: 1,
-            color: 'rgba(255,255,255,0.8)',
+            color: 'rgba(255,255,255,0.9)',
+            textShadow: '0 2px 6px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)',
           }}
         >
           {t('hero.subtitulo2')}
@@ -82,9 +71,9 @@ const HeroSection = () => {
 
       {/* Botón animado */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.8 }}
+        transition={{ duration: 0.7, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <Button
           component={Link}
@@ -103,10 +92,13 @@ const HeroSection = () => {
             textTransform: 'none',
             transition: 'all 0.3s ease-in-out',
             fontFamily: "'Poppins', sans-serif",
+            backgroundColor: 'rgba(0, 0, 0, 0.35)',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.2)',
             '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
               borderColor: 'white',
               color: theme.palette.secondary.main,
+              boxShadow: '0 6px 25px rgba(0,0,0,0.6)',
             },
           }}
         >
@@ -114,20 +106,20 @@ const HeroSection = () => {
         </Button>
       </motion.div>
 
-      {/* Nuevo texto animado debajo del botón */}
+      {/* Texto debajo del botón */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 1.2 }}
+        transition={{ duration: 0.7, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <Typography
           sx={{
-            mt: 4, // margen superior para separar del botón
+            mt: 4,
             fontFamily: "'Playfair Display', serif",
             fontWeight: 650,
-            fontSize: { xs: '2rem', md: '2rem' }, // tamaño adaptable móvil/escritorio
-            color: 'rgba(255,255,255,0.85)',
-            textShadow: '0 5px 10px rgba(0,0,0,0.5)',
+            fontSize: { xs: '2rem', md: '2rem' },
+            color: 'rgba(255,255,255,0.9)',
+            textShadow: '0 2px 4px rgba(0,0,0,0.9), 0 4px 12px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.5)',
             maxWidth: 600,
             marginLeft: 'auto',
             marginRight: 'auto',

@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Button, Grid, Paper, List, ListItem } from '@mui/material';
+import { Box, Container, Typography, Button, Grid, Paper, List, ListItem, Link } from '@mui/material';
 import { motion } from 'framer-motion';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -11,11 +11,12 @@ const Contacto = () => {
   const { t } = useTranslation();
   
   useEffect(() => {
+    document.title = t('pageTitles.contacto');
     document.body.classList.add('contacto');
     return () => {
       document.body.classList.remove('contacto');
     };
-  }, []);
+  }, [t]);
   
   // Números WhatsApp (no cambian con la traducción)
   const infoWhatsAppNumber = '+59171542030';
@@ -96,42 +97,42 @@ const Contacto = () => {
     }
   };
 
-  // Configuración común para animaciones spring
-  const springAnimation = {
-  initial: { opacity: 0, y: 20 },
-  animate: {
-    opacity: [0, 1, 0],
-    y: [20, 0, 20],
-    transition: {
-      repeat: Infinity,
-      repeatType: "reverse",
-      duration: 3,
-      ease: "easeInOut",
-      times: [0, 0.5, 1] // Puntos clave de la animación
-    }
-  },
-  whileHover: {
-    scale: 1.03,
-    textShadow: '0 2px 8px rgba(255,255,255,0.5)',
-    transition: { type: "spring", stiffness: 300 }
-  }
-};
+  const fadeInAnimation = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, ease: 'easeOut' },
+  };
 
   return (
-    <Box 
+    <Box
       component="section"
       sx={{
         width: '100%',
-        py: { xs: 4, md: 6 },
+        minHeight: '100vh',
+        pt: { xs: 12, md: 14 },
+        pb: { xs: 4, md: 6 },
         position: 'relative',
       }}
     >
+      {/* Overlay suave para legibilidad - el fondo (lugar de cultivo de quinua) se mantiene visible */}
+      <Box
+        sx={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'linear-gradient(145deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.15) 100%)',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
       <Container 
         maxWidth="lg" 
         sx={{ 
           position: 'relative',
           zIndex: 1,
-          px: { xs: 2, md: 0 }
+          px: { xs: 2, md: 0 },
         }}
       >
         <motion.div
@@ -139,31 +140,58 @@ const Contacto = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          {/* Sección del CEO */}
+          {/* Sección del CEO - tipografía y animación */}
           <Box sx={{ textAlign: 'center', mb: 4 }}>
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 1,
-                repeat: Infinity,
-                repeatType: "mirror",
-                repeatDelay: 2,
-                ease: "easeInOut"
-              }}
+              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}
             >
-              <Typography 
-                variant="h5" 
-                sx={{ 
-                  fontWeight: 900, 
-                  color: 'rgba(0, 0, 0, 0.9)',
+              <Typography
+                component="span"
+                sx={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontWeight: 600,
+                  fontSize: { xs: '0.95rem', md: '1.1rem' },
+                  color: 'rgba(0, 0, 0, 0.75)',
+                  letterSpacing: '0.2em',
                   textTransform: 'uppercase',
-                  letterSpacing: '2px',
-                  fontSize: { xs: '1.8rem', md: '2.2rem' },
-                  fontFamily: '"Montserrat", sans-serif',
                 }}
               >
-                {t("contact.ceo_title")}
+                {t("contact.ceo_prefix")}
+              </Typography>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
+                <Typography
+                  component="span"
+                  display="block"
+                  sx={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontWeight: 700,
+                    fontSize: { xs: '2rem', md: '2.6rem' },
+                    color: '#1B5E20',
+                    letterSpacing: '0.08em',
+                  }}
+                >
+                  {t("contact.ceo_company")}
+                </Typography>
+              </motion.div>
+              <Typography
+                component="span"
+                sx={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontWeight: 600,
+                  fontSize: { xs: '1.1rem', md: '1.35rem' },
+                  color: 'rgba(0, 0, 0, 0.9)',
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {t("contact.ceo_name")}
               </Typography>
             </motion.div>
           </Box>
@@ -183,9 +211,9 @@ const Contacto = () => {
                   justifyContent: 'space-between',
                   borderRadius: 3,
                   minHeight: '380px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                  backdropFilter: 'blur(4px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.88)',
+                  backdropFilter: 'blur(6px)',
+                  border: '1px solid rgba(255, 255, 255, 0.4)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-5px)',
@@ -207,8 +235,8 @@ const Contacto = () => {
                     }}
                   >
                     <motion.span
-                      {...springAnimation}
-                      transition={{ ...springAnimation.transition, delay: 0.1 }}
+                      {...fadeInAnimation}
+                      transition={{ ...fadeInAnimation.transition, delay: 0.1 }}
                     >
                       {t("contact.info_section.title")}
                     </motion.span>
@@ -265,13 +293,15 @@ const Contacto = () => {
                       fontWeight: 600,
                       textTransform: 'none',
                       fontSize: '1.05rem',
-                      backgroundColor: 'rgba(37, 211, 102, 0.9)',
+                      backgroundColor: '#25D366',
                       color: '#fff',
-                      '&:hover': {
-                        backgroundColor: 'rgba(37, 211, 102, 1)',
-                      },
+                      boxShadow: '0 4px 14px rgba(37, 211, 102, 0.4)',
                       transition: 'all 0.3s ease',
-                      boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+                      '&:hover': {
+                        backgroundColor: '#20BD5A',
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 6px 20px rgba(37, 211, 102, 0.5)',
+                      },
                     }}
                   >
                     {t("contact.info_section.button")}
@@ -293,9 +323,9 @@ const Contacto = () => {
                   justifyContent: 'space-between',
                   borderRadius: 3,
                   minHeight: '380px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                  backdropFilter: 'blur(4px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.88)',
+                  backdropFilter: 'blur(6px)',
+                  border: '1px solid rgba(255, 255, 255, 0.4)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-5px)',
@@ -317,8 +347,8 @@ const Contacto = () => {
                     }}
                   >
                     <motion.span
-                      {...springAnimation}
-                      transition={{ ...springAnimation.transition, delay: 0.2 }}
+                      {...fadeInAnimation}
+                      transition={{ ...fadeInAnimation.transition, delay: 0.2 }}
                     >
                       {t("contact.buy_section.title")}
                     </motion.span>
@@ -375,13 +405,15 @@ const Contacto = () => {
                       fontWeight: 600,
                       textTransform: 'none',
                       fontSize: '1.05rem',
-                      backgroundColor: 'rgba(37, 211, 102, 0.9)',
+                      backgroundColor: '#25D366',
                       color: '#fff',
-                      '&:hover': {
-                        backgroundColor: 'rgba(37, 211, 102, 1)',
-                      },
+                      boxShadow: '0 4px 14px rgba(37, 211, 102, 0.4)',
                       transition: 'all 0.3s ease',
-                      boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+                      '&:hover': {
+                        backgroundColor: '#20BD5A',
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 6px 20px rgba(37, 211, 102, 0.5)',
+                      },
                     }}
                   >
                     {t("contact.buy_section.button")}
@@ -397,9 +429,9 @@ const Contacto = () => {
                 sx={{
                   p: { xs: 3, md: 4 },
                   borderRadius: 3,
-                  backgroundColor: 'rgba(255, 255, 255, 0.18)',
-                  backdropFilter: 'blur(5px)',
-                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.88)',
+                  backdropFilter: 'blur(6px)',
+                  border: '1px solid rgba(255, 255, 255, 0.4)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-5px)',
@@ -423,8 +455,8 @@ const Contacto = () => {
                     }}
                   >
                     <motion.span
-                      {...springAnimation}
-                      transition={{ ...springAnimation.transition, delay: 0.3 }}
+                      {...fadeInAnimation}
+                      transition={{ ...fadeInAnimation.transition, delay: 0.3 }}
                     >
                       {t("contact.contact_section.title")}
                     </motion.span>
@@ -450,39 +482,33 @@ const Contacto = () => {
                         {t("contact.contact_section.emails")}
                       </Typography>
                       <List sx={{ pl: 0 }}>
-                        <ListItem 
-                          sx={{ 
-                            color: 'rgba(0, 0, 0, 0.75)',
-                            fontSize: '1.1rem',
-                            px: 0,
-                            py: 1,
-                            fontWeight: 500
-                          }}
-                        >
-                          grovervillca@quionbolivia.com
-                        </ListItem>
-                        <ListItem 
-                          sx={{ 
-                            color: 'rgba(0, 0, 0, 0.75)',
-                            fontSize: '1.1rem',
-                            px: 0,
-                            py: 1,
-                            fontWeight: 500
-                          }}
-                        >
-                          info@quionbolivia.com
-                        </ListItem>
-                        <ListItem 
-                          sx={{ 
-                            color: 'rgba(0, 0, 0, 0.75)',
-                            fontSize: '1.1rem',
-                            px: 0,
-                            py: 1,
-                            fontWeight: 500
-                          }}
-                        >
-                          ventas@quionbolivia.com
-                        </ListItem>
+                        {['grovervillca@quionbolivia.com', 'info@quionbolivia.com', 'ventas@quionbolivia.com'].map((email) => (
+                          <ListItem
+                            key={email}
+                            sx={{ px: 0, py: 0.75 }}
+                          >
+                            <Link
+                              href={`mailto:${email}`}
+                              sx={{
+                                color: '#1B5E20',
+                                fontSize: { xs: '1rem', md: '1.1rem' },
+                                fontWeight: 500,
+                                textDecoration: 'none',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 1,
+                                transition: 'all 0.2s ease',
+                                '&:hover': {
+                                  color: '#2E7D32',
+                                  textDecoration: 'underline',
+                                },
+                              }}
+                            >
+                              <EmailIcon sx={{ fontSize: '1.2rem', opacity: 0.8 }} />
+                              {email}
+                            </Link>
+                          </ListItem>
+                        ))}
                       </List>
                     </Box>
                   </Grid>
@@ -548,16 +574,21 @@ const Contacto = () => {
                       onClick={openFacebook}
                       sx={{
                         px: 3,
-                        py: 1.2,
+                        py: 1.4,
                         borderRadius: '50px',
                         textTransform: 'none',
-                        fontWeight: 500,
-                        minWidth: '140px',
-                        backgroundColor: 'rgba(24, 119, 242, 0.9)',
+                        fontWeight: 600,
+                        minWidth: '150px',
+                        fontSize: '1rem',
+                        backgroundColor: '#1877F2',
                         color: '#fff',
+                        boxShadow: '0 4px 14px rgba(24, 119, 242, 0.4)',
+                        transition: 'all 0.3s ease',
                         '&:hover': {
-                          backgroundColor: 'rgba(24, 119, 242, 1)'
-                        }
+                          backgroundColor: '#166FE5',
+                          transform: 'translateY(-2px)',
+                          boxShadow: '0 6px 20px rgba(24, 119, 242, 0.5)',
+                        },
                       }}
                     >
                       Facebook
@@ -568,16 +599,21 @@ const Contacto = () => {
                       onClick={openInstagram}
                       sx={{
                         px: 3,
-                        py: 1.2,
+                        py: 1.4,
                         borderRadius: '50px',
                         textTransform: 'none',
-                        fontWeight: 500,
-                        minWidth: '140px',
-                        backgroundColor: 'rgba(228, 64, 95, 0.9)',
+                        fontWeight: 600,
+                        minWidth: '150px',
+                        fontSize: '1rem',
+                        background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
                         color: '#fff',
+                        boxShadow: '0 4px 14px rgba(228, 64, 95, 0.4)',
+                        transition: 'all 0.3s ease',
                         '&:hover': {
-                          backgroundColor: 'rgba(228, 64, 95, 1)'
-                        }
+                          background: 'linear-gradient(45deg, #e0852a 0%, #d65a35 25%, #d41f3c 50%, #c41e5f 75%, #ac1577 100%)',
+                          transform: 'translateY(-2px)',
+                          boxShadow: '0 6px 20px rgba(228, 64, 95, 0.5)',
+                        },
                       }}
                     >
                       Instagram

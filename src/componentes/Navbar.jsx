@@ -32,7 +32,7 @@ const Navbar = () => {
   const [mounted, setMounted] = useState(false);
   const [language, setLanguage] = useState(i18n.language || 'es');
   const theme = useTheme();
-  const isMobile = window.innerWidth <= 768;
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 
 
@@ -133,7 +133,7 @@ const Navbar = () => {
                   variant="h6"
                   noWrap
                   sx={{
-                    fontFamily: 'monospace',
+                    fontFamily: '"Playfair Display", serif',
                     fontWeight: 700,
                     letterSpacing: '.2rem',
                     color: 'white',
@@ -144,27 +144,50 @@ const Navbar = () => {
                 </Typography>
               </Box>
 
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                {/* Botón Discover More */}
-                <Button
-                  ref={menuAnchorRef}
-                  onClick={handleToggleMenu}
-                  color="inherit"
-                  sx={{
-                    mx: 2,
-                    px: 3,
-                    py: 1,
-                    color: 'white',
-                    border: '1px solid white',
-                    borderRadius: 2,
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    },
-                  }}
-                >
-                  {t('descubre_mas')}
-                </Button>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                {/* Enlaces directos en desktop */}
+                {!isMobile && (
+                  <>
+                    <Button component={Link} to="/" color="inherit" sx={{ color: 'white', textTransform: 'none', fontFamily: "'Poppins', sans-serif", fontWeight: 500, transition: 'all 0.3s ease', '&:hover': { color: '#8BC34A' } }}>
+                      {t('Inicio')}
+                    </Button>
+                    <Button component={Link} to="/productos" color="inherit" sx={{ color: 'white', textTransform: 'none', fontFamily: "'Poppins', sans-serif", fontWeight: 500, transition: 'all 0.3s ease', '&:hover': { color: '#8BC34A' } }}>
+                      {t('Productos')}
+                    </Button>
+                    <Button component={Link} to="/nosotros" color="inherit" sx={{ color: 'white', textTransform: 'none', fontFamily: "'Poppins', sans-serif", fontWeight: 500, transition: 'all 0.3s ease', '&:hover': { color: '#8BC34A' } }}>
+                      {t('Nosotros')}
+                    </Button>
+                    <Button component={Link} to="/certificaciones" color="inherit" sx={{ color: 'white', textTransform: 'none', fontFamily: "'Poppins', sans-serif", fontWeight: 500, transition: 'all 0.3s ease', '&:hover': { color: '#8BC34A' } }}>
+                      {t('Certificaciones')}
+                    </Button>
+                    <Button component={Link} to="/contacto" color="inherit" sx={{ color: 'white', textTransform: 'none', fontFamily: "'Poppins', sans-serif", fontWeight: 500, transition: 'all 0.3s ease', '&:hover': { color: '#8BC34A' } }}>
+                      {t('Contactos')}
+                    </Button>
+                  </>
+                )}
+                {/* Botón Menú en móvil */}
+                {isMobile && (
+                  <Button
+                    ref={menuAnchorRef}
+                    onClick={handleToggleMenu}
+                    color="inherit"
+                    sx={{
+                      mx: 1,
+                      px: 2,
+                      py: 1,
+                      color: 'white',
+                      border: '1px solid white',
+                      borderRadius: 2,
+                      transition: 'all 0.3s ease',
+                      fontFamily: "'Poppins', sans-serif",
+                      '&:hover': {
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      },
+                    }}
+                  >
+                    {t('menu')}
+                  </Button>
+                )}
 
                 <Popper
                   open={menuOpen}
@@ -217,10 +240,10 @@ const Navbar = () => {
                             🌐 {t('Seleccionar idioma')}
                             </MenuItem>
                             <MenuItem onClick={() => handleChangeLanguage('es')} selected={language === 'es'}>
-                             BO Español
+                             Español
                             </MenuItem>
                              <MenuItem onClick={() => handleChangeLanguage('en')} selected={language === 'en'}>
-                             US English
+                             English
                             </MenuItem>
                             </>
                              )}
@@ -231,7 +254,8 @@ const Navbar = () => {
                   )}
                 </Popper>
 
-                {/* Selector de idioma personalizado con Popper */}
+                {/* Selector de idioma (solo desktop; en móvil está en el menú) */}
+                {!isMobile && (
                 <Box sx={{ ml: 2 }}>
                   <Button
                     ref={langAnchorRef}
@@ -313,6 +337,7 @@ const Navbar = () => {
                     )}
                   </Popper>
                 </Box>
+                )}
               </Box>
             </Toolbar>
           </Container>

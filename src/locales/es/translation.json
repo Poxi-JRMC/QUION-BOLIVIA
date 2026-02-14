@@ -1,11 +1,28 @@
 {
   "QUION-SRL": "QUION-SRL",
   "descubre_mas": "Descubre más",
+  "menu": "Menú",
   "Inicio": "Inicio",
   "Productos": "Productos",
   "Nosotros": "Nosotros",
   "Certificaciones": "Certificaciones",
   "Contactos": "Contactos",
+  "footer": {
+    "copyright": "Todos los derechos reservados.",
+    "developed_by": "Desarrollado por",
+    "links": "Enlaces",
+    "contact": "Contacto",
+    "developer_email": "innovajmc2020@gmail.com",
+    "and": "y",
+    "thanks": "Gracias por visitar nuestra web."
+  },
+  "pageTitles": {
+    "inicio": "Inicio | QUION-BO - Quinua Orgánica de los Andes",
+    "productos": "Productos | QUION-BO - Quinua Orgánica",
+    "nosotros": "Nosotros | QUION-BO - Quinua Orgánica",
+    "certificaciones": "Certificaciones | QUION-BO - Quinua Orgánica",
+    "contacto": "Contacto | QUION-BO - Quinua Orgánica"
+  },
   "hero": {
     "titulo": "QUION-SRL",
     "subtitulo1": "La Mejor Quinua de Bolivia",
@@ -66,8 +83,6 @@
 
   },
   
-  
-  "footer": "La mejor empresa de quinua QUION-SRL",
   "about": {
     "title": "Nosotros",
     "description": "Somos una empresa dedicada a ofrecer productos de alta calidad que respetan nuestras tradiciones y el medio ambiente. Nuestra misión, visión y valores guían cada acción para brindar lo mejor a nuestros clientes.",
@@ -86,10 +101,14 @@
       "text": "Calidad, sostenibilidad, responsabilidad social y respeto por las tradiciones ancestrales de cultivo.\n\nCompromiso:\nConsideramos el compromiso como parte fundamental de nuestra visión. Significa ejecutar plenamente nuestras capacidades para cumplir exitosamente lo que se nos confía.\n\nResponsabilidad y Disciplina:\nSomos organizados y perseverantes en nuestras actividades diarias, buscando optimizar recursos y exigir mejoras en nuestros estándares operativos.\n\nIntegridad:\nActuamos con honestidad y transparencia en todas nuestras acciones, generando confianza con clientes y colaboradores.",
       "imgAlt": "Imagen que representa los valores de QUION-SRL"
     },
-    "footer": "La mejor empresa de quinua QUION-SRL"
+    "viewDetails": "Ver detalle",
+    "footer": "La mejor empresa de quinua QUION-SRL",
+    "commitment": "Nuestro compromiso con la calidad",
+    "commitment_text": "En QUION-SRL nos dedicamos a ofrecer quinua orgánica de la más alta calidad, cultivada en los Andes bolivianos con respeto a las tradiciones ancestrales y al medio ambiente. Nuestra empresa cuenta con certificaciones internacionales que avalan nuestros procesos y garantizan productos aptos para exportación a mercados mundiales."
   },
   "certifications": {
   "title": "Certificaciones",
+  "subtitle": "Contamos con las certificaciones adecuadas para la exportación de quinua orgánica a mercados internacionales, garantizando calidad, inocuidad y cumplimiento de estándares.",
   "0": {
     "name": "Certificación Senasag",
     "description": "Otorgada por el Servicio Nacional de Sanidad Agropecuaria e Inocuidad Alimentaria, esta certificación garantiza que la quinua cumple con las normativas sanitarias y fitosanitarias nacionales, asegurando su inocuidad y calidad para el consumo.",
@@ -111,6 +130,9 @@
   "contact": {
   "title": "Contáctanos",
   "ceo_title": "CEO DE QUION-SRL GROVER VILLCA HUAYLLANI",
+  "ceo_prefix": "CEO DE",
+  "ceo_company": "QUION-SRL",
+  "ceo_name": "GROVER VILLCA HUAYLLANI",
   "info_section": {
     "title": "¿Quieres información?",
     "description": "Contáctanos directamente por WhatsApp para recibir información detallada.",

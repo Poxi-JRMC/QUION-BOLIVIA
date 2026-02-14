@@ -43,9 +43,23 @@ const imageVariants = {
 const Inicio = () => {
   const { t } = useTranslation();
   useEffect(() => {
+    document.title = t('pageTitles.inicio');
     document.body.className = "inicio";
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+    const scrollFix = () => {
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener('load', scrollFix);
+    requestAnimationFrame(scrollFix);
     return () => {
       document.body.className = "";
+      window.removeEventListener('load', scrollFix);
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'auto';
+      }
     };
   }, []);
 
@@ -115,71 +129,81 @@ const Inicio = () => {
 
   return (
     <Box className="inicio-container">
-      <video autoPlay muted loop playsInline className="video-fondo">
-        <source src="/quinua-bg.mp4" type="video/mp4" />
-        Tu navegador no soporta el video.
-      </video>
+      {/* Sección 1: Video - primera vista, de extremo a extremo */}
+      <Box className="hero-section-video">
+        <video autoPlay muted loop playsInline className="video-fondo">
+          <source src="/quinua-bg1.mp4" type="video/mp4" />
+          Tu navegador no soporta el video.
+        </video>
+        <Box className="hero-content-overlay">
+          <HeroSection />
+          {/* Beneficios directamente debajo de "Beneficios de la Quinua" */}
+          <Container maxWidth="lg" sx={{ py: 4, px: 2 }}>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <Grid container spacing={4}>
+                {beneficios.map(({ title, text }, index) => (
+                  <Grid item xs={12} md={4} key={index}>
+                    <motion.div variants={itemVariants}>
+                      <Paper
+                        elevation={6}
+                        sx={{
+                          p: 4,
+                          height: '100%',
+                          borderRadius: 3,
+                          backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                          color: 'white',
+                          backdropFilter: 'blur(8px)',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          boxShadow: '0 10px 25px rgba(0,0,0,0.4)',
+                          cursor: 'default',
+                          transition: 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease',
+                          '&:hover': {
+                            transform: 'translateY(-6px)',
+                            boxShadow: '0 14px 28px rgba(0,0,0,0.5)',
+                          },
+                        }}
+                      >
+                        <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: '600' }}>
+                          {title}
+                        </Typography>
+                        <Typography sx={{ color: '#fff' }}>{text}</Typography>
+                      </Paper>
+                    </motion.div>
+                  </Grid>
+                ))}
+              </Grid>
+            </motion.div>
+          </Container>
+          <ScrollDownIndicator />
+        </Box>
+      </Box>
 
-      <Box className="content-wrapper">
-        <HeroSection />
-        <ScrollDownIndicator />
-        <Container maxWidth="lg" sx={{ py: 8 }}>
-          <motion.div
-            initial={{ opacity: 0, y: -40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          ></motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <Grid container spacing={4}>
-              {beneficios.map(({ title, text }, index) => (
-                <Grid item xs={12} md={4} key={index}>
-                  <motion.div variants={itemVariants}>
-                    <Paper
-                      elevation={6}
-                      sx={{
-                        p: 4,
-                        height: '100%',
-                        borderRadius: 3,
-                        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                        color: 'white',
-                        backdropFilter: 'blur(8px)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        boxShadow: '0 10px 25px rgba(0,0,0,0.4)',
-                        cursor: 'default',
-                        transition: 'transform 0.3s ease',
-                        '&:hover': {
-                          transform: 'translateY(-10px)',
-                          boxShadow: '0 18px 30px rgba(0,0,0,0.6)',
-                        },
-                      }}
-                    >
-                      <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: '600' }}>
-                        {title}
-                      </Typography>
-                      <Typography sx={{ color: '#fff' }}>{text}</Typography>
-                    </Paper>
-                  </motion.div>
-                </Grid>
-              ))}
-            </Grid>
-          </motion.div>
-        </Container>
-
+      {/* Sección 2: Cuerpo negro - de extremo a extremo, separado */}
+      <Box className="content-below">
         <section className="exportSection">
           <Container>
             <Grid container spacing={6} alignItems="center" sx={{ mt: 10 }}>
               <Grid item xs={12} md={6}>
-                <Globo3D />
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
+                  <Globo3D />
+                </motion.div>
               </Grid>
               <Grid item xs={12} md={6}>
-                <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror", repeatDelay: 2, ease: "easeInOut" }}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
                   <Typography variant="h4" sx={{ fontWeight: 'bold', fontFamily: "'Playfair Display', serif", color: '#fff', mb: 2, textShadow: '0 2px 6px rgba(0,0,0,0.5)' }}>
                     {t('exportacion.titulo1')}
                   </Typography>
@@ -192,7 +216,12 @@ const Inicio = () => {
 
             <Grid container spacing={6} alignItems="center" sx={{ mt: 10 }}>
               <Grid item xs={12} md={6}>
-                <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, repeat: Infinity, repeatType: "mirror", repeatDelay: 2, ease: "easeInOut" }}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
                   <Typography variant="h4" sx={{ fontWeight: 'bold', fontFamily: "'Playfair Display', serif", color: '#fff', mb: 2, textShadow: '0 2px 6px rgba(0,0,0,0.5)' }}>
                     {t('exportacion.titulo2')}
                   </Typography>
@@ -250,15 +279,10 @@ const Inicio = () => {
                 {/* texto */}
                 <Grid item xs={12} md={6}>
                   <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      repeatType: "mirror",
-                      repeatDelay: 2,
-                      ease: "easeInOut"
-                    }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={{ duration: 0.7, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
                   >
                     <Typography
                       variant="h4"
@@ -288,12 +312,19 @@ const Inicio = () => {
                 {/* imagen o carrusel */}
                 <Grid item xs={12} md={6}>
                   {isExtra2 ? (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, margin: '-40px' }}
+                      transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    >
                     <Slider {...sliderSettings}>
                       {extra2Images.map((img, i) => (
                         <Box key={i} sx={{ px: 1 }}>
                           <img
                             src={img}
                             alt={`Extra 2 - ${i}`}
+                            loading="lazy"
                             style={{
                               width: '100%',
                               borderRadius: '16px',
@@ -305,6 +336,7 @@ const Inicio = () => {
                         </Box>
                       ))}
                     </Slider>
+                    </motion.div>
                   ) : (
                     <motion.img
                       src={imgSrc}
@@ -327,8 +359,7 @@ const Inicio = () => {
             )
           })}
         </Container>
-
-      </Box>
+        </Box>
     </Box>
   );
 };

@@ -1,5 +1,6 @@
 {
   "QUION-SRL": "QUION-SRL",
+  "menu": "Menu",
   "descubre_mas": "Discover more",
   "Inicio": "Home",
   "Productos": "Products",
@@ -66,7 +67,14 @@
 
   },
  
-  "footer": "The best quinoa company QUION-SRL",
+  "footer": {
+    "links": "Links",
+    "copyright": "All rights reserved.",
+    "developed_by": "Developed by",
+    "developer_email": "innovajmc2020@gmail.com",
+    "and": "and",
+    "thanks": "Thanks for visiting our website."
+  },
   "about": {
     "title": "About Us",
     "description": "We are a company dedicated to offering high-quality products that honor our traditions and the environment. Our mission, vision, and values guide every action to deliver the best to our customers.",
@@ -85,10 +93,14 @@
       "text": "Quality, sustainability, social responsibility, and respect for ancestral farming traditions.\n\nCommitment:\nWe consider commitment a key part of our vision. It means fully applying our abilities to successfully accomplish entrusted tasks.\n\nResponsibility and Discipline:\nWe are organized and persistent in our daily activities, aiming to optimize resources and improve our operational standards.\n\nIntegrity:\nWe act with honesty and transparency in all our actions, building trust with clients and collaborators.",
       "imgAlt": "Image representing the values of QUION-SRL"
     },
-    "footer": "The best quinoa company QUION-SRL"
+    "viewDetails": "View details",
+    "footer": "The best quinoa company QUION-SRL",
+    "commitment": "Our commitment to quality",
+    "commitment_text": "At QUION-SRL we are dedicated to offering organic quinoa of the highest quality, cultivated in the Bolivian Andes with respect for ancestral traditions and the environment. Our company holds international certifications that validate our processes and guarantee products suitable for export to global markets."
   },
   "certifications": {
   "title": "Certifications",
+  "subtitle": "We hold the appropriate certifications for the export of organic quinoa to international markets, ensuring quality, safety, and compliance with standards.",
   "0": {
     "name": "Senasag Certification",
     "description": "Granted by the National Service of Agricultural Health and Food Safety, this certification ensures that quinoa complies with national sanitary and phytosanitary regulations, guaranteeing its safety and quality for consumption.",
@@ -105,9 +117,12 @@
     "image": "/3.jpg"
       }
   },
-  "contact": {
+  "pageTitles":{"inicio":"Home | QUION-BO - Organic Quinoa from the Andes","productos":"Products | QUION-BO - Organic Quinoa","nosotros":"About Us | QUION-BO - Organic Quinoa","certificaciones":"Certifications | QUION-BO - Organic Quinoa","contacto":"Contact | QUION-BO - Organic Quinoa"},"contact": {
   "title": "Contact Us",
   "ceo_title": "CEO OF QUION-SRL GROVER VILLCA HUAYLLANI",
+  "ceo_prefix": "CEO OF",
+  "ceo_company": "QUION-SRL",
+  "ceo_name": "GROVER VILLCA HUAYLLANI",
   "info_section": {
     "title": "Do you need information?",
     "description": "Contact us directly via WhatsApp for detailed information.",
